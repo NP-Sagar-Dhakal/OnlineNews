@@ -1,0 +1,1442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.newstoday">
+
+    <!--    Notification-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!--    Filter-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="cyanogenmod.permission.PUBLISH_CUSTOM_TILE" />
+
+    <!--    Internet-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!--    Database-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!--    Radio-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission
+        android:name="android.permission.MEDIA_CONTENT_CONTROL"
+        tools:ignore="ProtectedPermissions" />
+
+    <permission
+        android:name="com.newstoday.WRITE_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <!--    Broadcast Receiver-->
+    <permission android:name="com.newstoday.todo_diary.NOTIFICATION" />
+    <!--    Services-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name="com.newstoday.MainApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <activity android:name="com.newstoday.todo_diary.MainActivity" />
+        <activity android:name="com.newstoday.Social_Media_Fragment" />
+
+        <receiver
+            android:name="com.newstoday.todo_diary.AlarmReceiver"
+            android:enabled="true"
+            android:permission="com.newstoday.todo_diary.NOTIFICATION">
+            <intent-filter>
+                <action android:name="com.newstoday.todo_diary.NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.newstoday.news_package.recent_news.service.Lollipop_RefreshService"
+            android:label="News Sync"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name="com.newstoday.rssfeedreader.service.Lollipop_RefreshService"
+            android:label="Feed Sync"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name="com.newstoday.activities.walkthrough.Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.newstoday.activities.Splash_Activity" />
+
+        <service
+            android:name="com.newstoday.services.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.newstoday.services.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/app_id" />
+
+        <activity android:name="com.newstoday.activities.About_Developer" />
+        <activity android:name="com.newstoday.services.Navigation" />
+
+        <service
+            android:name="com.newstoday.services.FilterService"
+            android:enabled="true"
+            android:stopWithTask="true" />
+
+        <!--        Screen Filter-->
+        <activity
+            android:name="com.newstoday.screenfilter.ui.MainActivity"
+            android:excludeFromRecents="false"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.Light">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/filter_shortcuts" />
+        </activity>
+
+        <activity
+            android:name="com.newstoday.screenfilter.ui.shortcut.ToggleActivity"
+            android:excludeFromRecents="false"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.newstoday.screenfilter.service.MaskService"
+            android:permission="com.newstoday.screenfilter.permission.CONTROL_NIGHT_SCREEN"
+            android:process=":mask">
+            <intent-filter>
+                <action android:name="com.newstoday.screenfilter.IMaskServiceInterface" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.newstoday.screenfilter.service.MaskTileService"
+            android:icon="@drawable/filter_brightness_2_black_48dp"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.newstoday.screenfilter.receiver.ActionReceiver"
+            android:exported="true"
+            android:permission="com.newstoday.screenfilter.CONTROL_NIGHT_SCREEN">
+            <intent-filter>
+                <action android:name="com.newstoday.screenfilter.ACTION_UPDATE_STATUS" />
+                <action android:name="com.newstoday.screenfilter.ALARM_ACTION_START" />
+                <action android:name="com.newstoday.screenfilter.ALARM_ACTION_STOP" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- radio -->
+        <activity android:name="com.newstoday.radio.Radio_Activity" />
+
+        <service android:name="com.newstoday.radio.radioplayer_service.RadioService" />
+
+        <activity android:name="com.newstoday.radio.radio_favorites.Fav_Detail_Activity" />
+        <activity android:name="com.newstoday.radio.Radio_Detail_Activity" />
+        <activity android:name="com.newstoday.radio.radio_recent.Recent_Detail_Activity" />
+
+        <receiver android:name="androidx.media.session.MediaButtonReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Filter -->
+        <activity android:name="com.newstoday.darker.ScreenFilter_Activity" />
+
+        <service
+            android:name="com.newstoday.darker.FilterService"
+            android:enabled="true" />
+        <!-- To-do & Diary -->
+        <activity
+            android:name="com.newstoday.todo_diary.AddToDoActivity"
+            android:parentActivityName=".todo_diary.MainActivity"
+            android:theme="@style/Theme.Light" />
+        <activity android:name="com.newstoday.todo_diary.ReminderActivity" />
+
+        <service android:name="com.newstoday.todo_diary.DeleteNotificationService" />
+
+        <!-- News -->
+        <service android:name="com.newstoday.news_package.recent_news.service.RefreshService" />
+        <service android:name="com.newstoday.news_package.recent_news.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.recent_news.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.recent_news.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.recent_news.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.recent_news.activity.MainHomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.recent_news.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.recent" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.newstoday.news_package.recent_news.activity.GeneralPrefsActivity" />
+
+        <receiver android:name="com.newstoday.services.receiver.BootCompletedBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.newstoday.services.receiver.ConnectionChangeReceiver">
+            <intent-filter>
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                    tools:ignore="BatteryLife" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.newstoday.news_package.recent_news.service.RefreshService$RefreshAlarmReceiver" />
+
+
+        <!-- Location one News -->
+        <service android:name="com.newstoday.news_package.news_location.one.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.one.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.one.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.one.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.one.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.one.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_one" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Two News -->
+        <service android:name="com.newstoday.news_package.news_location.two.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.two.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.two.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.two.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.two.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.two.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_two" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Location THREE News -->
+        <service android:name="com.newstoday.news_package.news_location.three.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.three.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.three.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.three.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.three.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.three.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_three" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Four News -->
+        <service android:name="com.newstoday.news_package.news_location.four.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.four.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.four.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.four.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.four.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.four.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_four" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Five News -->
+        <service android:name="com.newstoday.news_package.news_location.five.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.five.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.five.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.five.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.five.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.five.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_five" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Six News -->
+        <service android:name="com.newstoday.news_package.news_location.six.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.six.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.six.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.six.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.six.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.six.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_six" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Seven News -->
+        <service android:name="com.newstoday.news_package.news_location.seven.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.seven.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.seven.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.seven.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.seven.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.seven.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_seven" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Eight News -->
+        <service android:name="com.newstoday.news_package.news_location.eight.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.eight.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.eight.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.eight.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.eight.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.eight.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_eight" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Nine News -->
+        <service android:name="com.newstoday.news_package.news_location.nine.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.nine.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.nine.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.nine.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.nine.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.nine.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_nine" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Ten News -->
+        <service android:name="com.newstoday.news_package.news_location.ten.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.ten.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.ten.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.one.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.ten.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.ten.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_ten" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Eleven News -->
+        <service android:name="com.newstoday.news_package.news_location.eleven.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.eleven.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.eleven.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.eleven.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.eleven.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.eleven.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_eleven" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twelve News -->
+        <service android:name="com.newstoday.news_package.news_location.twelve.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twelve.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twelve.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twelve.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twelve.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twelve.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twelve" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Thirteen News -->
+        <service android:name="com.newstoday.news_package.news_location.thirteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.thirteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.thirteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.thirteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.thirteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.thirteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_thirteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Fourteen News -->
+        <service android:name="com.newstoday.news_package.news_location.fourteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.fourteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.fourteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.fourteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.fourteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.fourteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_fourteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Fifthteen News -->
+        <service android:name="com.newstoday.news_package.news_location.fifthteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.fifthteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.fifthteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.fifthteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.fifthteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.fifthteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_fifthteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Sixthteen News -->
+        <service android:name="com.newstoday.news_package.news_location.sixthteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.sixthteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.sixthteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.sixthteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.sixthteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.sixthteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_sixthteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Seventeen News -->
+        <service android:name="com.newstoday.news_package.news_location.seventeen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.seventeen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.seventeen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.seventeen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.seventeen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.seventeen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_seventeen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Eighteen News -->
+        <service android:name="com.newstoday.news_package.news_location.eighteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.eighteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.eighteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.eighteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.eighteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.eighteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_eighteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Nineteen News -->
+        <service android:name="com.newstoday.news_package.news_location.nineteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.nineteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.nineteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.nineteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.nineteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.nineteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_nineteen" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty News -->
+        <service android:name="com.newstoday.news_package.news_location.twenty.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twenty.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twenty.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twenty.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twenty.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twenty.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twenty" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location TwentyOne News -->
+        <service android:name="com.newstoday.news_package.news_location.twentyone.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentyone.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentyone.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.one.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentyone.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentyone.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentyone" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location TwentyTwo News -->
+        <service android:name="com.newstoday.news_package.news_location.twentytwo.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentytwo.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentytwo.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentytwo.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentytwo.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentytwo.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentytwo" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twentythree News -->
+        <service android:name="com.newstoday.news_package.news_location.twentythree.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentythree.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentythree.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentythree.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentythree.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentythree.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentythree" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twentyfour News -->
+        <service android:name="com.newstoday.news_package.news_location.twentyfour.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentyfour.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentyfour.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentyfour.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentyfour.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentyfour.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentyfour" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty Five News -->
+        <service android:name="com.newstoday.news_package.news_location.twentyfive.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentyfive.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentyfive.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentyfive.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentyfive.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentyfive.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentyfive" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty Six News -->
+        <service android:name="com.newstoday.news_package.news_location.twentysix.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentysix.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentysix.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentysix.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentysix.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentysix.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentysix" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty Seven News -->
+        <service android:name="com.newstoday.news_package.news_location.twentyseven.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentyseven.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentyseven.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentyseven.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentyseven.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentyseven.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentyseven" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty Eight News -->
+        <service android:name="com.newstoday.news_package.news_location.twentyeight.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentyeight.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentyeight.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentyeight.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentyeight.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentyeight.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentyeight" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Twenty Nine News -->
+        <service android:name="com.newstoday.news_package.news_location.twentynine.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.twentynine.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.twentynine.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.twentynine.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.twentynine.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.twentynine.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_twentynine" />
+            </intent-filter>
+        </activity>
+
+        <!-- Location Thirty News -->
+        <service android:name="com.newstoday.news_package.news_location.thirty.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_location.thirty.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_location.thirty.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_location.thirty.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_location.thirty.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_location.thirty.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.location_thirty" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- categories -->
+        <service android:name="com.newstoday.news_package.news_category.one.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.one.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.one.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.one.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.one.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.one.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_one" />
+            </intent-filter>
+        </activity>
+
+        <!--        category two-->
+        <service android:name="com.newstoday.news_package.news_category.two.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.two.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.two.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.two.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.two.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.two.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_two" />
+            </intent-filter>
+        </activity>
+
+        <!--        category three-->
+        <service android:name="com.newstoday.news_package.news_category.three.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.three.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.three.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.three.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.three.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.three.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_three" />
+            </intent-filter>
+        </activity>
+
+        <!--        category four-->
+        <service android:name="com.newstoday.news_package.news_category.four.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.four.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.four.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.four.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.four.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.four.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_four" />
+            </intent-filter>
+        </activity>
+
+        <!--        category five-->
+        <service android:name="com.newstoday.news_package.news_category.five.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.five.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.five.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.five.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.five.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.five.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_five" />
+            </intent-filter>
+        </activity>
+
+        <!--        category six-->
+        <service android:name="com.newstoday.news_package.news_category.six.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.six.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.six.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.six.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.six.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.six.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_six" />
+            </intent-filter>
+        </activity>
+
+        <!--        category seven-->
+        <service android:name="com.newstoday.news_package.news_category.seven.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.seven.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.seven.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.seven.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.seven.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.seven.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_seven" />
+            </intent-filter>
+        </activity>
+
+        <!--        category eight-->
+        <service android:name="com.newstoday.news_package.news_category.eight.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.eight.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.eight.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.eight.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.eight.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.eight.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_eight" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Nine-->
+        <service android:name="com.newstoday.news_package.news_category.nine.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.nine.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.nine.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.nine.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.nine.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.nine.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_nine" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Ten-->
+        <service android:name="com.newstoday.news_package.news_category.ten.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.ten.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.ten.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.ten.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.ten.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.ten.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_ten" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category eleven-->
+
+        <service android:name="com.newstoday.news_package.news_category.eleven.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.eleven.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.eleven.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.eleven.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.eleven.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.eleven.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_eleven" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Twelve-->
+        <service android:name="com.newstoday.news_package.news_category.twelve.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.twelve.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.twelve.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.twelve.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.twelve.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.twelve.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_twelve" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Thirteen-->
+        <service android:name="com.newstoday.news_package.news_category.thirteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.thirteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.thirteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.thirteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.thirteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.thirteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_thirteen" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Fourteen-->
+        <service android:name="com.newstoday.news_package.news_category.fourteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.fourteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.fourteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.fourteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.fourteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.fourteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_fourteen" />
+            </intent-filter>
+        </activity>
+
+        <!--        Category Fifthteen-->
+        <service android:name="com.newstoday.news_package.news_category.fifthteen.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.news_package.news_category.fifthteen.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.news_package.news_category.fifthteen.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.news_package.news_category.fifthteen.provider.WRITE_PERMISSION" />
+
+        <activity android:name="com.newstoday.news_package.news_category.fifthteen.activity.HomeActivity" />
+        <activity
+            android:name="com.newstoday.news_package.news_category.fifthteen.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spaRSS.entry.category_fifthteen" />
+            </intent-filter>
+        </activity>
+        <!-- Feed Reader -->
+        <service android:name="com.newstoday.rssfeedreader.service.RefreshService" />
+        <service android:name="com.newstoday.rssfeedreader.service.FetcherService" />
+
+        <provider
+            android:name="com.newstoday.rssfeedreader.provider.FeedDataContentProvider"
+            android:authorities="com.newstoday.rssfeedreader.provider.FeedData"
+            android:exported="false"
+            android:writePermission="com.newstoday.rssfeedreader.provider.WRITE_PERMISSION" />
+
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.HomeActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Light" />
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.AddGoogleNewsActivity"
+            android:label="@string/google_news_title"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Light"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.EditFeedsListActivity"
+            android:label="@string/feeds"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Light" />
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.EntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Slidr.Light">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action
+                    android:name="android.intent.action.VIEW"
+                    tools:ignore="AppLinkUrlError" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spa.entry" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.GeneralPrefsActivity"
+            android:label="@string/menu_settings"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Light" />
+        <activity
+            android:name="com.newstoday.rssfeedreader.widget.WidgetConfigActivity"
+            android:theme="@style/Theme.Light">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.newstoday.rssfeedreader.activity.EditFeedActivity"
+            android:theme="@style/Theme.Light"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.spa.feed" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.spa.feed" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.xml" />
+                <data android:pathPattern=".*\\.rss" />
+                <data android:pathPattern=".*/feed" />
+                <data android:pathPattern=".*feed/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="feeds.feedburner.com" />
+                <data android:host="feedproxy.google.com" />
+                <data android:host="feeds2.feedburner.com" />
+                <data android:host="feedsproxy.google.com" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/rss+xml" />
+                <data android:mimeType="application/rdf+xml" />
+                <data android:mimeType="application/atom+xml" />
+                <data android:mimeType="application/xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="feed" />
+                <data android:scheme="rss" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.newstoday.rssfeedreader.widget.WidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widgetinfo" />
+        </receiver>
+        <receiver android:name="com.newstoday.rssfeedreader.widget.TickerWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/tickerwidgetinfo" />
+        </receiver>
+
+        <service
+            android:name="com.newstoday.rssfeedreader.widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service android:name="com.newstoday.rssfeedreader.widget.TickerWidgetService" />
+
+        <receiver android:name="com.newstoday.rssfeedreader.service.RefreshService$RefreshAlarmReceiver" />
+    </application>
+
+</manifest>

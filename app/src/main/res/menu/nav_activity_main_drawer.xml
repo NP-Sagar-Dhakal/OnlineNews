@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/home">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/home"
+                android:title="@string/home" />
+        </menu>
+    </item>
+
+    <item android:title="@string/tools">
+        <menu>
+            <item
+                android:id="@+id/radio"
+                android:icon="@drawable/vector_radio"
+                android:title="@string/radio" />
+            <item
+                android:id="@+id/screen_filter"
+                android:icon="@drawable/ic_darker"
+                android:title="@string/screen_filter" />
+            <item
+                android:id="@+id/socialMedia"
+                android:icon="@drawable/social_media"
+                android:title="@string/social_media" />
+            <item
+                android:id="@+id/diary_reminder"
+                android:icon="@drawable/vector_note"
+                android:title="@string/todo_amp_diary" />
+            <item
+                android:id="@+id/rss_reader"
+                android:icon="@drawable/vector_rss"
+                android:title="@string/reader" />
+        </menu>
+    </item>
+
+    <item android:title="@string/exit">
+        <menu>
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/left_arrow"
+                android:title="@string/exit" />
+        </menu>
+    </item>
+
+</menu>
