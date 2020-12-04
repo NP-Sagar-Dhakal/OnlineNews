@@ -1,5 +1,5 @@
 /*
-  Nepali News
+  Online News
   <p/>
   Copyright (c) 2019-2021 Sagar Dhakal
   Copyright (c) 2015-2016 Arnaud Renaud-Goud

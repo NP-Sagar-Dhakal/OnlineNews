@@ -18,7 +18,7 @@ public class DiagonalLayoutSettings {
 	private float angle = 15;
 	private boolean handleMargins;
 	private int gravity = BOTTOM;
-	private boolean isDirectionLeft;
+	private final boolean isDirectionLeft;
 	private float elevation;
 
 	DiagonalLayoutSettings(Context context, AttributeSet attrs) {

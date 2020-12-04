@@ -16,7 +16,6 @@
         android:title="@string/menu_star"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
-
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_share"
@@ -24,11 +23,9 @@
     <item
         android:id="@+id/menu_copy_clipboard"
         android:title="@string/menu_copy_clipboard" />
-
     <item
         android:id="@+id/menu_mark_as_unread"
         android:title="@string/menu_mark_as_unread" />
-
     <item
         android:id="@+id/menu_open_in_browser"
         android:title="@string/menu_open_in_browser" />

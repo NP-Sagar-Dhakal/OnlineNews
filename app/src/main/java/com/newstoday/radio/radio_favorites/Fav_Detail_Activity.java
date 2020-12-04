@@ -16,10 +16,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.newstoday.radio.Next_Prev_Callback;
 import com.newstoday.R;
 import com.newstoday.radio.Radio_Activity;
-import com.newstoday.radio.Radio_Detail_Activity;
 import com.newstoday.services.SlideAd_Service;
-
-import java.util.Objects;
 
 public class Fav_Detail_Activity extends AppCompatActivity implements Next_Prev_Callback {
 

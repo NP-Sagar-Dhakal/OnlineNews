@@ -105,7 +105,7 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
 
         MobileAds.initialize(this, initializationStatus -> {
         });
-        mInterstitialAd = new InterstitialAd(Objects.requireNonNull(this));
+        mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
 

@@ -70,7 +70,7 @@ public class FeedsCursorAdapter extends CursorLoaderExpandableListAdapter {
     }
 
     @Override
-    protected void bindGroupView(View view, Context context, Cursor cursor, boolean isExpanded) {
+    protected void bindGroupView(View view, Context context, Cursor cursor) {
         ImageView indicatorImage = view.findViewById(R.id.indicator);
 
         if (cursor.getInt(mIsGroupPos) == 1) {

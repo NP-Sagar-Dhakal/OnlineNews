@@ -61,6 +61,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.SlideAd_Service;
 import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
 
@@ -357,7 +358,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     Toast.makeText(activity, R.string.copied_clipboard, Toast.LENGTH_SHORT).show();
                     break;
                 }
-                case R.id.menu_mark_as_unread: {
+               case R.id.menu_mark_as_unread: {
                     final Uri uri = ContentUris.withAppendedId(mBaseUri, mEntriesIds[mCurrentPagerPos]);
                     new Thread() {
                         @Override
@@ -369,6 +370,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     activity.finish();
                     break;
                 }
+               
                 case R.id.menu_open_in_browser: {
                     Cursor cursor = mEntryPagerAdapter.getCursor(mCurrentPagerPos);
                     if (cursor != null) {

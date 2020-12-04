@@ -196,11 +196,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onScrollChanged() {
-        if (mListView.getFirstVisiblePosition() == 0) {
-            mySwipeRefreshLayout.setEnabled(true);
-        } else {
-            mySwipeRefreshLayout.setEnabled(false);
-        }
+        mySwipeRefreshLayout.setEnabled(mListView.getFirstVisiblePosition() == 0);
     }
 
     @Override

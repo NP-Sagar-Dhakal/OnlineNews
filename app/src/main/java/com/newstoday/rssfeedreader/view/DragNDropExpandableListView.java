@@ -110,7 +110,7 @@ public class DragNDropExpandableListView extends ExpandableListView {
             Objects.requireNonNull(mWindowManager).updateViewLayout(mDragView, layoutParams);
 
             if (mDragNDropListener != null)
-                mDragNDropListener.onDrag(0, y, null);// change null to "this" when ready to use
+                mDragNDropListener.onDrag();// change null to "this" when ready to use
         }
     }
 
@@ -157,7 +157,7 @@ public class DragNDropExpandableListView extends ExpandableListView {
     private void stopDrag(int itemIndex) {
         if (mDragView != null) {
             if (mDragNDropListener != null)
-                mDragNDropListener.onStopDrag(getChildAt(itemIndex));
+                mDragNDropListener.onStopDrag();
             mDragView.setVisibility(GONE);
             WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
             Objects.requireNonNull(wm).removeView(mDragView);

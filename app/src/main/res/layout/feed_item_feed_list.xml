@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:paddingTop="5dip"
     android:paddingBottom="7dip">
@@ -42,6 +43,6 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:src="@drawable/ic_reorder" />
+        app:srcCompat="@drawable/ic_reorder" />
 
 </RelativeLayout>

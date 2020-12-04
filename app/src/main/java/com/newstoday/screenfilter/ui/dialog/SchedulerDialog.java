@@ -29,6 +29,8 @@ import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.SwitchCompat;
+
 import com.github.florent37.diagonallayout.DiagonalLayout;
 import com.newstoday.R;
 import com.newstoday.screenfilter.util.AlarmUtil;
@@ -110,7 +112,7 @@ public class SchedulerDialog extends AlertDialog implements TimePickerDialog.OnT
         sunsetTime.setText(String.format(Locale.getDefault(),
                 "%1$02d:%2$02d", hrsSunset, minSunset));
 
-        Switch switchView = rootView.findViewById(R.id.auto_switch);
+        SwitchCompat switchView = rootView.findViewById(R.id.auto_switch);
         switchView.setChecked(mSettings.getBoolean(Settings.KEY_AUTO_MODE, false));
         switchView.setOnCheckedChangeListener((compoundButton, b) -> {
             mSettings.putBoolean(Settings.KEY_AUTO_MODE, b);

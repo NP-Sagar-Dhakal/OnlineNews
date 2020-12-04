@@ -55,10 +55,6 @@ import com.github.clans.fab.FloatingActionButton;
 import java.io.File;
 import java.util.Objects;
 
-import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.R;
 import com.newstoday.rssfeedreader.adapter.DrawerAdapter;

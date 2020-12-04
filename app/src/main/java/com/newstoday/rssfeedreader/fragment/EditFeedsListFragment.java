@@ -136,7 +136,7 @@ public class EditFeedsListFragment extends ListFragment {
             boolean fromHasGroupIndicator = false;
 
             @Override
-            public void onStopDrag(View itemView) {
+            public void onStopDrag() {
             }
 
             @Override
@@ -176,7 +176,7 @@ public class EditFeedsListFragment extends ListFragment {
             }
 
             @Override
-            public void onDrag(int x, int y, ListView listView) {
+            public void onDrag() {
             }
         });
 

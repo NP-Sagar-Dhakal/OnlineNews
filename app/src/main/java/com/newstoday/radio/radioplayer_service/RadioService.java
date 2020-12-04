@@ -21,6 +21,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -70,7 +71,6 @@ public class RadioService extends Service implements Player.EventListener, Audio
     private AudioManager audioManager;
     private MediaNotificationManager notificationManager;
     private String status;
-    private String streamUrl;
     private boolean isRunning = false;
 
     public void sleepTimer(Context context, long minutes) {
@@ -343,13 +343,12 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     @Override
-    public void onPlayerError(ExoPlaybackException error) {
+    public void onPlayerError(@NonNull ExoPlaybackException error) {
 
         EventBus.getDefault().post(PlaybackStatus.ERROR);
     }
 
     private void play(String streamUrl) {
-        this.streamUrl = streamUrl;
         if (wifiLock != null && !wifiLock.isHeld()) {
             wifiLock.acquire();
 

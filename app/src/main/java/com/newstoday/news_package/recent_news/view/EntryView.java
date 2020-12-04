@@ -49,7 +49,6 @@ package com.newstoday.news_package.recent_news.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -126,12 +125,8 @@ public class EntryView extends ConstraintLayout {
         }
         description.setText(Html.fromHtml(contentText.replaceAll("<img.+?>|<a.+?>", "\n\n"), null, null));
 
-        if (description.length() < 1000) {
-            description.setMaxLines(7);
-        }
-
         try {
-            source.setText(getDomainName(link));
+            source.setText("Source : " + getDomainName(link));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

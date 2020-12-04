@@ -72,7 +72,6 @@ import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.activities.About_Developer;
 import com.newstoday.news_package.recent_news.activity.GeneralPrefsActivity;
-import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 import com.newstoday.news_package.recent_news.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.recent_news.provider.FeedData;
 import com.newstoday.news_package.recent_news.provider.FeedDataContentProvider;
@@ -277,7 +276,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             mShowFeedInfo = savedInstanceState.getBoolean(STATE_SHOW_FEED_INFO);
             mListDisplayDate = savedInstanceState.getLong(STATE_LIST_DISPLAY_DATE);
 
-            mEntriesCursorAdapter = new EntriesCursorAdapter(getActivity(), Constants.EMPTY_CURSOR, mShowFeedInfo);
+            mEntriesCursorAdapter = new EntriesCursorAdapter(getActivity(), Constants.EMPTY_CURSOR);
         }
     }
 
@@ -314,6 +313,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
         HorizontalScrollView second_hor = header.findViewById(R.id.second_hor);
         ConstraintLayout full_location = header.findViewById(R.id.full_location);
+        ConstraintLayout buttons_categories = header.findViewById(R.id.buttons_categories);
+
+        if (category1Name.equals("null")) {
+            buttons_categories.setVisibility(View.GONE);
+        }
+
         if (location1Name.equals("null")) {
             full_location.setVisibility(View.GONE);
         }
@@ -832,11 +837,21 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             case R.id.more_about:
                 startActivity(new Intent(getActivity(), About_Developer.class));
                 break;
+
+            case R.id.more_add_publisher:
+                Toast.makeText(myContext, "Please send message only from Gmail.", Toast.LENGTH_SHORT).show();
+                Intent emaill = new Intent(Intent.ACTION_SEND);
+                emaill.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
+                emaill.putExtra(Intent.EXTRA_SUBJECT, "Add New Suggestion from " + getActivity().getPackageName());
+                emaill.putExtra(Intent.EXTRA_TEXT, "Note : Dont't clear the subject please\n\nNews/Radio Name = \n\nNews/Radio Details = \n\nWebsite Link = ");
+                emaill.setType("message/rfc822");
+                startActivity(Intent.createChooser(emaill, "Send Mail"));
+                break;
             case R.id.more_send:
                 Toast.makeText(myContext, "Please send message only from Gmail.", Toast.LENGTH_SHORT).show();
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
-                email.putExtra(Intent.EXTRA_SUBJECT, "Problems & Feedback from" + getActivity().getPackageName());
+                email.putExtra(Intent.EXTRA_SUBJECT, "Problems & Feedback from " + getActivity().getPackageName());
                 email.putExtra(Intent.EXTRA_TEXT, "Note : Dont't clear the subject please,\n\n");
                 email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email, "Send Mail"));
@@ -954,7 +969,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         }
         mShowFeedInfo = showFeedInfo;
 
-        mEntriesCursorAdapter = new EntriesCursorAdapter(getActivity(), Constants.EMPTY_CURSOR, mShowFeedInfo);
+        mEntriesCursorAdapter = new EntriesCursorAdapter(getActivity(), Constants.EMPTY_CURSOR);
         setListAdapter(mEntriesCursorAdapter);
 
         mListDisplayDate = new Date().getTime();

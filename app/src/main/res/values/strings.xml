@@ -6,6 +6,8 @@
     <string name="intrestial_ad">ca-app-pub-3940256099942544/1033173712</string>
     <string name="native_ad">ca-app-pub-3940256099942544/2247696110</string>
 
+    <string name="publisher_link">https://contactnewspublisher.blogspot.com/2020/11/hindi-news-publishers.html</string>
+
     <string name="stream_offline">Radio station is offline. Please try again later.</string>
     <string name="no_to_dos">Add new note\n&amp;\nSwipe Right to delete the item</string>
     <string name="title">What\'s on your mind?</string>
@@ -344,7 +346,6 @@
 
     <string name="recent_news">Recent News</string>
     <string name="read_full_content">Read Full Content</string>
-    <string name="share_with">Share With :</string>
     <string name="reader">RSS Feed Reader</string>
     <string name="radio">Radio</string>
     <string name="reminder_not_available">In some rare cases you need to check todo manually.</string>
@@ -388,5 +389,7 @@
     <string name="exit">Exit</string>
     <string name="navigation_drawer_open">DRAWER_OPEN</string>
     <string name="navigation_drawer_close">DRAWER_CLOSED</string>
+    <string name="news_publisher">News Publishers</string>
+    <string name="more_add_publisher">Add News Site or Radio</string>
 
 </resources>

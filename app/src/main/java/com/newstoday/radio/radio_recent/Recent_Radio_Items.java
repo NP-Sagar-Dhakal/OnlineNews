@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "favoritelist")
 public class Recent_Radio_Items {
-    @PrimaryKey
     @NonNull
+    @PrimaryKey
     public String stationName;
     @ColumnInfo(name = "detail")
     public String stationDetail;

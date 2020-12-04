@@ -59,7 +59,7 @@ public class MaskService extends Service {
     private AccessibilityManager mAccessibilityManager;
 
     // Binder
-    private MaskServiceBinder mBinder = new MaskServiceBinder();
+    private final MaskServiceBinder mBinder = new MaskServiceBinder();
 
     // Notification
     private Notification mNotification;
@@ -308,7 +308,7 @@ public class MaskService extends Service {
                     .alpha(0f)
                     .setDuration(ANIMATE_DURATION_MILES)
                     .setListener(new Animator.AnimatorListener() {
-                        private View readyToRemoveView = mLayout;
+                        private final View readyToRemoveView = mLayout;
 
                         @Override
                         public void onAnimationStart(Animator animator) {

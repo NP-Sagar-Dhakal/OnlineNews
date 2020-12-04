@@ -188,7 +188,7 @@ public class FetcherService extends IntentService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Notification getNotification() {
         String channel = createChannel();
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(R.mipmap.ic_launcher).setContentTitle("Nepali News is Refreshing.");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(getResources().getString(R.string.app_name)+" is Refreshing.");
 
 
         return mBuilder
@@ -270,7 +270,7 @@ public class FetcherService extends IntentService {
                             .setDefaults(Notification.DEFAULT_LIGHTS)
                             .setWhen(System.currentTimeMillis())
                             .setAutoCancel(true)
-                            .setContentTitle("Nepali News")
+                            .setContentTitle(FetcherService.this.getResources().getString(R.string.app_name))
                             .setContentText(text)
                             .setContentIntent(contentIntent);
 

@@ -83,50 +83,45 @@ public class DiagonalLayout extends FrameLayout {
 				path.moveTo(width - getPaddingRight() + EPSILON, height - perpendicularHeight - getPaddingBottom() + EPSILON);
 				path.lineTo(width - getPaddingRight() + EPSILON, height - getPaddingBottom() + EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, height - getPaddingBottom() + EPSILON);
-				path.close();
-			} else {
+            } else {
 				path.moveTo(width - getPaddingRight() + EPSILON, height - getPaddingBottom() + EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, height - getPaddingBottom() + EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, height - perpendicularHeight - getPaddingBottom() + EPSILON);
-				path.close();
-			}
-		} else if(settings.isTop()){
+            }
+            path.close();
+        } else if(settings.isTop()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(width - getPaddingRight() + EPSILON, getPaddingTop() + perpendicularHeight - EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(width - getPaddingRight() + EPSILON, getPaddingTop() - EPSILON);
-				path.close();
-			} else {
+            } else {
 				path.moveTo(width - getPaddingRight() + EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, getPaddingTop() + perpendicularHeight - EPSILON);
 				path.lineTo(getPaddingLeft() - EPSILON, getPaddingTop() - EPSILON);
-				path.close();
-			}
-		} else if(settings.isRight()){
+            }
+            path.close();
+        } else if(settings.isRight()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(width - getPaddingRight() + EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(width - getPaddingRight() + EPSILON, height - getPaddingBottom() + EPSILON);
 				path.lineTo(width - perpendicularHeight - getPaddingRight() + EPSILON, height - getPaddingBottom() + EPSILON);
-				path.close();
-			} else {
+            } else {
 				path.moveTo(width - perpendicularHeight - getPaddingRight() - EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(width - getPaddingRight() + EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(width - getPaddingRight() + EPSILON, height - getPaddingBottom() + EPSILON);
-				path.close();
-			}
-		} else if(settings.isLeft()){
+            }
+            path.close();
+        } else if(settings.isLeft()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(getPaddingLeft() - EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(getPaddingLeft() + perpendicularHeight + EPSILON, getPaddingTop() - EPSILON);
-				path.lineTo(getPaddingLeft() - EPSILON, height - getPaddingBottom() + EPSILON);
-				path.close();
-			} else {
+            } else {
 				path.moveTo(getPaddingLeft() - EPSILON, getPaddingTop() - EPSILON);
 				path.lineTo(getPaddingLeft() + perpendicularHeight + EPSILON, height - getPaddingBottom() + EPSILON);
-				path.lineTo(getPaddingLeft() - EPSILON, height - getPaddingBottom() + EPSILON);
-				path.close();
-			}
-		}
+            }
+            path.lineTo(getPaddingLeft() - EPSILON, height - getPaddingBottom() + EPSILON);
+            path.close();
+        }
 		return path;
 	}
 
@@ -138,57 +133,51 @@ public class DiagonalLayout extends FrameLayout {
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), height - perpendicularHeight - getPaddingBottom());
 				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			} else {
+            } else {
 				path.moveTo(width - getPaddingRight(), height - getPaddingBottom());
 				path.lineTo(getPaddingLeft(), height - perpendicularHeight - getPaddingBottom());
 				path.lineTo(getPaddingLeft(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
-				path.close();
-			}
-		} else if(settings.isTop()){
+            }
+            path.close();
+        } else if(settings.isTop()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(width - getPaddingRight(), height - getPaddingBottom());
 				path.lineTo(width - getPaddingRight(), getPaddingTop() + perpendicularHeight);
 				path.lineTo(getPaddingLeft(), getPaddingTop());
-				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			} else {
+            } else {
 				path.moveTo(width - getPaddingRight(), height - getPaddingBottom());
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
 				path.lineTo(getPaddingLeft(), getPaddingTop() + perpendicularHeight);
-				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			}
-		} else if(settings.isRight()){
+            }
+            path.lineTo(getPaddingLeft(), height - getPaddingBottom());
+            path.close();
+        } else if(settings.isRight()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(getPaddingLeft(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
 				path.lineTo(width - getPaddingRight() - perpendicularHeight, height - getPaddingBottom());
-				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			} else {
+            } else {
 				path.moveTo(getPaddingLeft(), getPaddingTop());
 				path.lineTo(width - getPaddingRight() - perpendicularHeight, getPaddingTop());
 				path.lineTo(width - getPaddingRight(), height - getPaddingBottom());
-				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			}
-		} else if(settings.isLeft()){
+            }
+            path.lineTo(getPaddingLeft(), height - getPaddingBottom());
+            path.close();
+        } else if(settings.isLeft()){
 			if (settings.isDirectionLeft()) {
 				path.moveTo(getPaddingLeft() + perpendicularHeight, getPaddingTop());
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), height - getPaddingBottom());
 				path.lineTo(getPaddingLeft(), height - getPaddingBottom());
-				path.close();
-			} else {
+            } else {
 				path.moveTo(getPaddingLeft(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), getPaddingTop());
 				path.lineTo(width - getPaddingRight(), height - getPaddingBottom());
 				path.lineTo(getPaddingLeft() + perpendicularHeight, height - getPaddingBottom());
-				path.close();
-			}
-		}
+            }
+            path.close();
+        }
 		return path;
 	}
 

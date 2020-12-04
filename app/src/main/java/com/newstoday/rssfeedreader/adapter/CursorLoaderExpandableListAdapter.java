@@ -283,19 +283,17 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
         } else {
             v = convertView;
         }
-        bindGroupView(v, mActivity, mGroupCursor, isExpanded);
+        bindGroupView(v, mActivity, mGroupCursor);
         return v;
     }
 
     /**
      * Bind an existing view to the group data pointed to by cursor.
-     *
-     * @param view       Existing view, returned earlier by newGroupView.
+     *  @param view       Existing view, returned earlier by newGroupView.
      * @param context    Interface to application's global information
      * @param cursor     The cursor from which to get the data. The cursor is already moved to the correct position.
-     * @param isExpanded Whether the group is expanded.
      */
-    protected abstract void bindGroupView(View view, Context context, Cursor cursor, boolean isExpanded);
+    protected abstract void bindGroupView(View view, Context context, Cursor cursor);
 
     /**
      * Bind an existing view to the child data pointed to by cursor

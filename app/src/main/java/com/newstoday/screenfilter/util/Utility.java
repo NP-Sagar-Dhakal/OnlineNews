@@ -54,7 +54,7 @@ import cyanogenmod.app.CustomTile;
  */
 public final class Utility {
 
-    private static boolean sFontInitialized = false;
+    private static final boolean sFontInitialized = false;
 
     private static final int CM_TILE_CODE = 1001;
 

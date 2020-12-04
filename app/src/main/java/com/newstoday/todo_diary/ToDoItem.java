@@ -56,7 +56,7 @@ class ToDoItem implements Serializable {
     private boolean mHasReminder;
     private int mTodoColor;
     private Date mToDoDate;
-    private UUID mTodoIdentifier;
+    private final UUID mTodoIdentifier;
     private static final String TODOTEXT = "todotext";
     private static final String TODOREMINDER = "todoreminder";
     private static final String TODOCOLOR = "todocolor";

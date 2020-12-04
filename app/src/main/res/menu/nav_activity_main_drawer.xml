@@ -37,6 +37,15 @@
         </menu>
     </item>
 
+    <item android:title="@string/news_publisher">
+        <menu>
+            <item
+                android:id="@+id/news_publishers"
+                android:icon="@drawable/news_publishers"
+                android:title="@string/news_publisher" />
+        </menu>
+    </item>
+
     <item android:title="@string/exit">
         <menu>
             <item

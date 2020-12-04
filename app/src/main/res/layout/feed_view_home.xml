@@ -32,14 +32,14 @@
                 android:id="@+id/fab_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/google_logo"
+                fab:srcCompat="@drawable/google_logo"
                 fab:fab_label="@string/google_news_title" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fab_feed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_new_feed"
+                fab:srcCompat="@drawable/add_new_feed"
                 fab:fab_label="@string/add_custom_feed" />
 
         </com.github.clans.fab.FloatingActionMenu>

@@ -273,11 +273,7 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     try {
                         String databaseUrl = Objects.requireNonNull(dataSnapshot.child("database").getValue()).toString();
-                        if (Objects.requireNonNull(databaseLink).equals(databaseUrl)) {
-                            getRealtimeUrl(savedInstanceState, databaseUrl, false);
-                        } else {
-                            getRealtimeUrl(savedInstanceState, databaseUrl, true);
-                        }
+                        getRealtimeUrl(savedInstanceState, databaseUrl, !Objects.requireNonNull(databaseLink).equals(databaseUrl));
                         FirebaseDatabase.getInstance().goOffline();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -304,11 +300,7 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         try {
                             String databaseUrl = Objects.requireNonNull(dataSnapshot.child("database").getValue()).toString();
-                            if (Objects.requireNonNull(databaseLink).equals(databaseUrl)) {
-                                getRealtimeUrl(savedInstanceState, databaseUrl, false);
-                            } else {
-                                getRealtimeUrl(savedInstanceState, databaseUrl, true);
-                            }
+                            getRealtimeUrl(savedInstanceState, databaseUrl, !Objects.requireNonNull(databaseLink).equals(databaseUrl));
                             FirebaseDatabase.getInstance().goOffline();
                         } catch (Exception e) {
                             e.printStackTrace();

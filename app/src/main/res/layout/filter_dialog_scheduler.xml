@@ -35,9 +35,9 @@
                     android:layout_height="56dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-                    android:src="@drawable/filter_wb_sunny_black_48dp"
-                    android:tint="@android:color/white"
-                    android:translationX="-8dp" />
+                    app:srcCompat="@drawable/filter_wb_sunny_black_48dp"
+                    android:translationX="-8dp"
+                    app:tint="@android:color/white" />
 
                 <TextView
                     android:id="@+id/sunrise_time"
@@ -78,8 +78,8 @@
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
                     android:src="@drawable/filter_brightness_2_black_48dp"
-                    android:tint="@android:color/white"
-                    android:translationX="8dp" />
+                    android:translationX="8dp"
+                    app:tint="@android:color/white" />
 
                 <TextView
                     android:id="@+id/sunset_time"
@@ -108,7 +108,7 @@
             android:textAppearance="@android:style/TextAppearance.Material.DialogWindowTitle"
             android:textColor="@android:color/white" />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/auto_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -65,7 +65,7 @@ public class About_Developer extends AppCompatActivity {
             sendLink("https://www.facebook.com/dev.sagardhakal");
         });
 
-        fork_gith.setOnClickListener(v -> sendLink("https://github.com/NP-Sagar-Dhakal/NepaliNews"));
+        fork_gith.setOnClickListener(v -> sendLink("https://github.com/NP-Sagar-Dhakal/OnlineNews"));
         licenses.setOnClickListener(v -> {
             WebView web = (WebView) LayoutInflater.from(About_Developer.this).inflate(R.layout.dialog_licenses, null);
             web.loadUrl("file:///android_asset/licenses.html");

@@ -55,7 +55,6 @@
             tools:ignore="SmallSp" />
 
         <View
-            android:id="@+id/native_ad_headline_placeholder"
             android:layout_width="160dp"
             android:layout_height="18dp"
             android:layout_centerVertical="true"
@@ -76,7 +75,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/native_ad_information_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/native_ad_information_headline"
@@ -116,7 +114,6 @@
             android:layout_toLeftOf="@+id/buttonCard">
 
             <View
-                android:id="@+id/native_ad_body_placeholder"
                 android:layout_width="130dp"
                 android:layout_height="18dp" />
 

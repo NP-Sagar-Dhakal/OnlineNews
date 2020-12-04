@@ -77,7 +77,7 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
     private int mDatePos;
     private int mFavoritePos;
 
-    public EntriesCursorAdapter(Context context, Cursor cursor, boolean showFeedInfo) {
+    public EntriesCursorAdapter(Context context, Cursor cursor) {
         super(context, R.layout.news_list_item_layout, cursor, 0);
         reinit(cursor);
     }

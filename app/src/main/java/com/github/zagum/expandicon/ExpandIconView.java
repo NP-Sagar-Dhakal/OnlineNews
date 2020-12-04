@@ -53,7 +53,7 @@ public class ExpandIconView extends View {
 	private float fraction = 0f;
 	private float animationSpeed;
 
-	private boolean switchColor;
+	private final boolean switchColor;
 	private int color;
 	private final int colorMore;
 	private final int colorLess;

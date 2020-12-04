@@ -217,6 +217,10 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                 Intent rss_reader = new Intent(Navigation.this, HomeActivity.class);
                 startActivity(rss_reader);
                 break;
+            case R.id.news_publishers:
+                ChromeOpener pub_opener = new ChromeOpener();
+                pub_opener.openLink(Navigation.this, Navigation.this.getResources().getString(R.string.publisher_link));
+                break;
             case R.id.nav_exit:
                 Navigation.this.moveTaskToBack(true);
                 break;

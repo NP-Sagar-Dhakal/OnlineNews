@@ -104,8 +104,9 @@ public class ModeListAdapter extends BaseAdapter implements ListAdapter {
 
 	public static class ModeItem {
 
-	    private int modeId;
-	    private int titleResId, descResId;
+	    private final int modeId;
+	    private final int titleResId;
+        private final int descResId;
 
 	    ModeItem(int modeId, int titleResId, int descResId) {
 	        this.modeId = modeId;

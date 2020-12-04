@@ -189,7 +189,7 @@ public class FetcherService extends IntentService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Notification getNotification() {
         String channel = createChannel();
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(R.drawable.rss_feed).setContentTitle("Nepali News Rss Reader is Refreshing.");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel).setSmallIcon(R.drawable.rss_feed).setContentTitle("Rss Reader is Refreshing.");
 
         return mBuilder
                 .setPriority(PRIORITY_LOW)
@@ -275,7 +275,7 @@ public class FetcherService extends IntentService {
                             .setDefaults(Notification.DEFAULT_LIGHTS)
                             .setWhen(System.currentTimeMillis())
                             .setAutoCancel(true)
-                            .setContentTitle("Rss Feed from Nepali News")
+                            .setContentTitle("Rss Feed from " + FetcherService.this.getResources().getString(R.string.app_name))
                             .setContentText(text)
                             .setContentIntent(contentIntent);
                     NotificationManager mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);

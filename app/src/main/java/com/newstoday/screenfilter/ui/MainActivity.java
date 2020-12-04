@@ -55,8 +55,6 @@ import com.newstoday.screenfilter.util.AlarmUtil;
 import com.newstoday.screenfilter.util.Settings;
 import com.newstoday.screenfilter.util.Utility;
 
-import java.util.List;
-
 public class MainActivity extends Activity {
 
     // Views & States
@@ -85,7 +83,7 @@ public class MainActivity extends Activity {
     // Service states
     private boolean isRunning = false;
 
-    private ServiceConnection mServiceConnection = new ServiceConnection() {
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             IMaskServiceInterface msi = IMaskServiceInterface.Stub.asInterface(service);

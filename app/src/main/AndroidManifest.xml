@@ -118,10 +118,6 @@
         <!--        Screen Filter-->
         <activity
             android:name="com.newstoday.screenfilter.ui.MainActivity"
-            android:excludeFromRecents="false"
-            android:finishOnTaskLaunch="true"
-            android:launchMode="singleInstance"
-            android:stateNotNeeded="true"
             android:theme="@style/Theme.Light">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
@@ -134,10 +130,6 @@
 
         <activity
             android:name="com.newstoday.screenfilter.ui.shortcut.ToggleActivity"
-            android:excludeFromRecents="false"
-            android:finishOnTaskLaunch="true"
-            android:launchMode="singleInstance"
-            android:stateNotNeeded="true"
             android:theme="@style/Theme.Light">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />

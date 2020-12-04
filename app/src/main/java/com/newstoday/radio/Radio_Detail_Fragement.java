@@ -76,7 +76,7 @@ public class Radio_Detail_Fragement extends Fragment {
         }
     }
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String currentMedia = intent.getStringExtra("radioDetail");

@@ -65,6 +65,7 @@ import com.newstoday.news_package.news_location.six.provider.FeedData.FeedColumn
 import com.newstoday.news_package.recent_news.fragment.SwipeRefreshFragment;
 import com.newstoday.news_package.news_location.six.service.FetcherService;
 import com.newstoday.news_package.recent_news.view.EntryView;
+import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.FilterService;
 import com.newstoday.news_package.news_location.six.utils.PrefUtils;
 import com.newstoday.services.SlideAd_Service;
@@ -286,7 +287,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     Toast.makeText(activity, R.string.copied_clipboard, Toast.LENGTH_SHORT).show();
                     break;
                 }
-                case R.id.menu_mark_as_unread: {
+               case R.id.menu_mark_as_unread: {
                     final Uri uri = ContentUris.withAppendedId(mBaseUri, mEntriesIds[mCurrentPagerPos]);
                     new Thread() {
                         @Override
@@ -298,6 +299,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     activity.finish();
                     break;
                 }
+               
                 case R.id.menu_open_in_browser: {
                     Cursor cursor = mEntryPagerAdapter.getCursor(mCurrentPagerPos);
                     if (cursor != null) {

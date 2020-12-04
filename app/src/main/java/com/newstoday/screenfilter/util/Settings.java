@@ -41,7 +41,7 @@ public class Settings {
 
     private volatile static Settings sInstance;
 
-    private SharedPreferences mPrefs;
+    private final SharedPreferences mPrefs;
 
     public static Settings getInstance(Context context) {
         if (sInstance == null) {

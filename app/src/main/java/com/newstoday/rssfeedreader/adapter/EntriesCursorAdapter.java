@@ -51,7 +51,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -66,10 +65,6 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.squareup.picasso.Picasso;
@@ -84,8 +79,6 @@ import com.newstoday.rssfeedreader.utils.CircleTransform;
 import com.newstoday.rssfeedreader.utils.NetworkUtils;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.utils.StringUtils;
-
-import java.util.Objects;
 
 public class EntriesCursorAdapter extends ResourceCursorAdapter {
 

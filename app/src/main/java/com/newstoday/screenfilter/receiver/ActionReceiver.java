@@ -34,7 +34,7 @@ import com.newstoday.screenfilter.util.Utility;
 
 public class ActionReceiver extends BroadcastReceiver {
 
-    private static String TAG = ActionReceiver.class.getSimpleName();
+    private static final String TAG = ActionReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
