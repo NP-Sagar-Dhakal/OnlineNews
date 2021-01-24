@@ -61,15 +61,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.newstoday.services.ChromeOpener;
-import com.newstoday.services.SlideAd_Service;
-import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
-
-import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.activity.BaseActivity;
 import com.newstoday.rssfeedreader.provider.FeedData;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
@@ -77,6 +71,10 @@ import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
 import com.newstoday.rssfeedreader.service.FetcherService;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.view.EntryView;
+import com.newstoday.services.SlideAd_Service;
+import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
+
+import java.util.Objects;
 
 public class EntryFragment extends SwipeRefreshFragment implements
         BaseActivity.OnFullScreenListener,
@@ -130,7 +128,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
         mInterstitialAd = new InterstitialAd(Objects.requireNonNull(getActivity()));
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
 
 
@@ -139,7 +137,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
         floatingActionButton.setOnClickListener(v -> {
             //Start onClick Action
             if (mPreferFullText) {
-                Toast.makeText(activity, "Feed Text", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, getResources().getString(R.string.feedText), Toast.LENGTH_SHORT).show();
                 floatingActionButton.setImageResource(R.drawable.content_min);
                 getActivity().runOnUiThread(() -> {
                     mPreferFullText = false;
@@ -147,7 +145,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     mEntryPagerAdapter.displayEntry(mCurrentPagerPos, null, true);
                 });
             } else {
-                Toast.makeText(activity, "Full Text", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, getResources().getString(R.string.fullText), Toast.LENGTH_SHORT).show();
                 floatingActionButton.setImageResource(R.drawable.content_full);
                 Cursor cursor = mEntryPagerAdapter.getCursor(mCurrentPagerPos);
                 final boolean alreadyMobilized = !cursor.isNull(mMobilizedHtmlPos);
@@ -213,12 +211,12 @@ public class EntryFragment extends SwipeRefreshFragment implements
                         mInterstitialAd.show();
                         SlideAd_Service.putSLIDE_AD(getActivity(), 0);
                         mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     } else {
                         SlideAd_Service.putSLIDE_AD(getActivity(), slideAD);
                         mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     }
                 }

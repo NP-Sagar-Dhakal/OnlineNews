@@ -29,7 +29,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-
 import com.newstoday.R;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;

@@ -68,11 +68,11 @@ import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.news_package.news_category.ten.parser.RssAtomParser;
 import com.newstoday.news_package.news_category.ten.provider.FeedData;
-import com.newstoday.news_package.news_category.ten.utils.NetworkUtils;
-import com.newstoday.news_package.news_category.ten.utils.PrefUtils;
 import com.newstoday.news_package.news_category.ten.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_category.ten.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.news_category.ten.provider.FeedData.TaskColumns;
+import com.newstoday.news_package.news_category.ten.utils.NetworkUtils;
+import com.newstoday.news_package.news_category.ten.utils.PrefUtils;
 import com.newstoday.news_package.recent_news.utils.ArticleTextExtractor;
 import com.newstoday.news_package.recent_news.utils.HtmlUtils;
 

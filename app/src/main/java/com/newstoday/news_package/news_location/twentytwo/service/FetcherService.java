@@ -71,10 +71,10 @@ import com.newstoday.news_package.news_location.twentytwo.provider.FeedData;
 import com.newstoday.news_package.news_location.twentytwo.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_location.twentytwo.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.news_location.twentytwo.provider.FeedData.TaskColumns;
-import com.newstoday.news_package.recent_news.utils.ArticleTextExtractor;
-import com.newstoday.news_package.recent_news.utils.HtmlUtils;
 import com.newstoday.news_package.news_location.twentytwo.utils.NetworkUtils;
 import com.newstoday.news_package.news_location.twentytwo.utils.PrefUtils;
+import com.newstoday.news_package.recent_news.utils.ArticleTextExtractor;
+import com.newstoday.news_package.recent_news.utils.HtmlUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

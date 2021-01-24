@@ -9,8 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="start"
-        android:theme="@style/Theme.Light">
+        android:gravity="start">
 
         <TextView
             android:id="@+id/navigationTitle"

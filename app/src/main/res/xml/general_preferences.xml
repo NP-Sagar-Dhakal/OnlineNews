@@ -4,6 +4,17 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
+    <com.newstoday.services.LanguageSelector
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:defaultValue="en"
+        android:dependency="language.change"
+        android:entries="@array/langSelector"
+        android:entryValues="@array/langSelector_values"
+        android:inputType="text"
+        android:key="language.change"
+        android:title="@string/chooseLanguage" />
+
     <SwitchPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,4 +41,5 @@
         android:key="refreshonopen.enabled"
         android:summary="@string/news_settings_refresh_on_open_description"
         android:title="@string/news_settings_refresh_on_open" />
+
 </PreferenceScreen>

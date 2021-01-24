@@ -30,10 +30,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.services.ChromeOpener;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -218,7 +218,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(topNewsSites.get(position).siteName);
                 String siteImage = topNewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = topNewsSites.get(position).siteLink;
@@ -230,7 +230,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location1NewsSites.get(position).siteName);
                 String siteImage = location1NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location1NewsSites.get(position).siteLink;
@@ -242,7 +242,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location2NewsSites.get(position).siteName);
                 String siteImage = location2NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location2NewsSites.get(position).siteLink;
@@ -254,7 +254,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location3NewsSites.get(position).siteName);
                 String siteImage = location3NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location3NewsSites.get(position).siteLink;
@@ -266,7 +266,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location4NewsSites.get(position).siteName);
                 String siteImage = location4NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location4NewsSites.get(position).siteLink;
@@ -278,7 +278,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location5NewsSites.get(position).siteName);
                 String siteImage = location5NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location5NewsSites.get(position).siteLink;
@@ -290,7 +290,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location6NewsSites.get(position).siteName);
                 String siteImage = location6NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location6NewsSites.get(position).siteLink;
@@ -302,7 +302,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location7NewsSites.get(position).siteName);
                 String siteImage = location7NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location7NewsSites.get(position).siteLink;
@@ -314,7 +314,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location8NewsSites.get(position).siteName);
                 String siteImage = location8NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location8NewsSites.get(position).siteLink;
@@ -326,7 +326,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location9NewsSites.get(position).siteName);
                 String siteImage = location9NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location9NewsSites.get(position).siteLink;
@@ -338,7 +338,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location10NewsSites.get(position).siteName);
                 String siteImage = location10NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location10NewsSites.get(position).siteLink;
@@ -350,7 +350,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location11NewsSites.get(position).siteName);
                 String siteImage = location11NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location11NewsSites.get(position).siteLink;
@@ -362,7 +362,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location12NewsSites.get(position).siteName);
                 String siteImage = location12NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location12NewsSites.get(position).siteLink;
@@ -374,7 +374,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location13NewsSites.get(position).siteName);
                 String siteImage = location13NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location13NewsSites.get(position).siteLink;
@@ -386,7 +386,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location14NewsSites.get(position).siteName);
                 String siteImage = location14NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location14NewsSites.get(position).siteLink;
@@ -398,7 +398,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location15NewsSites.get(position).siteName);
                 String siteImage = location15NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location15NewsSites.get(position).siteLink;
@@ -410,7 +410,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location16NewsSites.get(position).siteName);
                 String siteImage = location16NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location16NewsSites.get(position).siteLink;
@@ -422,7 +422,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location17NewsSites.get(position).siteName);
                 String siteImage = location17NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location17NewsSites.get(position).siteLink;
@@ -434,7 +434,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location18NewsSites.get(position).siteName);
                 String siteImage = location18NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location18NewsSites.get(position).siteLink;
@@ -446,7 +446,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location19NewsSites.get(position).siteName);
                 String siteImage = location19NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location19NewsSites.get(position).siteLink;
@@ -458,7 +458,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location20NewsSites.get(position).siteName);
                 String siteImage = location20NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location20NewsSites.get(position).siteLink;
@@ -470,7 +470,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location21NewsSites.get(position).siteName);
                 String siteImage = location21NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location21NewsSites.get(position).siteLink;
@@ -482,7 +482,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location22NewsSites.get(position).siteName);
                 String siteImage = location22NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location22NewsSites.get(position).siteLink;
@@ -494,7 +494,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location23NewsSites.get(position).siteName);
                 String siteImage = location23NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location23NewsSites.get(position).siteLink;
@@ -506,7 +506,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location24NewsSites.get(position).siteName);
                 String siteImage = location24NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location24NewsSites.get(position).siteLink;
@@ -518,7 +518,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location25NewsSites.get(position).siteName);
                 String siteImage = location25NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location25NewsSites.get(position).siteLink;
@@ -530,7 +530,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location26NewsSites.get(position).siteName);
                 String siteImage = location26NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location26NewsSites.get(position).siteLink;
@@ -542,7 +542,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location27NewsSites.get(position).siteName);
                 String siteImage = location27NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location27NewsSites.get(position).siteLink;
@@ -554,7 +554,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location28NewsSites.get(position).siteName);
                 String siteImage = location28NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location28NewsSites.get(position).siteLink;
@@ -566,7 +566,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location29NewsSites.get(position).siteName);
                 String siteImage = location29NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location29NewsSites.get(position).siteLink;
@@ -578,7 +578,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(location30NewsSites.get(position).siteName);
                 String siteImage = location30NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = location30NewsSites.get(position).siteLink;
@@ -591,7 +591,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category1NewsSites.get(position).siteName);
                 String siteImage = category1NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category1NewsSites.get(position).siteLink;
@@ -603,7 +603,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category2NewsSites.get(position).siteName);
                 String siteImage = category2NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category2NewsSites.get(position).siteLink;
@@ -615,7 +615,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category3NewsSites.get(position).siteName);
                 String siteImage = category3NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category3NewsSites.get(position).siteLink;
@@ -627,7 +627,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category4NewsSites.get(position).siteName);
                 String siteImage = category4NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category4NewsSites.get(position).siteLink;
@@ -639,7 +639,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category5NewsSites.get(position).siteName);
                 String siteImage = category5NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category5NewsSites.get(position).siteLink;
@@ -651,7 +651,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category6NewsSites.get(position).siteName);
                 String siteImage = category6NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category6NewsSites.get(position).siteLink;
@@ -663,7 +663,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category7NewsSites.get(position).siteName);
                 String siteImage = category7NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category7NewsSites.get(position).siteLink;
@@ -675,7 +675,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category8NewsSites.get(position).siteName);
                 String siteImage = category8NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category8NewsSites.get(position).siteLink;
@@ -687,7 +687,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category9NewsSites.get(position).siteName);
                 String siteImage = category9NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category9NewsSites.get(position).siteLink;
@@ -699,7 +699,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category10NewsSites.get(position).siteName);
                 String siteImage = category10NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category10NewsSites.get(position).siteLink;
@@ -711,7 +711,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category11NewsSites.get(position).siteName);
                 String siteImage = category11NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category11NewsSites.get(position).siteLink;
@@ -723,7 +723,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category12NewsSites.get(position).siteName);
                 String siteImage = category12NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category12NewsSites.get(position).siteLink;
@@ -735,7 +735,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category13NewsSites.get(position).siteName);
                 String siteImage = category13NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category13NewsSites.get(position).siteLink;
@@ -747,7 +747,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category14NewsSites.get(position).siteName);
                 String siteImage = category14NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category14NewsSites.get(position).siteLink;
@@ -759,7 +759,7 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 newsSitesViewHolder.siteName.setText(category15NewsSites.get(position).siteName);
                 String siteImage = category15NewsSites.get(position).siteImage;
                 if (!siteImage.equals("")) {
-                    Picasso.get().load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
+                    Glide.with(c).load(siteImage).into(((News_Sites_ViewHolder) holder).siteImage);
                 }
                 newsSitesViewHolder.newsParent.setOnClickListener(v -> {
                     String link = category15NewsSites.get(position).siteLink;

@@ -13,8 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.newstoday.radio.Next_Prev_Callback;
 import com.newstoday.R;
+import com.newstoday.radio.Next_Prev_Callback;
 import com.newstoday.radio.Radio_Activity;
 import com.newstoday.services.SlideAd_Service;
 
@@ -50,19 +50,19 @@ public class Fav_Detail_Activity extends AppCompatActivity implements Next_Prev_
                     MobileAds.initialize(Fav_Detail_Activity.this, initializationStatus -> {
                     });
                     InterstitialAd mInterstitialAd = new InterstitialAd(Fav_Detail_Activity.this);
-                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                     mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
 
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                         SlideAd_Service.putSLIDE_AD(Fav_Detail_Activity.this, 0);
                         mInterstitialAd = new InterstitialAd(Fav_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     } else {
                         SlideAd_Service.putSLIDE_AD(Fav_Detail_Activity.this, slideAD);
                         mInterstitialAd = new InterstitialAd(Fav_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     }
                 }

@@ -26,9 +26,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -44,13 +46,14 @@ public class Activity extends AppCompatActivity {
     private ViewPager screenPager;
     ViewPagerAdapter viewPagerAdapter;
     TabLayout tabIndicator;
-    Button btnNext;
+    ImageButton btnNext;
     int position = 0;
     Button btnGetStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -69,7 +72,7 @@ public class Activity extends AppCompatActivity {
         final List<ScreenItems> mList = new ArrayList<>();
         mList.add(new ScreenItems("News by Location", "One of the best News Application with many more features.", R.drawable.app_icon));
         mList.add(new ScreenItems("All Online Radio Stations", "Almost all Online Radio Stations are available to listen online.", R.drawable.ic_radio));
-        mList.add(new ScreenItems("App Permissions", "<br>External Storage is used to save app data and read them.<br><br>Phone permission is used to stop radio player when you are receiving phone calls<br><br>", R.drawable.app_icon));
+        mList.add(new ScreenItems("App Permissions", "External Storage is used to save app data and read them.<br><br>Call permission is used to stop radio player when you are receiving phone calls.", R.drawable.app_icon));
 
         screenPager = findViewById(R.id.screen_viewpager);
         viewPagerAdapter = new ViewPagerAdapter(this, mList);
@@ -89,7 +92,7 @@ public class Activity extends AppCompatActivity {
             }
         });
 
-        tabIndicator.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+        tabIndicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == mList.size() - 1) {

@@ -54,7 +54,7 @@
         android:maxLines="2"
         android:minHeight="45dp"
         android:text="@string/app_name"
-        android:textColor="@color/max_grey"
+        android:textColor="?attr/colorReadState"
         android:textSize="@dimen/title_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/image_card"
@@ -69,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:gravity="start"
         android:text="@string/app_name"
-        android:textColor="@color/mid_grey"
+        android:textColor="?attr/colorReadState"
         android:textSize="@dimen/pubdate_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />

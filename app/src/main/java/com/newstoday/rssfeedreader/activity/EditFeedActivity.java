@@ -79,6 +79,16 @@ import android.widget.Toast;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.Toolbar;
 
+import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.adapter.FiltersCursorAdapter;
+import com.newstoday.rssfeedreader.loader.BaseLoader;
+import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
+import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
+import com.newstoday.rssfeedreader.provider.FeedDataContentProvider;
+import com.newstoday.rssfeedreader.utils.NetworkUtils;
+import com.newstoday.rssfeedreader.utils.UiUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -89,16 +99,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.R;
-import com.newstoday.rssfeedreader.adapter.FiltersCursorAdapter;
-import com.newstoday.rssfeedreader.loader.BaseLoader;
-import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
-import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
-import com.newstoday.rssfeedreader.provider.FeedDataContentProvider;
-import com.newstoday.rssfeedreader.utils.NetworkUtils;
-import com.newstoday.rssfeedreader.utils.UiUtils;
 
 public class EditFeedActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     static final String FEED_SEARCH_TITLE = "title";

@@ -70,9 +70,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.io.File;
-import java.util.Objects;
-
 import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.rssfeedreader.activity.AddGoogleNewsActivity;
@@ -81,6 +78,9 @@ import com.newstoday.rssfeedreader.parser.OPML;
 import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
 import com.newstoday.rssfeedreader.view.DragNDropExpandableListView;
 import com.newstoday.rssfeedreader.view.DragNDropListener;
+
+import java.io.File;
+import java.util.Objects;
 
 public class EditFeedsListFragment extends ListFragment {
 
@@ -379,7 +379,7 @@ public class EditFeedsListFragment extends ListFragment {
                     final String filename = Environment.getExternalStorageDirectory().toString() + "/Readify_"
                             + System.currentTimeMillis() + ".opml";
                     OPML.exportToFile(filename);
-                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Exported", Toast.LENGTH_SHORT).show());
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), getResources().getString(R.string.success), Toast.LENGTH_SHORT).show());
                 } catch (Exception e) {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), R.string.error_feed_export, Toast.LENGTH_LONG).show());
                 }

@@ -16,8 +16,17 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.newstoday.services;
+
+import android.annotation.TargetApi;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,21 +35,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.annotation.TargetApi;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 import com.newstoday.R;
-
 import com.newstoday.Social_Media_Fragment;
 import com.newstoday.darker.ScreenFilter_Activity;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
@@ -48,8 +44,6 @@ import com.newstoday.radio.Radio_Activity;
 import com.newstoday.rssfeedreader.activity.HomeActivity;
 import com.newstoday.screenfilter.Constants;
 import com.newstoday.todo_diary.MainActivity;
-
-import java.util.Objects;
 
 public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -60,7 +54,6 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        Objects.requireNonNull(toolbar.getOverflowIcon()).setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
 
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -71,7 +64,6 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -189,6 +181,9 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                 Intent home = new Intent(Navigation.this, com.newstoday.news_package.recent_news.activity.MainHomeActivity.class);
                 startActivity(home);
                 break;
+            case R.id.dark_theme:
+                Theme_Service.changeTheme(Navigation.this);
+                break;
             case R.id.radio:
                 if (MainHomeActivity.radioItems.isEmpty()) {
                     Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show();
@@ -216,10 +211,6 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
             case R.id.rss_reader:
                 Intent rss_reader = new Intent(Navigation.this, HomeActivity.class);
                 startActivity(rss_reader);
-                break;
-            case R.id.news_publishers:
-                ChromeOpener pub_opener = new ChromeOpener();
-                pub_opener.openLink(Navigation.this, Navigation.this.getResources().getString(R.string.publisher_link));
                 break;
             case R.id.nav_exit:
                 Navigation.this.moveTaskToBack(true);

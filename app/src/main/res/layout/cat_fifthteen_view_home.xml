@@ -25,7 +25,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/floating_button_margin"
             fab:menu_animationDelayPerItem="0"
-            fab:menu_colorNormal="@color/colorPrimary">
+            fab:menu_colorNormal="@color/floating_button">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fab_google"

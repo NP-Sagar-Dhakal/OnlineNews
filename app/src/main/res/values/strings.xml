@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Project News</string>
 
-    <string name="app_id">ca-app-pub-7330887983553029~4271620333</string>
-    <string name="banner_ad">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="intrestial_ad">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="native_ad">ca-app-pub-3940256099942544/2247696110</string>
-
-    <string name="publisher_link">https://contactnewspublisher.blogspot.com/2020/11/hindi-news-publishers.html</string>
+    <string name="app_id" translatable="false">ca-app-pub-7330887983553029~4271620333</string>
+    <string name="banner_ad" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="native_ad" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
 
     <string name="stream_offline">Radio station is offline. Please try again later.</string>
-    <string name="no_to_dos">Add new note\n&amp;\nSwipe Right to delete the item</string>
+    <string name="no_to_dos">Add new note \n&amp;\n Swipe Right to delete the item</string>
     <string name="title">What\'s on your mind?</string>
     <string name="date_reminder_default">Today</string>
     <string name="date_error_check_again">The date you entered is in the past.</string>
@@ -27,13 +25,13 @@
 
     <plurals name="number_of_new_entries_for_notification">
         <item quantity="one">One New Feed is available to read</item>
-        <item quantity="other">%d New Feed are available to read</item>
+        <item quantity="other">%d New Feeds are available to read</item>
     </plurals>
 
-    <!--    Deleted Todo-->
+    <!--    Deleted to-do-->
     <string name="deleted_todo">Sorry, the data is already deleted</string>
     <!--    Screen Filter-->
-    <string name="screen_filter">Night Light</string>
+    <string name="screen_filter">Screen Filter</string>
 
     <!-- Button tip -->
     <string name="button_tip_text">Tip: Click the top left button to turn on Night Screen.</string>
@@ -64,8 +62,6 @@
     <string name="mode_android_oreo_explanation_dialog_message">Since Android Oreo (8.0), Android strictly limits the permissions of floating windows. The methods used before are no longer available. Maybe we will support better methods to control brightness in the future.</string>
     <string name="mode_android_oreo_explanation_read_more">Read more</string>
     <string name="mode_android_oreo_explanation_url" translatable="false">https://developer.android.com/about/versions/oreo/android-8.0-changes.html#all-aw</string>
-
-    <!-- More settings row -->
 
     <!-- Notification Channel -->
     <string name="notification_channel_running_status">Running status</string>
@@ -100,7 +96,7 @@
     <!--    Readify-->
     <string name="never">never</string>
     <string name="update">Update</string>
-    <string name="colon">:\u00A0</string>
+    <string name="colon" translatable="false">:\u00A0</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_all_read">Mark all as read</string>
     <string name="error">Error</string>
@@ -204,8 +200,6 @@
     <string name="open_link">Open link</string>
     <string name="tip_sentence">Tip: slide left to mark as read and slide right to mark as favorite</string>
 
-    <!-- WIDGET -->
-
     <!-- SETTINGS -->
     <string name="settings_category_refresh">Automated refresh</string>
     <string name="settings_refresh_enabled">Enable automatic refresh</string>
@@ -229,7 +223,17 @@
     <string name="settings_refresh_wifi_only">Refresh only over Wi-Fi</string>
     <string name="settings_refresh_wifi_only_description">Automatic refresh will only be done if Wi-Fi connection is available</string>
 
-    <string-array name="settings_intervals">
+    <string-array name="langSelector" translatable="false">
+        <item>English</item>
+        <item>Nepali</item>
+    </string-array>
+
+    <string-array name="langSelector_values" translatable="false">
+        <item>en</item>
+        <item>ne</item>
+    </string-array>
+
+    <string-array name="settings_intervals" translatable="false">
         <item>10 minutes</item>
         <item>1 hour</item>
         <item>2 hours</item>
@@ -237,7 +241,7 @@
         <item>12 hours</item>
         <item>1 day</item>
     </string-array>
-    <string-array name="settings_keep_times">
+    <string-array name="settings_keep_times" translatable="false">
         <item>1 day</item>
         <item>2 days</item>
         <item>4 days</item>
@@ -248,7 +252,7 @@
         <item>3 months</item>
         <item>Forever</item>
     </string-array>
-    <string-array name="settings_keep_times_per_feed">
+    <string-array name="settings_keep_times_per_feed" translatable="false">
         <item>1 day</item>
         <item>2 days</item>
         <item>4 days</item>
@@ -259,7 +263,7 @@
         <item>3 months</item>
         <item>Default</item>
     </string-array>
-    <string-array name="settings_font_sizes">
+    <string-array name="settings_font_sizes" translatable="false">
         <item>-2</item>
         <item>-1</item>
         <item>Standard</item>
@@ -269,7 +273,7 @@
         <item>+4</item>
         <item>+5</item>
     </string-array>
-    <string-array name="settings_preload_image_modes">
+    <string-array name="settings_preload_image_modes" translatable="false">
         <item>Never</item>
         <item>Only over Wi-Fi</item>
         <item>Always</item>
@@ -283,7 +287,7 @@
     <string name="all_feeds">All feeds (incl. future)</string>
     <string name="marked_as_read">Marked as read</string>
     <string name="undo">Undo</string>
-    <string name="website_or_feed">(e.g: Hacker News, The Verge…)</string>
+    <string name="website_or_feed" translatable="false">(e.g: Hacker News, The Verge…)</string>
 
     <string-array name="settings_interval_values" translatable="false">
         <item>600000</item>
@@ -320,18 +324,15 @@
         <item>ALWAYS_PRELOAD</item>
     </string-array>
 
-    <!--  Flashlight-->
-
     <!--    Layout Values-->
-    <string name="ad">Ad</string>
-    <string name="developer_name">Sagar Dhakal</string>
-    <string name="developer_career">Android Developer</string>
-    <string name="freelancer">Online Solutions</string>
-    <string name="developer_address">Cherry Digital Services</string>
-    <string name="extra_description"><![CDATA[Hello Everyone,\n My name is Sagar Dhakal and I\'m the man behind this app.\n\nTo add new sites or RSS Feed please email me, Go below.\n\nThanks to all for installing this app, If you have any suggestions or feedback & Sponsored ads placement feel free to message me. I will reply to everyone. :)\n\nIf you want to build any high quality app with best design and online services from Android Studio + Firebase, Do drop me a Hi, It really means a lot to me.\nLooking forward to hear from you.]]></string>
-    <string name="licenses">Licenses</string>
-    <string name="fork_on_github">Fork on Github</string>
-    <string name="nepali_radio">Online Radio</string>
+    <string name="ad" translatable="false">Ad</string>
+    <string name="developer_name" translatable="false">Sagar Dhakal</string>
+    <string name="developer_career" translatable="false">Android Developer</string>
+    <string name="freelancer" translatable="false">Tech Solutions</string>
+    <string name="developer_address" translatable="false">Cherry Digital Services</string>
+    <string name="licenses" translatable="false">Licenses</string>
+    <string name="fork_on_github" translatable="false">Fork on Github</string>
+    <string name="online_radio">Online Radio</string>
     <string name="filter_service">Filter Service</string>
     <string name="brightness">Brightness</string>
     <string name="mix_rgb_color">Mix RGB Color</string>
@@ -363,33 +364,64 @@
     <string name="rate_us">Rate us</string>
     <string name="invite_friends">Invite Friends</string>
     <string name="about_developer">About Developer</string>
-    <string name="send_feedback_amp_problems"><![CDATA[Send Problems & Feedback ]]></string>
+    <string name="send_feedback_amp_problems">Send Problems &amp; Feedback</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="radio_timer">Radio Timer</string>
-    <string name="_10_min">10 Min</string>
-    <string name="_25_min">25 Min</string>
-    <string name="_40_min">40 Min</string>
-    <string name="_60_min">60 Min</string>
+    <string name="_10_min" translatable="false">10 Min</string>
+    <string name="_25_min" translatable="false">25 Min</string>
+    <string name="_40_min" translatable="false">40 Min</string>
+    <string name="_60_min" translatable="false">60 Min</string>
+    <string name="exit">Exit</string>
+    <string name="navigation_drawer_open" translatable="false">DRAWER_OPEN</string>
+    <string name="navigation_drawer_close" translatable="false">DRAWER_CLOSED</string>
+    <string name="news_publisher">News Publishers</string>
+    <string name="more_add_publisher">Add News Site or Radio</string>
+    <string name="refresh_suggestion">You can click refresh button on top. When you want to read new news.</string>
+    <string name="theme">Theme</string>
+
+    <!--    Extra things-->
+    <string name="noConnection">No Internet Connection</string>
+    <string name="allitems">All Items</string>
+    <string name="success">Successfully Done</string>
+    <string name="unreadOnly">Unread Items Only</string>
+    <string name="feedText">Feed Text</string>
+    <string name="fullText">Full Text</string>
+    <string name="somethingWrong">Sorry Something went wrong, Please try again later</string>
+    <!--    Categories Name-->
+
+    <string name="catOne">Politics</string>
+    <string name="catOneE">National</string>
+    <string name="catTwo">Entertainment</string>
+    <string name="catThree">Astrology &amp; Horoscope</string>
+    <string name="catThreeE">Culture</string>
+    <string name="catFour">Business &amp; Economy</string>
+    <string name="catSix">Health &amp; Lifestyle</string>
+    <string name="catSeven">Sports</string>
+    <string name="catEight">Tech &amp; Auto</string>
+    <string name="catNine">World</string>
+
+    <string name="extra_description" translatable="false">Hello Everyone, \n My name is Sagar Dhakal and I\'m the man behind this app.\n\n To add new websites or RSS Feed please email me, Go below.\n\nThanks to all for installing this app, If you have any suggestions &amp; feedback feel free to message me. I will reply to everyone. :) Do drop me a Hi, It really means a lot to me.\n\nLooking forward to hear from you.</string>
 
     <!--    Disclaimer-->
-    <string name="app_disclaimer">This app is made for those who like to read news and other article and listen online radios,
+    <string name="app_disclaimer" translatable="false">This app is made for those who like to read news and other article and listen online radios,
         \n
         To make a good application we should give extra effort to make all services accurate and valid, application may contain inaccuracies. By using this app,
         you agree that this app assumes no liability for any harm caused by use of this application.
         \n\n
-        We dosen\'t own and assume responsibility of any news and sites added on this app. This app uses RSS Feed to gather and display news and sites. News content, Images and their icons are copyright of their respective owner.
+        We doesn\'t own and assume responsibility of any news and sites added on this app. This app uses RSS Feed to gather and display news and sites. News content, Images and their icons are copyright of their respective owner.
         if any website/content is yours and you don\'t want to show your content here, please contact us first.
         \n\n
-        Radio is a streaming client and dosen\'t stream/host any content by itself. Images/Logo are copyright of their respective owners.
+        Radio is a streaming client and doesn\'t stream/host any content by itself. Images/Logo are copyright of their respective owners.
         If you want to add/update/remove your radio station, Please inform us(cherrydigital.care@gmail.com).
         \n\n
         To add new sites or rss feed please contact me, Go to developer page on this app. Thank you.
     </string>
-    <string name="exit">Exit</string>
-    <string name="navigation_drawer_open">DRAWER_OPEN</string>
-    <string name="navigation_drawer_close">DRAWER_CLOSED</string>
-    <string name="news_publisher">News Publishers</string>
-    <string name="more_add_publisher">Add News Site or Radio</string>
+
+    <string name="drawerOne">News, Radio &amp; Other Tools</string>
+
+    <string name="newsSettings">News Settings</string>
+    <string name="chooseLanguage">Language</string>
+
 
 </resources>

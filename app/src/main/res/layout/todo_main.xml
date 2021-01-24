@@ -10,8 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="start"
-        android:theme="@style/Theme.Light">
+        android:gravity="start">
 
         <TextView
             android:id="@+id/navigationTitle"
@@ -65,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            app:backgroundTint="@color/floating_button"
             android:layout_margin="16dp"
             app:layout_behavior="com.newstoday.todo_diary.ScrollingFABBehaviour"
             app:srcCompat="@drawable/ic_add" />

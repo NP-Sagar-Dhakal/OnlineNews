@@ -96,7 +96,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/native_call_button"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/p_white"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     tools:ignore="SmallSp" />

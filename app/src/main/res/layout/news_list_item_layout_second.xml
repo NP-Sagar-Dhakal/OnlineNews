@@ -23,7 +23,7 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="2"
-            android:textColor="@color/max_grey"
+            android:textColor="?attr/colorReadState"
             android:textSize="@dimen/title_size"
             android:textStyle="bold" />
 

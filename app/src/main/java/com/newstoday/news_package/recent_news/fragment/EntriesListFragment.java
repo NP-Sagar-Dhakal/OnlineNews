@@ -18,7 +18,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.newstoday.news_package.recent_news.fragment;
 
 import android.annotation.SuppressLint;
@@ -74,20 +73,20 @@ import com.newstoday.activities.About_Developer;
 import com.newstoday.news_package.recent_news.activity.GeneralPrefsActivity;
 import com.newstoday.news_package.recent_news.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.recent_news.provider.FeedData;
+import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.provider.FeedDataContentProvider;
 import com.newstoday.news_package.recent_news.service.FetcherService;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-
-import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.utils.UiUtils;
 import com.newstoday.recyclerview.News_Sites_Adapter;
 import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.Disclaimer_Dialog;
+import com.newstoday.services.Pref_Util_Service;
 import com.newstoday.services.SlideAd_Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.category10Name;
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.category10NewsSites;
@@ -278,6 +277,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
             mEntriesCursorAdapter = new EntriesCursorAdapter(getActivity(), Constants.EMPTY_CURSOR);
         }
+
     }
 
     @Override
@@ -660,6 +660,26 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     private void hideButton(String name, CardView view, TextView t_view) {
         if (name.equals("null")) {
             view.setVisibility(View.GONE);
+        } else if (name.equals("Politics")) {
+            t_view.setText(getResources().getString(R.string.catOne));
+        } else if (name.equals("National")) {
+            t_view.setText(getResources().getString(R.string.catOneE));
+        } else if (name.equals("Entertainment")) {
+            t_view.setText(getResources().getString(R.string.catTwo));
+        } else if (name.equals("Astrology & Horoscope")) {
+            t_view.setText(getResources().getString(R.string.catThree));
+        } else if (name.equals("Culture")) {
+            t_view.setText(getResources().getString(R.string.catThreeE));
+        } else if (name.equals("Business & Economy")) {
+            t_view.setText(getResources().getString(R.string.catFour));
+        } else if (name.equals("Health & Lifestyle")) {
+            t_view.setText(getResources().getString(R.string.catSix));
+        } else if (name.equals("Sports")) {
+            t_view.setText(getResources().getString(R.string.catSeven));
+        } else if (name.equals("Tech & Auto")) {
+            t_view.setText(getResources().getString(R.string.catEight));
+        } else if (name.equals("World")) {
+            t_view.setText(getResources().getString(R.string.catNine));
         } else {
             t_view.setText(name);
         }
@@ -669,7 +689,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
         InterstitialAd mInterstitialAd = new InterstitialAd(Objects.requireNonNull(getActivity()));
-        mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.intrestial_ad));
+        mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -680,12 +700,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                 mInterstitialAd.show();
                 SlideAd_Service.putBUTTON_CLICK(getActivity(), 0);
                 mInterstitialAd = new InterstitialAd(getActivity());
-                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.intrestial_ad));
+                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
                 mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
             } else {
                 SlideAd_Service.putBUTTON_CLICK(getActivity(), slideAD);
                 mInterstitialAd = new InterstitialAd(getActivity());
-                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.intrestial_ad));
+                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
                 mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
             }
         }
@@ -718,6 +738,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             }
         });
         disableSwipe();
+        boolean isFirst = Pref_Util_Service.getPrefBoolean(getActivity(), "recent", true);
+        if (isFirst) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.refresh_suggestion), Toast.LENGTH_LONG).show();
+            Pref_Util_Service.putPrefBoolean(getActivity(), "recent", false);
+            startRefresh();
+        }
     }
 
     @Override
@@ -759,6 +785,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         inflater.inflate(R.menu.entry_list, menu);
 
         MenuItem searchItem = menu.findItem(R.id.menu_search);
+
         final SearchView searchView = (SearchView) searchItem.getActionView();
 
         if (EntryColumns.isSearchUri(mUri)) {
@@ -789,7 +816,9 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         });
         searchView.setOnCloseListener(() -> {
             setData(mOriginalUri, true);
-            addHeaderView();
+            if (mListView.getHeaderViewsCount() <= 0) {
+                addHeaderView();
+            }
             return false;
         });
         super.onCreateOptionsMenu(menu, inflater);
@@ -798,7 +827,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.reresh: {
+            case R.id.refresh: {
                 startRefresh();
                 return true;
             }
@@ -942,7 +971,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     }
 
 
-    private void startRefresh() {
+    public void startRefresh() {
         if (!PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
             if (mUri != null && FeedDataContentProvider.URI_MATCHER.match(mUri) == FeedDataContentProvider.URI_ENTRIES_FOR_FEED) {
                 getActivity().startService(new Intent(getActivity(), FetcherService.class).setAction(FetcherService.ACTION_REFRESH_FEEDS).putExtra(Constants.FEED_ID,

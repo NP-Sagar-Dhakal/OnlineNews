@@ -58,13 +58,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.activity.EditFeedsListActivity;
 import com.newstoday.rssfeedreader.activity.GeneralPrefsActivity;
 import com.newstoday.rssfeedreader.adapter.EntriesCursorAdapter;
@@ -74,6 +70,9 @@ import com.newstoday.rssfeedreader.provider.FeedDataContentProvider;
 import com.newstoday.rssfeedreader.service.FetcherService;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.utils.UiUtils;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class EntriesListFragment extends SwipeRefreshListFragment implements ViewTreeObserver.OnScrollChangedListener {
 
@@ -324,9 +323,9 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         });
 
         if (!PrefUtils.getBoolean(PrefUtils.SHOW_READ, true)) {
-            menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_read_white);
+            menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_read);
         } else {
-            menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_unread_white);
+            menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_unread);
         }
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -337,15 +336,15 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         switch (item.getItemId()) {
             case R.id.menu_unread:
                 if (!PrefUtils.getBoolean(PrefUtils.SHOW_READ, true)) {
-                    Toast.makeText(getActivity(), "All Items", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.allitems), Toast.LENGTH_SHORT).show();
                     PrefUtils.putBoolean(PrefUtils.SHOW_READ, true);
-                    menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_unread_white);
+                    menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_unread);
                     return true;
 
                 } else {
-                    Toast.makeText(getActivity(), "Unread Items Only", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.unreadOnly), Toast.LENGTH_SHORT).show();
                     PrefUtils.putBoolean(PrefUtils.SHOW_READ, false);
-                    menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_read_white);
+                    menu.findItem(R.id.menu_unread).setIcon(R.drawable.nav_read);
                 }
                 return true;
 
@@ -412,7 +411,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     }
 
 
-    private void startRefresh() {
+    public void startRefresh() {
         if (!PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
             if (mUri != null && FeedDataContentProvider.URI_MATCHER.match(mUri) == FeedDataContentProvider.URI_ENTRIES_FOR_FEED) {
                 getActivity().startService(new Intent(getActivity(), FetcherService.class).setAction(FetcherService.ACTION_REFRESH_FEEDS).putExtra(Constants.FEED_ID,

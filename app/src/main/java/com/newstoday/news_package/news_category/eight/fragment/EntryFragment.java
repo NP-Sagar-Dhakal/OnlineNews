@@ -35,10 +35,8 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -60,17 +58,18 @@ import com.newstoday.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.news_package.news_category.eight.provider.FeedData;
-import com.newstoday.news_package.news_category.eight.service.FetcherService;
-import com.newstoday.news_package.news_category.eight.utils.PrefUtils;
 import com.newstoday.news_package.news_category.eight.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_category.eight.provider.FeedData.FeedColumns;
+import com.newstoday.news_package.news_category.eight.service.FetcherService;
+import com.newstoday.news_package.news_category.eight.utils.PrefUtils;
 import com.newstoday.news_package.recent_news.fragment.SwipeRefreshFragment;
 import com.newstoday.news_package.recent_news.view.EntryView;
-import com.newstoday.services.ChromeOpener;
-import com.newstoday.services.FilterService;
 import com.newstoday.services.SlideAd_Service;
+import com.newstoday.services.Theme_Service;
 
 import java.util.Objects;
+
+;
 
 public class EntryFragment extends SwipeRefreshFragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -116,7 +115,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
         mInterstitialAd = new InterstitialAd(Objects.requireNonNull(getActivity()));
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
 
         mEntryPager = rootView.findViewById(R.id.pager);
@@ -148,12 +147,12 @@ public class EntryFragment extends SwipeRefreshFragment implements
                         mInterstitialAd.show();
                         SlideAd_Service.putSLIDE_AD(getActivity(), 0);
                         mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     } else {
                         SlideAd_Service.putSLIDE_AD(getActivity(), slideAD);
                         mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     }
                 }
@@ -244,22 +243,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     break;
                 }
                 case R.id.darker: {
-                    Intent i = new Intent(getActivity(), FilterService.class);
-                    if (FilterService.CURRENT_STATE == FilterService.ACTIVE) {
-                        getActivity().stopService(i);
-                    } else {
-                        if (Build.VERSION.SDK_INT >= 23) {
-                            if (!Settings.canDrawOverlays(getActivity())) {
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                        Uri.parse("package:" + getActivity().getPackageName()));
-                                startActivityForResult(intent, 1234);
-                            } else {
-                                getActivity().startService(i);
-                            }
-                        } else {
-                            getActivity().startService(i);
-                        }
-                    }
+                    Theme_Service.changeTheme(getActivity());
                     break;
                 }
                 case R.id.menu_share: {

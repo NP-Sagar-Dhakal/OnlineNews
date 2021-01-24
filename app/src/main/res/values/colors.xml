@@ -10,6 +10,11 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 
+    <color name="p_black">#000000</color>
+    <color name="p_white">#ffffff</color>
+
+    <color name="floating_button">#ffffff</color>
+
     <color name="ultra_grey">#424242</color>
     <color name="max_grey">#757575</color>
     <color name="mid_grey">#bdbdbd</color>

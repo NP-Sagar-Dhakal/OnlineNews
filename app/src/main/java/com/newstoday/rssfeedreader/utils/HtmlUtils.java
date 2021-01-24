@@ -24,6 +24,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.newstoday.MainApplication;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.service.FetcherService;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -32,9 +36,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.rssfeedreader.service.FetcherService;
 
 public class HtmlUtils {
 

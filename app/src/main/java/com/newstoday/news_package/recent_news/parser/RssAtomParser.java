@@ -56,6 +56,17 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.newstoday.Constants;
+import com.newstoday.MainApplication;
+import com.newstoday.R;
+import com.newstoday.news_package.recent_news.provider.FeedData;
+import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
+import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
+import com.newstoday.news_package.recent_news.provider.FeedData.FilterColumns;
+import com.newstoday.news_package.recent_news.service.FetcherService;
+import com.newstoday.news_package.recent_news.utils.HtmlUtils;
+import com.newstoday.news_package.recent_news.utils.NetworkUtils;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -70,17 +81,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.newstoday.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.R;
-import com.newstoday.news_package.recent_news.provider.FeedData;
-import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
-import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
-import com.newstoday.news_package.recent_news.provider.FeedData.FilterColumns;
-import com.newstoday.news_package.recent_news.service.FetcherService;
-import com.newstoday.news_package.recent_news.utils.HtmlUtils;
-import com.newstoday.news_package.recent_news.utils.NetworkUtils;
 
 public class RssAtomParser extends DefaultHandler {
     private static final String TAG = RssAtomParser.class.getSimpleName();

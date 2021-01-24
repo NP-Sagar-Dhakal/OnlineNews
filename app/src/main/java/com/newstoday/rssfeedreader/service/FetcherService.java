@@ -73,6 +73,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.newstoday.MainApplication;
+import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.activity.HomeActivity;
+import com.newstoday.rssfeedreader.parser.RssAtomParser;
+import com.newstoday.rssfeedreader.provider.FeedData;
+import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
+import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
+import com.newstoday.rssfeedreader.provider.FeedData.TaskColumns;
+import com.newstoday.rssfeedreader.utils.ArticleTextExtractor;
+import com.newstoday.rssfeedreader.utils.HtmlUtils;
+import com.newstoday.rssfeedreader.utils.NetworkUtils;
+import com.newstoday.rssfeedreader.utils.PrefUtils;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -92,20 +106,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.R;
-import com.newstoday.rssfeedreader.activity.HomeActivity;
-import com.newstoday.rssfeedreader.parser.RssAtomParser;
-import com.newstoday.rssfeedreader.provider.FeedData;
-import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
-import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
-import com.newstoday.rssfeedreader.provider.FeedData.TaskColumns;
-import com.newstoday.rssfeedreader.utils.ArticleTextExtractor;
-import com.newstoday.rssfeedreader.utils.HtmlUtils;
-import com.newstoday.rssfeedreader.utils.NetworkUtils;
-import com.newstoday.rssfeedreader.utils.PrefUtils;
 
 import static androidx.core.app.NotificationCompat.PRIORITY_LOW;
 

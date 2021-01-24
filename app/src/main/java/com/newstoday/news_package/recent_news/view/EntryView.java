@@ -61,10 +61,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
@@ -76,8 +78,8 @@ import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.newstoday.R;
 import com.newstoday.rssfeedreader.utils.StringUtils;
 import com.newstoday.services.ChromeOpener;
+import com.newstoday.services.Pref_Util_Service;
 import com.newstoday.services.SlideAd_Service;
-import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -106,6 +108,11 @@ public class EntryView extends ConstraintLayout {
     }
 
     public void setHtml(Activity activity, String title, String link, String contentText, long timestamp) {
+        boolean isFirst = Pref_Util_Service.getPrefBoolean(activity, "sug_Swipe", true);
+        if (isFirst) {
+            Toast.makeText(activity, "Swipe right to read next news.", Toast.LENGTH_LONG).show();
+            Pref_Util_Service.putPrefBoolean(activity, "sug_Swipe", false);
+        }
         TextView title_text = findViewById(R.id.title);
         TextView pubDate = findViewById(R.id.pubdate);
         ImageView image = findViewById(R.id.image);
@@ -135,7 +142,7 @@ public class EntryView extends ConstraintLayout {
         String imagelink = doc.getElementsByTag("img").attr("src");
         if (!imagelink.equals("")) {
             image.setVisibility(View.VISIBLE);
-            Picasso.get().load(imagelink).placeholder(R.drawable.placeholder).resize(400, 300).into(image);
+            Glide.with(activity).load(imagelink).placeholder(R.drawable.placeholder).into(image);
         }
 
         readFullContent.setOnClickListener(v -> {
@@ -150,7 +157,7 @@ public class EntryView extends ConstraintLayout {
                 } else {
                     SlideAd_Service.putWEBSITE_CLICK(getContext(), slideAD);
                     mInterstitialAd = new InterstitialAd(getContext());
-                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                     mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     mInterstitialAd.show();
                 }

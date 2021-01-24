@@ -22,25 +22,24 @@ package com.newstoday.rssfeedreader.activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.fragment.EntryFragment;
+import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrPosition;
 
 import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.R;
-import com.newstoday.rssfeedreader.fragment.EntryFragment;
-import com.newstoday.rssfeedreader.utils.PrefUtils;
 
 public class EntryActivity extends BaseActivity {
 
@@ -49,6 +48,8 @@ public class EntryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.pull_in_right, R.anim.holder);
         setContentView(R.layout.feed_activity_entry);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -78,7 +79,7 @@ public class EntryActivity extends BaseActivity {
             mEntryFragment.setData(Objects.requireNonNull(getIntent().getData()));
         }
 
-        Toolbar toolbar = findViewById(R.id.entry_toolbar);
+        Toolbar toolbar = findViewById(R.id.feed_entry_toolbar);
         setSupportActionBar(toolbar);
         //SupportActionBar may produce a null pointer
         if (getSupportActionBar() != null) {
@@ -87,10 +88,6 @@ public class EntryActivity extends BaseActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
         //Called onBackPressed at OnClickListener to apply overridePendingTransition
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        toolbar.setBackgroundColor(getResources().getColor(R.color.dark_background));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.dark_background));
-        }
         if (PrefUtils.getBoolean(PrefUtils.DISPLAY_ENTRIES_FULLSCREEN, false)) {
             setImmersiveFullScreen(true);
         }

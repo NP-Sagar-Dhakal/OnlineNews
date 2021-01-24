@@ -67,7 +67,7 @@ public class GeneralPrefsActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Toolbar toolbar = findViewById(R.id.base_toolbar);
         TextView navigationTitle = findViewById(R.id.navigationTitle);
-        navigationTitle.setText("News Settings");
+        navigationTitle.setText(R.string.newsSettings);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

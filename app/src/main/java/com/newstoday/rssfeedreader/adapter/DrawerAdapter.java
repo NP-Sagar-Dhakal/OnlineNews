@@ -37,17 +37,16 @@ import androidx.core.content.ContextCompat;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-
 import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.rssfeedreader.provider.FeedData;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
 import com.newstoday.rssfeedreader.utils.StringUtils;
 import com.newstoday.rssfeedreader.utils.UiUtils;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class DrawerAdapter extends BaseAdapter {
 
@@ -117,7 +116,7 @@ public class DrawerAdapter extends BaseAdapter {
             if (position == mSelectedItem) {
                 holder.titleTxt.setTextColor(ContextCompat.getColor(mContext, R.color.light_primary_color));
             } else {
-                holder.titleTxt.setTextColor(ContextCompat.getColor(mContext, R.color.light_base_text));
+                holder.titleTxt.setTextColor(ContextCompat.getColor(mContext, R.color.text_black));
             }
 
             // default init
@@ -136,7 +135,7 @@ public class DrawerAdapter extends BaseAdapter {
                 if (position == mSelectedItem) {
                     holder.iconView.setColorFilter(ContextCompat.getColor(mContext, R.color.light_primary_color));
                 } else {
-                    holder.iconView.setColorFilter(ContextCompat.getColor(mContext, R.color.light_base_text));
+                    holder.iconView.setColorFilter(ContextCompat.getColor(mContext, R.color.text_black));
                 }
 
                 int unread = position == 0 ? mAllUnreadNumber : mFavoritesNumber;

@@ -44,13 +44,13 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.newstoday.Constants;
 import com.newstoday.R;
-import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
-import com.newstoday.news_package.news_location.thirty.utils.PrefUtils;
 import com.newstoday.news_package.news_location.thirty.fragment.EntriesListFragment;
 import com.newstoday.news_package.news_location.thirty.provider.FeedData;
 import com.newstoday.news_package.news_location.thirty.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_location.thirty.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.news_location.thirty.provider.FeedDataContentProvider;
+import com.newstoday.news_package.news_location.thirty.utils.PrefUtils;
+import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 
 
 public class HomeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {

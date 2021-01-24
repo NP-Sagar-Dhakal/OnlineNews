@@ -65,17 +65,15 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
-import com.squareup.picasso.Picasso;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.provider.FeedData;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
-import com.newstoday.rssfeedreader.utils.CircleTransform;
 import com.newstoday.rssfeedreader.utils.NetworkUtils;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.utils.StringUtils;
@@ -84,7 +82,6 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
     private final Uri mUri;
     private final boolean mShowFeedInfo;
-    private final CircleTransform mCircleTransform = new CircleTransform();
     private int mIdPos;
     private int mTitlePos;
     private int mMainImgPos;
@@ -152,9 +149,8 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         int color = generator.getColor(feedId); // The color is specific to the feedId (which shouldn't change)
         TextDrawable letterDrawable = TextDrawable.builder().buildRound((feedName != null ? feedName.substring(0, 1).toUpperCase() : ""), color);
         if (mainImgUrl != null && PrefUtils.getBoolean(PrefUtils.DISPLAY_IMAGES, true)) {
-            Picasso.get().load(mainImgUrl).transform(mCircleTransform).placeholder(letterDrawable).error(letterDrawable).into(holder.mainImgView);
+            Glide.with(context).load(mainImgUrl).circleCrop().placeholder(letterDrawable).error(letterDrawable).into(holder.mainImgView);
         } else {
-            Picasso.get().cancelRequest(holder.mainImgView);
             holder.mainImgView.setImageDrawable(letterDrawable);
         }
 

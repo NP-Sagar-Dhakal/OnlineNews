@@ -31,9 +31,9 @@ import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
-import java.util.Objects;
-
 import com.newstoday.R;
+
+import java.util.Objects;
 
 public class DragNDropExpandableListView extends ExpandableListView {
 

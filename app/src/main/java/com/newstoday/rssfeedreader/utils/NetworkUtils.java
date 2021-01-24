@@ -29,6 +29,10 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.text.Html;
 
+import com.newstoday.MainApplication;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.provider.FeedData;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,10 +50,6 @@ import java.net.ProxySelector;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.rssfeedreader.provider.FeedData;
 
 public class NetworkUtils {
     private static final String TAG = "NetworkUtils";

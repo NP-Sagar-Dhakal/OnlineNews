@@ -63,18 +63,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.utils.FileUtils;
 import com.newstoday.rssfeedreader.utils.HtmlUtils;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 
-public class EntryView extends WebView {
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
+public class EntryView extends WebView {
     private static final String TEXT_HTML = "text/html";
     private static final String FONT_SANS_SERIF = "font-family: sans-serif;";
     private static final String HTML_IMG_REGEX = "(?i)<[/]?[ ]?img(.|\n)*?>";

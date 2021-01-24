@@ -56,9 +56,11 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import com.newstoday.R;
+import com.newstoday.activities.Splash_Activity;
 import com.newstoday.news_package.recent_news.service.RefreshService;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
 import com.newstoday.services.Custom_JobSheduler;
+import com.newstoday.services.SetAppLanguage;
 
 public class GeneralPrefsFragment extends PreferenceFragment {
 
@@ -93,6 +95,11 @@ public class GeneralPrefsFragment extends PreferenceFragment {
             return true;
         });
 
+        Preference langPreference = findPreference(PrefUtils.LANGUAGE);
+        langPreference.setOnPreferenceChangeListener((preference1, newValue) -> {
+            SetAppLanguage.setApplicationLocale(getActivity(), newValue.toString());
+            startActivity(new Intent(getActivity(), Splash_Activity.class));
+            return true;
+        });
     }
-
 }

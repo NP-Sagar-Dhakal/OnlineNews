@@ -51,14 +51,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.os.Handler;
 
-import java.io.File;
-import java.util.Objects;
-
 import com.newstoday.rssfeedreader.parser.OPML;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.TaskColumns;
+
+import java.io.File;
+import java.util.Objects;
 
 class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";

@@ -44,8 +44,7 @@ import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.radio.radioplayer_service.RadioService;
 import com.newstoday.screenfilter.Constants;
-import com.newstoday.services.CacheCleaner;
-import com.newstoday.services.FilterService;
+import com.newstoday.services.Theme_Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +59,6 @@ public class Radio_Activity extends AppCompatActivity implements SearchView.OnQu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        CacheCleaner cacheCleaner = new CacheCleaner();
-        cacheCleaner.clearCacheFolder(this.getCacheDir(), 5);
-
         service = new RadioService();
         Toolbar radio_Toolbar = findViewById(R.id.radio_Toolbar);
         TabLayout radio_TabLayout = findViewById(R.id.radio_Tab);
@@ -147,19 +143,7 @@ public class Radio_Activity extends AppCompatActivity implements SearchView.OnQu
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.radio_darktheme) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    createNotificationChannel();
-                }
-                startActivity(new Intent(Radio_Activity.this, com.newstoday.screenfilter.ui.MainActivity.class));
-            } else {
-                Intent i = new Intent(Radio_Activity.this, FilterService.class);
-                if (FilterService.CURRENT_STATE == FilterService.ACTIVE) {
-                    stopService(i);
-                } else {
-                    startService(i);
-                }
-            }
+            Theme_Service.changeTheme(Radio_Activity.this);
         } else if (id == R.id.radio_timer) {
             PopupMenu popup = new PopupMenu(Radio_Activity.this, findViewById(R.id.radio_timer));
             popup.setOnMenuItemClickListener(item1 -> {

@@ -51,12 +51,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.github.clans.fab.FloatingActionButton;
-
-import java.io.File;
-import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.adapter.DrawerAdapter;
 import com.newstoday.rssfeedreader.fragment.EntriesListFragment;
 import com.newstoday.rssfeedreader.parser.OPML;
@@ -66,8 +62,10 @@ import com.newstoday.rssfeedreader.service.FetcherService;
 import com.newstoday.rssfeedreader.service.RefreshService;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.utils.UiUtils;
-import com.newstoday.services.CacheCleaner;
 import com.newstoday.services.Custom_JobSheduler;
+
+import java.io.File;
+import java.util.Objects;
 
 public class HomeActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -99,8 +97,6 @@ public class HomeActivity extends BaseActivity implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed_activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        CacheCleaner cacheCleaner = new CacheCleaner();
-        cacheCleaner.clearCacheFolder(this.getCacheDir(), 5);
 
         mEntriesFragment = (EntriesListFragment) getFragmentManager().findFragmentById(R.id.entries_list_fragment);
 
@@ -112,7 +108,8 @@ public class HomeActivity extends BaseActivity implements LoaderManager.LoaderCa
 
         FloatingActionButton fab = findViewById(R.id.fab_google);
         FloatingActionButton fab2 = findViewById(R.id.fab_feed);
-
+        fab.setImageResource(R.drawable.google_logo);
+        fab2.setImageResource(R.drawable.add_new_feed);
         fab.setColorNormalResId(R.color.colorPrimary);
         fab.setColorPressedResId(R.color.h_dark_red);
         fab2.setColorNormalResId(R.color.colorPrimary);
@@ -139,8 +136,6 @@ public class HomeActivity extends BaseActivity implements LoaderManager.LoaderCa
             return false;
         });
 
-        mLeftDrawer.setBackgroundColor((ContextCompat.getColor(getApplicationContext(), R.color.light_primary_color)));
-        mDrawerList.setBackgroundColor((ContextCompat.getColor(getApplicationContext(), R.color.light_background)));
         mDrawerLayout = findViewById(R.id.drawer_layout);
         if (mDrawerLayout != null) {
             mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);

@@ -45,7 +45,6 @@ import androidx.annotation.RequiresApi;
 import com.newstoday.R;
 import com.newstoday.screenfilter.Constants;
 
-
 import cyanogenmod.app.CMStatusBarManager;
 import cyanogenmod.app.CustomTile;
 
@@ -199,7 +198,7 @@ public final class Utility {
                 activity.startActivityForResult(intent, requestCode);
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(activity, "Sorry Something happens, Please try again later", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, activity.getResources().getString(R.string.somethingWrong), Toast.LENGTH_SHORT).show();
             }
         }
         // TODO Support third-party customize ROM?

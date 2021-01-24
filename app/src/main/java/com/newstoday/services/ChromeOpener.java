@@ -39,7 +39,7 @@ public class ChromeOpener {
             } else {
                 SlideAd_Service.putWEBSITE_CLICK(context, slideAD);
                 mInterstitialAd = new InterstitialAd(context);
-                mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.intrestial_ad));
+                mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad));
                 mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                 mInterstitialAd.show();
             }

@@ -27,8 +27,9 @@ import android.preference.PreferenceManager;
 
 import com.newstoday.MainApplication;
 
-
 public class PrefUtils {
+    public static final String LANGUAGE = "language.change";
+
     public static final String SLIDE_AD = "SLIDE_AD";
     public static final String URL_INTERSTITIAL = "URL_INTERSTITIAL";
     public static final String BUTTON_INTERSTITIAL = "BUTTON_INTERSTITIAL";

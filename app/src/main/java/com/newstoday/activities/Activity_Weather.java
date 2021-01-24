@@ -19,11 +19,6 @@
 
 package com.newstoday.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -48,13 +43,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.newstoday.R;
-import com.newstoday.services.CacheCleaner;
 
 import java.io.IOException;
 import java.util.List;
@@ -77,8 +76,6 @@ public class Activity_Weather extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_weather);
         Toast.makeText(this, "Click refresh button until you get your real location", Toast.LENGTH_LONG).show();
-        CacheCleaner cacheCleaner = new CacheCleaner();
-        cacheCleaner.clearCacheFolder(this.getCacheDir(), 10);
         Toolbar toolbar = findViewById(R.id.weatherToolbar);
         setSupportActionBar(toolbar);
         latTextView = findViewById(R.id.latTextView);

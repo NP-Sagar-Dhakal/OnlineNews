@@ -7,14 +7,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +18,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.newstoday.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
@@ -34,6 +36,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
 import com.newstoday.radio.radio_recent.Recent_Radio_Adapter;
@@ -41,8 +44,6 @@ import com.newstoday.radio.radio_recent.Recent_Radio_Items;
 import com.newstoday.radio.radioplayer_service.PlaybackStatus;
 import com.newstoday.radio.radioplayer_service.RadioManager;
 import com.newstoday.radio.radioplayer_service.RadioService;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -104,27 +105,24 @@ public class Radio_Detail_Fragement extends Fragment {
         this.radioName.setText(this.radioItems.stationName);
         this.radioDetail.setText(this.radioItems.stationDetail);
 
+        Glide.with(this)
+                .asBitmap()
+                .load(this.radioItems.stationimage)
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        bitmap = resource;
+                    }
 
-        Picasso.get()
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
+
+        Glide.with(getActivity())
                 .load(this.radioItems.stationimage)
                 .into(this.radioImage);
-
-        Picasso.get().load(this.radioItems.stationimage).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmapp, Picasso.LoadedFrom from) {
-                bitmap = bitmapp;
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        });
 
         fragplay_pause.setOnClickListener(v -> {
             Recent_Radio_Items favoriteList = new Recent_Radio_Items();

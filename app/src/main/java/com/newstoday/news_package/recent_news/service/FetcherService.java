@@ -74,6 +74,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.newstoday.Constants;
+import com.newstoday.MainApplication;
+import com.newstoday.R;
+import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
+import com.newstoday.news_package.recent_news.parser.RssAtomParser;
+import com.newstoday.news_package.recent_news.provider.FeedData;
+import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
+import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
+import com.newstoday.news_package.recent_news.provider.FeedData.TaskColumns;
+import com.newstoday.news_package.recent_news.utils.ArticleTextExtractor;
+import com.newstoday.news_package.recent_news.utils.HtmlUtils;
+import com.newstoday.news_package.recent_news.utils.NetworkUtils;
+import com.newstoday.news_package.recent_news.utils.PrefUtils;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -93,20 +107,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.newstoday.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.R;
-import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
-import com.newstoday.news_package.recent_news.parser.RssAtomParser;
-import com.newstoday.news_package.recent_news.provider.FeedData;
-import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
-import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
-import com.newstoday.news_package.recent_news.provider.FeedData.TaskColumns;
-import com.newstoday.news_package.recent_news.utils.ArticleTextExtractor;
-import com.newstoday.news_package.recent_news.utils.HtmlUtils;
-import com.newstoday.news_package.recent_news.utils.NetworkUtils;
-import com.newstoday.news_package.recent_news.utils.PrefUtils;
 
 import static androidx.core.app.NotificationCompat.PRIORITY_LOW;
 

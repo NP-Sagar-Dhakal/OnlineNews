@@ -31,11 +31,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.InternetIsConnected;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class SocialMedia_Recycler_Adapter extends RecyclerView.Adapter<SocialMed
     @Override
     public void onBindViewHolder(@NonNull SocialMedia_Viewholder holder, int position) {
         holder.socialTitle.setText(socialMedia.get(position).siteName);
-        Picasso.get().load(socialMedia.get(position).siteImage).into(holder.socialImage);
+        Glide.with(context).load(socialMedia.get(position).siteImage).into(holder.socialImage);
         final String link = socialMedia.get(position).siteLink;
         holder.socialLinear.setOnClickListener(v -> {
             InternetIsConnected isConnected = new InternetIsConnected();
@@ -80,7 +80,7 @@ public class SocialMedia_Recycler_Adapter extends RecyclerView.Adapter<SocialMed
                 ChromeOpener opener = new ChromeOpener();
                 opener.openLink(context, link);
             } else {
-                Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.noConnection), Toast.LENGTH_SHORT).show();
             }
         });
     }

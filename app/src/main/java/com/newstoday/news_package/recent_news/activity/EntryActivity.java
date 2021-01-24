@@ -46,7 +46,6 @@ public class EntryActivity extends AppCompatActivity {
 
     private EntryFragment mEntryFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

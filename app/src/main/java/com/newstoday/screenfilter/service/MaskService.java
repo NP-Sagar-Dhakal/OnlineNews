@@ -39,9 +39,9 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.RequiresApi;
 
+import com.newstoday.IMaskServiceInterface;
 import com.newstoday.R;
 import com.newstoday.screenfilter.Constants;
-import com.newstoday.IMaskServiceInterface;
 import com.newstoday.screenfilter.receiver.ActionReceiver;
 import com.newstoday.screenfilter.ui.MainActivity;
 import com.newstoday.screenfilter.util.ColorUtil;
@@ -49,7 +49,10 @@ import com.newstoday.screenfilter.util.Utility;
 
 import java.util.Objects;
 
-import static android.view.WindowManager.LayoutParams.*;
+import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
+import static android.view.WindowManager.LayoutParams.TYPE_TOAST;
 
 public class MaskService extends Service {
 

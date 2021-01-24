@@ -23,6 +23,8 @@ package com.newstoday.rssfeedreader.utils;
 import android.annotation.TargetApi;
 import android.os.Build;
 
+import com.newstoday.MainApplication;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,8 +32,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import com.newstoday.MainApplication;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class StringUtils {

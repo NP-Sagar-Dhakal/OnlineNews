@@ -46,6 +46,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,14 +58,15 @@ import com.newstoday.Constants;
 import com.newstoday.R;
 import com.newstoday.news_package.news_location.four.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.news_location.four.provider.FeedData;
-import com.newstoday.news_package.news_location.four.provider.FeedDataContentProvider;
 import com.newstoday.news_package.news_location.four.provider.FeedData.EntryColumns;
-import com.newstoday.news_package.recent_news.fragment.SwipeRefreshListFragment;
+import com.newstoday.news_package.news_location.four.provider.FeedDataContentProvider;
 import com.newstoday.news_package.news_location.four.service.FetcherService;
+import com.newstoday.news_package.news_location.four.utils.PrefUtils;
+import com.newstoday.news_package.recent_news.fragment.SwipeRefreshListFragment;
 import com.newstoday.news_package.recent_news.utils.UiUtils;
 import com.newstoday.recyclerview.News_Sites_Adapter;
-import com.newstoday.services.FilterService;
-import com.newstoday.news_package.news_location.four.utils.PrefUtils;
+import com.newstoday.services.Pref_Util_Service;
+import com.newstoday.services.Theme_Service;
 
 import java.util.Date;
 
@@ -250,7 +252,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         news_Recycler = header.findViewById(R.id.news_recycler);
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         news_Recycler.setLayoutManager(layoutManager1);
-        News_Sites_Adapter adapter = new News_Sites_Adapter(getActivity(), "location3NewsSites", topNewsSites, category1NewsSites, category2NewsSites, category3NewsSites, category4NewsSites, category5NewsSites, category6NewsSites, category7NewsSites, category8NewsSites, category9NewsSites, category10NewsSites, category11NewsSites, category12NewsSites, category13NewsSites, category14NewsSites, category15NewsSites, location1NewsSites, location2NewsSites, location3NewsSites, location4NewsSites, location5NewsSites, location6NewsSites, location7NewsSites, location8NewsSites, location9NewsSites, location10NewsSites, location11NewsSites, location12NewsSites, location13NewsSites, location14NewsSites, location15NewsSites, location16NewsSites, location17NewsSites, location18NewsSites, location19NewsSites, location20NewsSites, location21NewsSites, location22NewsSites, location23NewsSites, location24NewsSites, location25NewsSites, location26NewsSites, location27NewsSites, location28NewsSites, location29NewsSites, location30NewsSites);
+        News_Sites_Adapter adapter = new News_Sites_Adapter(getActivity(), "location4NewsSites", topNewsSites, category1NewsSites, category2NewsSites, category3NewsSites, category4NewsSites, category5NewsSites, category6NewsSites, category7NewsSites, category8NewsSites, category9NewsSites, category10NewsSites, category11NewsSites, category12NewsSites, category13NewsSites, category14NewsSites, category15NewsSites, location1NewsSites, location2NewsSites, location3NewsSites, location4NewsSites, location5NewsSites, location6NewsSites, location7NewsSites, location8NewsSites, location9NewsSites, location10NewsSites, location11NewsSites, location12NewsSites, location13NewsSites, location14NewsSites, location15NewsSites, location16NewsSites, location17NewsSites, location18NewsSites, location19NewsSites, location20NewsSites, location21NewsSites, location22NewsSites, location23NewsSites, location24NewsSites, location25NewsSites, location26NewsSites, location27NewsSites, location28NewsSites, location29NewsSites, location30NewsSites);
         news_Recycler.setAdapter(adapter);
         if (adapter.getItemCount() > 1) {
             mListView.addHeaderView(header);
@@ -269,6 +271,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             }
         });
         disableSwipe();
+        boolean isFirst = Pref_Util_Service.getPrefBoolean(getActivity(), "loc_Four", true);
+        if (isFirst) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.refresh_suggestion), Toast.LENGTH_LONG).show();
+            Pref_Util_Service.putPrefBoolean(getActivity(), "loc_Four", false);
+            startRefresh();
+        }
     }
 
     @Override
@@ -376,24 +384,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.reresh: {
+            case R.id.refresh: {
                 startRefresh();
                 return true;
             }
             case R.id.darker: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        createNotificationChannel();
-                    }
-                    startActivity(new Intent(getActivity(), com.newstoday.screenfilter.ui.MainActivity.class));
-                } else {
-                    Intent i = new Intent(getActivity(), FilterService.class);
-                    if (FilterService.CURRENT_STATE == FilterService.ACTIVE) {
-                        getActivity().stopService(i);
-                    } else {
-                        getActivity().startService(i);
-                    }
-                }
+                Theme_Service.changeTheme(getActivity());
                 break;
             }
             case android.R.id.home: {
@@ -404,7 +400,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         return super.onOptionsItemSelected(item);
     }
 
-    private void startRefresh() {
+    public void startRefresh() {
         if (!PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
             if (mUri != null && FeedDataContentProvider.URI_MATCHER.match(mUri) == FeedDataContentProvider.URI_ENTRIES_FOR_FEED) {
                 getActivity().startService(new Intent(getActivity(), FetcherService.class).setAction(FetcherService.ACTION_REFRESH_FEEDS).putExtra(Constants.FEED_ID,

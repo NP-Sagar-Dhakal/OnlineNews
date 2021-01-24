@@ -60,14 +60,12 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
+import com.bumptech.glide.Glide;
 import com.newstoday.R;
-import com.newstoday.news_package.recent_news.utils.NetworkUtils;
-import com.newstoday.rssfeedreader.utils.StringUtils;
-import com.squareup.picasso.Picasso;
-
-
 import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
+import com.newstoday.news_package.recent_news.utils.NetworkUtils;
+import com.newstoday.rssfeedreader.utils.StringUtils;
 
 public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
@@ -75,10 +73,12 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
     private int mTitlePos;
     private int mMainImgPos;
     private int mDatePos;
+    private int mIsReadPos;
     private int mFavoritePos;
 
     public EntriesCursorAdapter(Context context, Cursor cursor) {
         super(context, R.layout.news_list_item_layout, cursor, 0);
+
         reinit(cursor);
     }
 
@@ -95,7 +95,7 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
             if (mainImgUrl != null) {
                 holder.imageCard.setVisibility(View.VISIBLE);
-                Picasso.get().load(mainImgUrl).resize(400, 300).into(holder.mainImgView);
+                Glide.with(context).load(mainImgUrl).into(holder.mainImgView);
             } else {
                 holder.imageCard.setVisibility(View.GONE);
             }
@@ -110,6 +110,16 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
                 holder.dateTextView.setText(StringUtils.getDateTimeString(cursor.getLong(mDatePos)));
             } else {
                 holder.dateTextView.setText(pub);
+            }
+
+            if (cursor.isNull(mIsReadPos)) {
+                holder.titleTextView.setEnabled(true);
+                holder.dateTextView.setEnabled(true);
+                holder.isRead = false;
+            } else {
+                holder.titleTextView.setEnabled(false);
+                holder.dateTextView.setEnabled(false);
+                holder.isRead = true;
             }
         }
     }
@@ -179,6 +189,7 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
             mDatePos = cursor.getColumnIndex(EntryColumns.DATE);
             mFavoritePos = cursor.getColumnIndex(EntryColumns.IS_FAVORITE);
             int mFeedNamePos = cursor.getColumnIndex(FeedColumns.NAME);
+            mIsReadPos = cursor.getColumnIndex(EntryColumns.IS_READ);
         }
     }
 
@@ -188,6 +199,7 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         TextView dateTextView, titleTextView;
         ImageView mainImgView;
         boolean isFavorite;
+        boolean isRead;
         long entryID = -1;
     }
 }

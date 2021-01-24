@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:theme="@style/Theme.Light"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -13,7 +14,7 @@
             android:id="@+id/acceptRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="Accept"
             android:textColor="#669900" />
 
         <RadioButton
@@ -21,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text=""
+            android:text="Reject"
             android:textColor="#CC0000" />
     </RadioGroup>
 
@@ -50,13 +51,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="" />
+            android:text="Apply to title" />
 
         <RadioButton
             android:id="@+id/applyContentRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="Apply to content" />
     </RadioGroup>
 
 </LinearLayout>

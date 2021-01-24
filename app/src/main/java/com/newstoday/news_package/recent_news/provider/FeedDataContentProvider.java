@@ -62,14 +62,14 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.multidex.BuildConfig;
 
-import java.util.Date;
-import java.util.Objects;
-
 import com.newstoday.Constants;
 import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FilterColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.TaskColumns;
+
+import java.util.Date;
+import java.util.Objects;
 
 public class FeedDataContentProvider extends ContentProvider {
 

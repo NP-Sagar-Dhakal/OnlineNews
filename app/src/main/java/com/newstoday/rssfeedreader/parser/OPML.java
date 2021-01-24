@@ -52,6 +52,11 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Xml;
 
+import com.newstoday.MainApplication;
+import com.newstoday.rssfeedreader.Constants;
+import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
+import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -64,11 +69,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
-import com.newstoday.MainApplication;
-import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
-import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
 
 public class OPML {
 

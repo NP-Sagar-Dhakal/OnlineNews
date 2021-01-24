@@ -27,24 +27,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/cherry_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
         android:layout_marginBottom="10dp"
-        android:text="        Developed by\nCherry Digital Services "
-        android:textColor="@color/red"
-        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_marginLeft="40dp"
+            android:id="@+id/cherry_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/cherry_logo" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cherry_logo"
+            android:text="Developed by\nCherry Digital Services "
+            android:textColor="@color/red"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

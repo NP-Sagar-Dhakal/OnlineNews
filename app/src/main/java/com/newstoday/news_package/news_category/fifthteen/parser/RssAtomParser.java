@@ -60,11 +60,11 @@ import com.newstoday.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
 import com.newstoday.news_package.news_category.fifthteen.provider.FeedData;
-import com.newstoday.news_package.news_category.fifthteen.service.FetcherService;
-import com.newstoday.news_package.news_category.fifthteen.utils.NetworkUtils;
 import com.newstoday.news_package.news_category.fifthteen.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_category.fifthteen.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.news_category.fifthteen.provider.FeedData.FilterColumns;
+import com.newstoday.news_package.news_category.fifthteen.service.FetcherService;
+import com.newstoday.news_package.news_category.fifthteen.utils.NetworkUtils;
 import com.newstoday.news_package.recent_news.utils.HtmlUtils;
 
 import org.xml.sax.Attributes;

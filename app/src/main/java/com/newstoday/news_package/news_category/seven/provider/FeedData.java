@@ -53,6 +53,7 @@ import android.text.TextUtils;
 
 import com.newstoday.Constants;
 import com.newstoday.news_package.news_category.seven.utils.PrefUtils;
+
 import static com.newstoday.Constants.TYPE_BOOLEAN;
 import static com.newstoday.Constants.TYPE_DATE_TIME;
 import static com.newstoday.Constants.TYPE_EXTERNAL_ID;

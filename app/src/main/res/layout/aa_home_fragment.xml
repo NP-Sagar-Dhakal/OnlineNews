@@ -11,7 +11,7 @@
         android:fillViewport="true"
         android:focusableInTouchMode="true"
         android:scrollbars="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="androidx.appcompat.widget.Toolbar$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

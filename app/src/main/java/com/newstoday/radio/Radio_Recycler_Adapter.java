@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.bumptech.glide.Glide;
+import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
-import com.squareup.picasso.Picasso;
-import com.newstoday.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
         int color = generator.getColor(position);
         TextDrawable letterDrawable = TextDrawable.builder().buildRoundRect((radioItems.get(position).stationName != null ? radioItems.get(position).stationName.substring(0, 1).toUpperCase() : ""), color, 8);
         try {
-            Picasso.get().load(radioItems.get(position).stationimage).placeholder(letterDrawable).error(letterDrawable).into(holder.radio_Image);
+            Glide.with(context).load(radioItems.get(position).stationimage).placeholder(letterDrawable).error(letterDrawable).into(holder.radio_Image);
         } catch (Exception e) {
             e.printStackTrace();
         }

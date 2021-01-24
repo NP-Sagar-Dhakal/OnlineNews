@@ -33,7 +33,6 @@ import androidx.annotation.StringRes;
 import androidx.collection.LongSparseArray;
 
 import com.google.android.material.snackbar.Snackbar;
-
 import com.newstoday.MainApplication;
 import com.newstoday.R;
 

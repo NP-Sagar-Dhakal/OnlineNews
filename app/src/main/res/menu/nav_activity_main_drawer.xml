@@ -9,6 +9,10 @@
                 android:id="@+id/nav_home"
                 android:icon="@drawable/home"
                 android:title="@string/home" />
+            <item
+                android:id="@+id/dark_theme"
+                android:icon="@drawable/ic_darker"
+                android:title="@string/dark_theme" />
         </menu>
     </item>
 
@@ -36,16 +40,6 @@
                 android:title="@string/reader" />
         </menu>
     </item>
-
-    <item android:title="@string/news_publisher">
-        <menu>
-            <item
-                android:id="@+id/news_publishers"
-                android:icon="@drawable/news_publishers"
-                android:title="@string/news_publisher" />
-        </menu>
-    </item>
-
     <item android:title="@string/exit">
         <menu>
             <item

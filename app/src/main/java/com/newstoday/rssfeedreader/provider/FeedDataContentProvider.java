@@ -63,15 +63,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.multidex.BuildConfig;
 
-import java.util.Date;
-import java.util.Objects;
-
-import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.R;
+import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
 import com.newstoday.rssfeedreader.provider.FeedData.TaskColumns;
+
+import java.util.Date;
+import java.util.Objects;
 
 public class FeedDataContentProvider extends ContentProvider {
 

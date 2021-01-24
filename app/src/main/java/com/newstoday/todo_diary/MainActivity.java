@@ -87,9 +87,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.content.Context.ALARM_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 import static com.newstoday.todo_diary.AlarmReceiver.TODOTEXT;
 import static com.newstoday.todo_diary.AlarmReceiver.TODOUUID;
 

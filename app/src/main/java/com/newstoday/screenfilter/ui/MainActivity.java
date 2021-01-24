@@ -29,7 +29,12 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
-import android.os.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,10 +47,9 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.github.zagum.expandicon.ExpandIconView;
 import com.newstoday.IMaskServiceInterface;
 import com.newstoday.R;
-
-import com.github.zagum.expandicon.ExpandIconView;
 import com.newstoday.screenfilter.Constants;
 import com.newstoday.screenfilter.receiver.ActionReceiver;
 import com.newstoday.screenfilter.service.MaskService;

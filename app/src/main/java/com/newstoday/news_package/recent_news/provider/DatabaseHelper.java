@@ -51,13 +51,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
-import java.io.File;
-import java.util.Objects;
-
 import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FilterColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.TaskColumns;
+
+import java.io.File;
+import java.util.Objects;
 
 class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Latest.db";

@@ -139,7 +139,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/read_full_content"
-                        android:textColor="@color/text_white"
+                        android:textColor="@color/p_white"
                         android:textSize="17sp" />
                 </androidx.cardview.widget.CardView>
 

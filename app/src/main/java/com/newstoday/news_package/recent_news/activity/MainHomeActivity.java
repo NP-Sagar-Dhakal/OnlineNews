@@ -61,7 +61,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
@@ -82,12 +81,11 @@ import com.newstoday.news_package.recent_news.provider.FeedDataContentProvider;
 import com.newstoday.news_package.recent_news.service.FetcherService;
 import com.newstoday.news_package.recent_news.service.RefreshService;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
-import com.newstoday.services.CacheCleaner;
 import com.newstoday.services.Custom_JobSheduler;
 import com.newstoday.services.InternetIsConnected;
 import com.newstoday.services.Navigation;
-import com.squareup.picasso.Cache;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -248,15 +246,11 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }
-        CacheCleaner cacheCleaner = new CacheCleaner();
-        cacheCleaner.clearCacheFolder(this.getCacheDir(), 10);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainHomeActivity.this);
         isConnected = new InternetIsConnected();
 
         String responses = sharedPreferences.getString("NewsSites", "");
         String databaseLink = sharedPreferences.getString("DatabaseLink", "");
-
-      
 
         if (Objects.requireNonNull(responses).equals("")) {
             Toast.makeText(this, "Please wait Some Time", Toast.LENGTH_LONG).show();
@@ -316,39 +310,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
                 getNewsItem(savedInstanceState, responses);
             }
         }
-        Cache.NONE.clear();
-        com.android.volley.Cache cache = new com.android.volley.Cache() {
-            @Override
-            public Entry get(String key) {
-                return null;
-            }
-
-            @Override
-            public void put(String key, Entry entry) {
-
-            }
-
-            @Override
-            public void initialize() {
-
-            }
-
-            @Override
-            public void invalidate(String key, boolean fullExpire) {
-
-            }
-
-            @Override
-            public void remove(String key) {
-
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        };
-        cache.clear();
     }
 
     private void getRealtimeUrl(Bundle savedInstanceState, String databaseUrl, boolean fetchdata) {
@@ -888,6 +849,32 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             channel.setSound(null, null);
 
             notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
         }
     }
 }

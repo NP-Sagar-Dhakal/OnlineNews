@@ -46,6 +46,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,14 +58,15 @@ import com.newstoday.Constants;
 import com.newstoday.R;
 import com.newstoday.news_package.news_category.thirteen.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.news_category.thirteen.provider.FeedData;
+import com.newstoday.news_package.news_category.thirteen.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_category.thirteen.provider.FeedDataContentProvider;
 import com.newstoday.news_package.news_category.thirteen.service.FetcherService;
 import com.newstoday.news_package.news_category.thirteen.utils.PrefUtils;
-import com.newstoday.news_package.news_category.thirteen.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.fragment.SwipeRefreshListFragment;
 import com.newstoday.news_package.recent_news.utils.UiUtils;
 import com.newstoday.recyclerview.News_Sites_Adapter;
-import com.newstoday.services.FilterService;
+import com.newstoday.services.Pref_Util_Service;
+import com.newstoday.services.Theme_Service;
 
 import java.util.Date;
 
@@ -269,6 +271,13 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             }
         });
         disableSwipe();
+
+        boolean isFirst = Pref_Util_Service.getPrefBoolean(getActivity(), "cat_Thirteen", true);
+        if (isFirst) {
+            Toast.makeText(getActivity(), getResources().getString(R.string.refresh_suggestion), Toast.LENGTH_LONG).show();
+            Pref_Util_Service.putPrefBoolean(getActivity(), "cat_Thirteen", false);
+            startRefresh();
+        }
     }
 
     @Override
@@ -375,24 +384,12 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.reresh: {
+            case R.id.refresh: {
                 startRefresh();
                 return true;
             }
             case R.id.darker: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        createNotificationChannel();
-                    }
-                    startActivity(new Intent(getActivity(), com.newstoday.screenfilter.ui.MainActivity.class));
-                } else {
-                    Intent i = new Intent(getActivity(), FilterService.class);
-                    if (FilterService.CURRENT_STATE == FilterService.ACTIVE) {
-                        getActivity().stopService(i);
-                    } else {
-                        getActivity().startService(i);
-                    }
-                }
+                Theme_Service.changeTheme(getActivity());
                 break;
             }
             case android.R.id.home: {
@@ -403,7 +400,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         return super.onOptionsItemSelected(item);
     }
 
-    private void startRefresh() {
+    public void startRefresh() {
         if (!PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
             if (mUri != null && FeedDataContentProvider.URI_MATCHER.match(mUri) == FeedDataContentProvider.URI_ENTRIES_FOR_FEED) {
                 getActivity().startService(new Intent(getActivity(), FetcherService.class).setAction(FetcherService.ACTION_REFRESH_FEEDS).putExtra(Constants.FEED_ID,

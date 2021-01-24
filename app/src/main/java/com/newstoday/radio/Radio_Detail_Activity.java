@@ -47,18 +47,18 @@ public class Radio_Detail_Activity extends AppCompatActivity implements Next_Pre
                     MobileAds.initialize(Radio_Detail_Activity.this, initializationStatus -> {
                     });
                     InterstitialAd mInterstitialAd = new InterstitialAd(Radio_Detail_Activity.this);
-                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                     mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                         SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, 0);
                         mInterstitialAd = new InterstitialAd(Radio_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     } else {
                         SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, slideAD);
                         mInterstitialAd = new InterstitialAd(Radio_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.intrestial_ad));
+                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
                         mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
                     }
                 }
