@@ -56,34 +56,34 @@ import static android.view.WindowManager.LayoutParams.TYPE_TOAST;
 
 public class MaskService extends Service {
 
+    // Constants
+    private static final int ANIMATE_DURATION_MILES = 250;
+    private static final int NOTIFICATION_NO = 1024;
+    private static final String TAG = MaskService.class.getSimpleName();
+    // Binder
+    private final MaskServiceBinder mBinder = new MaskServiceBinder();
     // System Services
     private WindowManager mWindowManager;
     private NotificationManager mNotificationManager;
     private AccessibilityManager mAccessibilityManager;
-
-    // Binder
-    private final MaskServiceBinder mBinder = new MaskServiceBinder();
-
     // Notification
     private Notification mNotification;
-
     // Floating Window
     private View mLayout;
     private WindowManager.LayoutParams mLayoutParams;
-
     // If floating window is showing
     private boolean isShowing = false;
-
     // Options
     private int mBrightness = 80;
     private int mAdvancedMode = Constants.AdvancedMode.NONE;
     private int mYellowFilterAlpha = 0;
 
-    // Constants
-    private static final int ANIMATE_DURATION_MILES = 250;
-    private static final int NOTIFICATION_NO = 1024;
-
-    private static final String TAG = MaskService.class.getSimpleName();
+    private static float constrain(float paramFloat1, float paramFloat2, float paramFloat3) {
+        if (paramFloat1 < paramFloat2) {
+            return paramFloat2;
+        }
+        return Math.min(paramFloat1, paramFloat3);
+    }
 
     @Override
     public void onCreate() {
@@ -431,13 +431,6 @@ public class MaskService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static float constrain(float paramFloat1, float paramFloat2, float paramFloat3) {
-        if (paramFloat1 < paramFloat2) {
-            return paramFloat2;
-        }
-        return Math.min(paramFloat1, paramFloat3);
     }
 
     public class MaskServiceBinder extends IMaskServiceInterface.Stub {

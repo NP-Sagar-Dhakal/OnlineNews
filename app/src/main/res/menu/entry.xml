@@ -2,14 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <item
         android:id="@+id/menu_star"
         android:icon="@drawable/ic_heart_empty"
         android:title="@string/menu_star"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
-
     <item
         android:id="@+id/darker"
         android:icon="@drawable/ic_darker"

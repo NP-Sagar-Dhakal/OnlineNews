@@ -43,6 +43,10 @@ public class Settings {
 
     private final SharedPreferences mPrefs;
 
+    private Settings(Context context) {
+        mPrefs = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_MULTI_PROCESS);
+    }
+
     public static Settings getInstance(Context context) {
         if (sInstance == null) {
             synchronized (Settings.class) {
@@ -52,10 +56,6 @@ public class Settings {
             }
         }
         return sInstance;
-    }
-
-    private Settings(Context context) {
-        mPrefs = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_MULTI_PROCESS);
     }
 
     public void putBoolean(String key, boolean value) {
@@ -92,12 +92,24 @@ public class Settings {
         return getInt(KEY_ADVANCED_MODE, Constants.AdvancedMode.NONE);
     }
 
+    public void setAdvancedMode(int advancedMode) {
+        putInt(KEY_ADVANCED_MODE, advancedMode);
+    }
+
     public boolean isFirstRun() {
         return getBoolean(KEY_FIRST_RUN, true);
     }
 
+    public void setFirstRun(boolean isFirstRun) {
+        putBoolean(KEY_FIRST_RUN, isFirstRun);
+    }
+
     public boolean isDarkTheme() {
         return getBoolean(KEY_DARK_THEME, false);
+    }
+
+    public void setDarkTheme(boolean useDarkTheme) {
+        putBoolean(KEY_DARK_THEME, useDarkTheme);
     }
 
     public boolean isAutoMode() {
@@ -106,18 +118,6 @@ public class Settings {
 
     public void setBrightness(int brightness) {
         putInt(KEY_BRIGHTNESS, brightness);
-    }
-
-    public void setAdvancedMode(int advancedMode) {
-        putInt(KEY_ADVANCED_MODE, advancedMode);
-    }
-
-    public void setFirstRun(boolean isFirstRun) {
-        putBoolean(KEY_FIRST_RUN, isFirstRun);
-    }
-
-    public void setDarkTheme(boolean useDarkTheme) {
-        putBoolean(KEY_DARK_THEME, useDarkTheme);
     }
 
     public void setHandleVolumeKey(boolean handleVolumeKey) {
@@ -136,12 +136,12 @@ public class Settings {
         return getBoolean(KEY_SHOW_TASK, false);
     }
 
-    public void setAutoEnableWhenBrightnessChanged(boolean newValue) {
-        putBoolean(KEY_AUTO_ENABLE_WHEN_BRIGHTNESS_CHANGED, newValue);
-    }
-
     public boolean isAutoEnableWhenBrightnessChanged() {
         return getBoolean(KEY_AUTO_ENABLE_WHEN_BRIGHTNESS_CHANGED, true);
+    }
+
+    public void setAutoEnableWhenBrightnessChanged(boolean newValue) {
+        putBoolean(KEY_AUTO_ENABLE_WHEN_BRIGHTNESS_CHANGED, newValue);
     }
 
     public String getSunsetTimeText() {
@@ -162,12 +162,12 @@ public class Settings {
         return getYellowFilterAlpha(0);
     }
 
-    public int getYellowFilterAlpha(int defValue) {
-        return getInt(KEY_YELLOW_FILTER_ALPHA, defValue);
-    }
-
     public void setYellowFilterAlpha(int alpha) {
         putInt(KEY_YELLOW_FILTER_ALPHA, alpha);
+    }
+
+    public int getYellowFilterAlpha(int defValue) {
+        return getInt(KEY_YELLOW_FILTER_ALPHA, defValue);
     }
 
     public boolean needButtonTip() {

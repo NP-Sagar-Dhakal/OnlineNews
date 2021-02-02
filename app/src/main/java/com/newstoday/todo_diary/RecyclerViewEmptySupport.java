@@ -41,8 +41,8 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -73,25 +73,8 @@ public class RecyclerViewEmptySupport extends RecyclerView {
     };
 
 
-
     public RecyclerViewEmptySupport(Context context) {
         super(context);
-    }
-
-    private void showEmptyView(){
-
-        Adapter<?> adapter = getAdapter();
-        if(adapter!=null && emptyView!=null){
-            if(adapter.getItemCount()==0){
-                emptyView.setVisibility(VISIBLE);
-                RecyclerViewEmptySupport.this.setVisibility(GONE);
-            }
-            else{
-                emptyView.setVisibility(GONE);
-                RecyclerViewEmptySupport.this.setVisibility(VISIBLE);
-            }
-        }
-
     }
 
     public RecyclerViewEmptySupport(Context context, AttributeSet attrs) {
@@ -102,16 +85,31 @@ public class RecyclerViewEmptySupport extends RecyclerView {
         super(context, attrs, defStyle);
     }
 
+    private void showEmptyView() {
+
+        Adapter<?> adapter = getAdapter();
+        if (adapter != null && emptyView != null) {
+            if (adapter.getItemCount() == 0) {
+                emptyView.setVisibility(VISIBLE);
+                RecyclerViewEmptySupport.this.setVisibility(GONE);
+            } else {
+                emptyView.setVisibility(GONE);
+                RecyclerViewEmptySupport.this.setVisibility(VISIBLE);
+            }
+        }
+
+    }
+
     @Override
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
-        if(adapter!=null){
+        if (adapter != null) {
             adapter.registerAdapterDataObserver(observer);
             observer.onChanged();
         }
     }
 
-    public void setEmptyView(View v){
+    public void setEmptyView(View v) {
         emptyView = v;
     }
 }

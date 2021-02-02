@@ -3,15 +3,10 @@
     <dimen name="title_size">17sp</dimen>
     <dimen name="channel_size">12sp</dimen>
     <dimen name="pubdate_size">14sp</dimen>
-
     <dimen name="horizontal_margin">16dp</dimen>
     <dimen name="horizontal_margin2">8dp</dimen>
-
-    <dimen name="img_size">40dp</dimen>
-
-    <!--    News Categories & Locations-->
+    <dimen name="img_size">40dp</dimen><!--    News Categories & Locations-->
     <dimen name="frag_left_right">10dp</dimen>
     <dimen name="frag_top">50dp</dimen>
     <dimen name="floating_button_margin">30dp</dimen>
-
 </resources>

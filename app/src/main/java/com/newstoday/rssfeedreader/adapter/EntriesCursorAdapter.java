@@ -277,18 +277,6 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
     }
 
-    private static class ViewHolder {
-        FrameLayout frameLayout;
-        TextView authorTextView;
-        TextView dateTextView;
-        TextView titleTextView;
-        ImageView mainImgView;
-        ImageView starImgView;
-        ImageView readImgView;
-        boolean isRead;
-        boolean isFavorite;
-    }
-
     private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
         adView.setMediaView(adView.findViewById(R.id.native_ad_media_view));
         adView.setHeadlineView(adView.findViewById(R.id.native_ad_headline));
@@ -326,6 +314,18 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
         adView.setNativeAd(nativeAd);
 
+    }
+
+    private static class ViewHolder {
+        FrameLayout frameLayout;
+        TextView authorTextView;
+        TextView dateTextView;
+        TextView titleTextView;
+        ImageView mainImgView;
+        ImageView starImgView;
+        ImageView readImgView;
+        boolean isRead;
+        boolean isFavorite;
     }
 
 }

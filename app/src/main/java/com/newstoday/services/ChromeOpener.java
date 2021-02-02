@@ -1,5 +1,6 @@
 package com.newstoday.services;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,13 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.R;
 
 public class ChromeOpener {
     public void openLink(Context context, @NonNull String url) {
+        Activity activity = (Activity) context;
         PackageManager pm = context.getPackageManager();
-
         boolean installed = false;
         try {
             pm.getPackageInfo("com.android.chrome", PackageManager.GET_ACTIVITIES);
@@ -27,24 +29,20 @@ public class ChromeOpener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         int slideAD = sharedPreferences.getInt("WEBSITE_CLICK", 0) + 1;
         SlideAd_Service.putWEBSITE_CLICK(context, slideAD);
-        if (slideAD >= 15) {
-            InterstitialAd mInterstitialAd = new InterstitialAd(context);
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-                SlideAd_Service.putWEBSITE_CLICK(context, 0);
-            } else {
-                SlideAd_Service.putWEBSITE_CLICK(context, slideAD);
-                mInterstitialAd = new InterstitialAd(context);
-                mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad));
-                mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                mInterstitialAd.show();
-            }
+        if (slideAD >= 10) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(activity);
+                    SlideAd_Service.putWEBSITE_CLICK(context, 0);
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
         }
-
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(Color.WHITE);
         builder.setShowTitle(true);

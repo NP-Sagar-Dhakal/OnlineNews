@@ -35,8 +35,8 @@
                     android:layout_height="56dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/filter_wb_sunny_black_48dp"
                     android:translationX="-8dp"
+                    app:srcCompat="@drawable/filter_wb_sunny_black_48dp"
                     app:tint="@android:color/white" />
 
                 <TextView
@@ -50,9 +50,7 @@
                     android:textAppearance="@android:style/TextAppearance.Material.Display1"
                     android:textColor="@android:color/white"
                     android:translationX="-8dp" />
-
             </FrameLayout>
-
         </com.github.florent37.diagonallayout.DiagonalLayout>
 
         <com.github.florent37.diagonallayout.DiagonalLayout
@@ -92,9 +90,7 @@
                     android:textAppearance="@android:style/TextAppearance.Material.Display1"
                     android:textColor="@android:color/white"
                     android:translationX="8dp" />
-
             </FrameLayout>
-
         </com.github.florent37.diagonallayout.DiagonalLayout>
 
         <TextView
@@ -116,7 +112,6 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp" />
-
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
@@ -139,5 +134,4 @@
             android:textColor="@color/text_white"
             android:textSize="17sp" />
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

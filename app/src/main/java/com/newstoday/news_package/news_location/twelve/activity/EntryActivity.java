@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.ads.MobileAds;
 import com.newstoday.Constants;
 import com.newstoday.R;
 import com.newstoday.news_package.news_location.twelve.fragment.EntryFragment;
@@ -55,9 +54,7 @@ public class EntryActivity extends AppCompatActivity {
 
         setContentView(R.layout.location_twelve_activity_entry);
 
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-SlidrConfig config = new SlidrConfig.Builder()
+        SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)
                 .sensitivity(1f)
                 .scrimColor(Color.BLACK)

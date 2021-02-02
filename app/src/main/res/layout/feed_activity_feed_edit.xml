@@ -82,7 +82,6 @@
                                 android:inputType="textUri"
                                 android:maxLines="1" />
 
-
                             <CheckBox
                                 android:id="@+id/retrieve_fulltext"
                                 android:layout_width="wrap_content"
@@ -93,7 +92,6 @@
                                 android:visibility="gone" />
                         </LinearLayout>
                     </ScrollView>
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -179,7 +177,6 @@
                                     android:layout_weight="1"
                                     android:hint="@string/cookievalue"
                                     android:maxLines="1" />
-
                             </LinearLayout>
 
                             <TextView
@@ -214,7 +211,6 @@
                                     android:hint="@string/passwordhttpAuth"
                                     android:inputType="textPassword"
                                     android:maxLines="1" />
-
                             </LinearLayout>
 
                             <TextView
@@ -240,10 +236,8 @@
                                 android:inputType="number"
                                 android:key="keeptime"
                                 android:title="@string/settings_keep_time" />
-
                         </LinearLayout>
                     </ScrollView>
-
                 </RelativeLayout>
             </FrameLayout>
         </LinearLayout>
@@ -271,5 +265,4 @@
             android:layout_weight="1"
             android:text="@android:string/ok" />
     </LinearLayout>
-
 </RelativeLayout>

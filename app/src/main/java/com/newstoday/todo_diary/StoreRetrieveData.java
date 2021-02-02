@@ -41,8 +41,8 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 import android.content.Context;
 
@@ -64,21 +64,21 @@ class StoreRetrieveData {
     private final Context mContext;
     private final String mFileName;
 
-    StoreRetrieveData(Context context){
+    StoreRetrieveData(Context context) {
         mContext = context;
         mFileName = MainActivity.FILENAME;
     }
 
-    private static JSONArray toJSONArray(ArrayList<ToDoItem> items) throws JSONException{
+    private static JSONArray toJSONArray(ArrayList<ToDoItem> items) throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for(ToDoItem item : items){
+        for (ToDoItem item : items) {
             JSONObject jsonObject = item.toJSON();
             jsonArray.put(jsonObject);
         }
-        return  jsonArray;
+        return jsonArray;
     }
 
-    void saveToFile(ArrayList<ToDoItem> items) throws JSONException, IOException{
+    void saveToFile(ArrayList<ToDoItem> items) throws JSONException, IOException {
         FileOutputStream fileOutputStream;
         OutputStreamWriter outputStreamWriter;
         fileOutputStream = mContext.openFileOutput(mFileName, Context.MODE_PRIVATE);
@@ -88,21 +88,21 @@ class StoreRetrieveData {
         fileOutputStream.close();
     }
 
-    ArrayList<ToDoItem> loadFromFile() throws IOException, JSONException{
+    ArrayList<ToDoItem> loadFromFile() throws IOException, JSONException {
         ArrayList<ToDoItem> items = new ArrayList<>();
         BufferedReader bufferedReader = null;
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream =  mContext.openFileInput(mFileName);
+            fileInputStream = mContext.openFileInput(mFileName);
             StringBuilder builder = new StringBuilder();
             String line;
             bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-            while((line = bufferedReader.readLine())!=null){
+            while ((line = bufferedReader.readLine()) != null) {
                 builder.append(line);
             }
 
-            JSONArray jsonArray = (JSONArray)new JSONTokener(builder.toString()).nextValue();
-            for(int i =0; i<jsonArray.length();i++){
+            JSONArray jsonArray = (JSONArray) new JSONTokener(builder.toString()).nextValue();
+            for (int i = 0; i < jsonArray.length(); i++) {
                 ToDoItem item = new ToDoItem(jsonArray.getJSONObject(i));
                 items.add(item);
             }
@@ -111,12 +111,11 @@ class StoreRetrieveData {
         } catch (FileNotFoundException fnfe) {
             //do nothing about it
             //file won't exist first time app is run
-        }
-        finally {
-            if(bufferedReader!=null){
+        } finally {
+            if (bufferedReader != null) {
                 bufferedReader.close();
             }
-            if(fileInputStream!=null){
+            if (fileInputStream != null) {
                 fileInputStream.close();
             }
 

@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -40,13 +39,11 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <include layout="@layout/buttons_locations" />
 
                 <include layout="@layout/buttons_categories" />
-
             </LinearLayout>
 
             <View
@@ -67,15 +64,13 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 android:gravity="start"
-                android:text="Recent News"
+                android:text="@string/recent_news"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/title_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linear" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

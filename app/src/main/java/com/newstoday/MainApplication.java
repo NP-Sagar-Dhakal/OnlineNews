@@ -34,6 +34,10 @@ public class MainApplication extends Application {
         return mContext;
     }
 
+    public static void setContext(Context context) {
+        mContext = context;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -41,9 +45,5 @@ public class MainApplication extends Application {
         mContext = getApplicationContext();
 
         PrefUtils.putBoolean(PrefUtils.IS_REFRESHING, false); // init
-    }
-
-    public static void setContext(Context context) {
-        mContext = context;
     }
 }

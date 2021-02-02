@@ -60,10 +60,7 @@
                     android:gravity="center"
                     android:textColor="@color/ultra_grey"
                     android:textSize="14sp" />
-
             </LinearLayout>
-
         </FrameLayout>
-
     </androidx.cardview.widget.CardView>
 </FrameLayout>

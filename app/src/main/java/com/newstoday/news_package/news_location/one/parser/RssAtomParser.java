@@ -148,6 +148,7 @@ public class RssAtomParser extends DefaultHandler {
     private final FeedFilters mFilters;
     private final ArrayList<ContentProviderOperation> mInserts = new ArrayList<>();
     private final ArrayList<ArrayList<String>> mInsertedEntriesImages = new ArrayList<>();
+    private final boolean mRetrieveFullText;
     private long mNewRealLastUpdate;
     private boolean mEntryTagEntered = false;
     private boolean mTitleTagEntered = false;
@@ -174,7 +175,6 @@ public class RssAtomParser extends DefaultHandler {
     private String mFeedTitle;
     private boolean mDone = false;
     private boolean mFetchImages = false;
-    private final boolean mRetrieveFullText;
     private boolean mCancelled = false;
     private long mNow = System.currentTimeMillis();
     private StringBuilder mGuid;

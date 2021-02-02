@@ -28,7 +28,6 @@ import com.newstoday.MainApplication;
 
 public class PrefUtils {
     public static final String SLIDE_AD = "SLIDE_AD";
-    private static final String TAG = "PrefUtils_READER";
     public static final String DISPLAY_TIP = "DISPLAY_TIP_READER";
     public static final String IS_REFRESHING = "IS_REFRESHING_READER";
     public static final String REFRESH_INTERVAL = "refresh.interval.reader";
@@ -48,6 +47,7 @@ public class PrefUtils {
     public static final String FONT_SIZE = "fontsize.reader";
     public static final String LAST_SCHEDULED_REFRESH = "lastscheduledrefresh.reader";
     public static final String SHOW_READ = "show_read.reader";
+    private static final String TAG = "PrefUtils_READER";
 
     public static boolean getBoolean(String key, boolean defValue) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainApplication.getContext());

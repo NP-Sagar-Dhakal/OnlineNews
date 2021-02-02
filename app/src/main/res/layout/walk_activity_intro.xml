@@ -56,10 +56,7 @@
                 android:background="@drawable/splashgradient"
                 android:tint="@color/black"
                 app:srcCompat="@drawable/ic_arrow_forward_black" />
-
         </FrameLayout>
-
-
     </FrameLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -73,5 +70,4 @@
         android:paddingLeft="30dp"
         android:paddingTop="20dp"
         android:paddingRight="30dp" />
-
 </RelativeLayout>

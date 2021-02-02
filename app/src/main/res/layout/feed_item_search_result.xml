@@ -22,5 +22,4 @@
         android:maxLines="2"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/darker_gray" />
-
 </LinearLayout>

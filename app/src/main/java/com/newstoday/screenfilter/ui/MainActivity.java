@@ -61,32 +61,29 @@ import com.newstoday.screenfilter.util.Utility;
 
 public class MainActivity extends Activity {
 
+    // Constants
+    private static final int REQUEST_CODE_OVERLAY_PERMISSION = 1001;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static boolean isExpand = false, hasDismissFirstRunDialog = false;
     // Views & States
     private ImageView mToggle;
     private SeekBar mSeekBar;
     private ExpandIconView mExpandIcon;
     private View mDivider, mMiniSchedulerBar;
     private TextView mMiniSchedulerStatus, mButtonTip;
-
     private View mSchedulerRow;
     private TextView mSchedulerStatus;
     private ImageView mSchedulerIcon;
-
     private View mAdvancedModeRow;
     private TextView mAdvancedModeText;
-
     private View mYellowFilterRow;
     private SeekBar mYellowFilterSeekBar;
-
     private AlertDialog mFirstRunDialog;
-
     private boolean isUsingDarkTheme = false;
-
-    private static boolean isExpand = false, hasDismissFirstRunDialog = false;
-
     // Service states
     private boolean isRunning = false;
-
+    // Settings
+    private Settings mSettings;
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -103,16 +100,8 @@ public class MainActivity extends Activity {
         public void onServiceDisconnected(ComponentName name) {
         }
     };
-
-    // Settings
-    private Settings mSettings;
-
     // Local broadcast receivers
     private MessageReceiver mReceiver;
-
-    // Constants
-    private static final int REQUEST_CODE_OVERLAY_PERMISSION = 1001;
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override

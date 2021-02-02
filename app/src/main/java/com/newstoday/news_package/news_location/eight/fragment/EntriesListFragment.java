@@ -126,17 +126,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     private static final int ENTRIES_LOADER_ID = 1;
     private static final int NEW_ENTRIES_NUMBER_LOADER_ID = 2;
-
-    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (PrefUtils.SHOW_READ.equals(key)) {
-                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
-            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
-                refreshSwipeProgress();
-            }
-        }
-    };
     private Cursor mJustMarkedAsReadEntries;
     private Button mRefreshListBtn;
     private Uri mUri, mOriginalUri;
@@ -167,6 +156,16 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             mEntriesCursorAdapter.swapCursor(Constants.EMPTY_CURSOR);
+        }
+    };
+    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (PrefUtils.SHOW_READ.equals(key)) {
+                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
+            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
+                refreshSwipeProgress();
+            }
         }
     };
     private int mNewEntriesNumber, mOldUnreadEntriesNumber = -1;
@@ -354,9 +353,9 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             news_Recycler.setLayoutManager(layoutManager1);
             News_Sites_Adapter adapter = new News_Sites_Adapter(getActivity(), "location8NewsSites", topNewsSites, category1NewsSites, category2NewsSites, category3NewsSites, category4NewsSites, category5NewsSites, category6NewsSites, category7NewsSites, category8NewsSites, category9NewsSites, category10NewsSites, category11NewsSites, category12NewsSites, category13NewsSites, category14NewsSites, category15NewsSites, location1NewsSites, location2NewsSites, location3NewsSites, location4NewsSites, location5NewsSites, location6NewsSites, location7NewsSites, location8NewsSites, location9NewsSites, location10NewsSites, location11NewsSites, location12NewsSites, location13NewsSites, location14NewsSites, location15NewsSites, location16NewsSites, location17NewsSites, location18NewsSites, location19NewsSites, location20NewsSites, location21NewsSites, location22NewsSites, location23NewsSites, location24NewsSites, location25NewsSites, location26NewsSites, location27NewsSites, location28NewsSites, location29NewsSites, location30NewsSites);
             news_Recycler.setAdapter(adapter);
-        if (adapter.getItemCount() > 1) {
-            mListView.addHeaderView(header);
-        }
+            if (adapter.getItemCount() > 1) {
+                mListView.addHeaderView(header);
+            }
             return false;
         });
         super.onCreateOptionsMenu(menu, inflater);

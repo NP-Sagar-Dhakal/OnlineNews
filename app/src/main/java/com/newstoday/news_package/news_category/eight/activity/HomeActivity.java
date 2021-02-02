@@ -64,10 +64,10 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
 
         }
     };
+    private final String demo = "News Today";
     private EntriesListFragment mEntriesFragment;
     private int mCurrentDrawerPos;
     private int i;
-    private final String demo = "News Today";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

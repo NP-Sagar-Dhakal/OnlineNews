@@ -81,7 +81,6 @@
                 android:hint="@string/google_news_custom_topic"
                 android:singleLine="true"
                 tools:ignore="Autofill,TextFields" />
-
         </LinearLayout>
     </ScrollView>
 
@@ -106,5 +105,4 @@
             android:layout_weight="0.5"
             android:text="@android:string/ok" />
     </LinearLayout>
-
 </RelativeLayout>

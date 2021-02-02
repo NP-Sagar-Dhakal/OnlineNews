@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
-
     <item
         android:id="@+id/reresh"
         android:icon="@drawable/ic_refresh"
         android:title="@string/refresh"
         app:showAsAction="always" />
-
     <item
         android:id="@+id/more_rate"
         android:orderInCategory="100"
         android:title="@string/rate_us"
         app:showAsAction="never" />
-
     <item
         android:id="@+id/setting"
         android:orderInCategory="200"
         android:title="@string/menu_settings"
         app:showAsAction="never" />
-
     <item
         android:id="@+id/more_invite"
         android:orderInCategory="300"
@@ -42,7 +37,6 @@
         android:orderInCategory="500"
         android:title="@string/more_add_publisher"
         app:showAsAction="never" />
-
     <item
         android:id="@+id/more_disclaimer"
         android:orderInCategory="600"
@@ -58,5 +52,4 @@
         android:orderInCategory="800"
         android:title="@string/send_feedback_amp_problems"
         app:showAsAction="never" />
-
 </menu>

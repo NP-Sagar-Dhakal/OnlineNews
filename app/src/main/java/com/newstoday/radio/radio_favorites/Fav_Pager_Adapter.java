@@ -15,11 +15,11 @@ class Fav_Pager_Adapter extends FragmentPagerAdapter {
 
     @NonNull
     public Fragment getItem(int arg0) {
-        Fav_Detail_Fragement radioDetailFragement = new Fav_Detail_Fragement();
+        Fav_Detail_Fragment radioDetailFragment = new Fav_Detail_Fragment();
         Bundle data = new Bundle();
         data.putInt("current_page", arg0 + 1);
-        radioDetailFragement.setArguments(data);
-        return radioDetailFragement;
+        radioDetailFragment.setArguments(data);
+        return radioDetailFragment;
     }
 
     public int getCount() {

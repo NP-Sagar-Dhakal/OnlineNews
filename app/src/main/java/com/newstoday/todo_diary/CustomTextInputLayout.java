@@ -41,8 +41,8 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 
 import android.content.Context;
@@ -75,7 +75,7 @@ public class CustomTextInputLayout extends TextInputLayout {
     @Override
     public void addView(@NonNull View child, int index, @NonNull ViewGroup.LayoutParams params) {
         if (child instanceof EditText) {
-            mHint = ((EditText)child).getHint();
+            mHint = ((EditText) child).getHint();
         }
         super.addView(child, index, params);
     }
@@ -86,7 +86,7 @@ public class CustomTextInputLayout extends TextInputLayout {
 
         if (!mIsHintSet && ViewCompat.isLaidOut(this)) {
             setHint(null);
-            CharSequence currentEditTextHint =  Objects.requireNonNull(getEditText()).getHint();
+            CharSequence currentEditTextHint = Objects.requireNonNull(getEditText()).getHint();
 
             if (currentEditTextHint != null && currentEditTextHint.length() > 0) {
                 mHint = currentEditTextHint;

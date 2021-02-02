@@ -43,12 +43,12 @@ import java.util.List;
 
 public class Activity extends AppCompatActivity {
 
-    private ViewPager screenPager;
     ViewPagerAdapter viewPagerAdapter;
     TabLayout tabIndicator;
     ImageButton btnNext;
     int position = 0;
     Button btnGetStarted;
+    private ViewPager screenPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class Activity extends AppCompatActivity {
                 startActivity(mainActivity);
                 finish();
             } else {
-                Toast.makeText(this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, this.getResources().getString(R.string.connect_internet), Toast.LENGTH_SHORT).show();
             }
         });
     }

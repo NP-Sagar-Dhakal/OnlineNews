@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/frag_scroll"
@@ -77,8 +76,8 @@
                     android:layout_marginRight="30dp"
                     android:gravity="center"
                     app:srcCompat="@drawable/ic_share"
-                    tools:ignore="ContentDescription"
-                    app:tint="@color/black" />
+                    app:tint="@color/black"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/frag_prev"
@@ -155,7 +154,6 @@
                         android:textColor="@color/text_black"
                         android:textSize="25sp"
                         android:textStyle="bold" />
-
                 </RelativeLayout>
 
                 <FrameLayout

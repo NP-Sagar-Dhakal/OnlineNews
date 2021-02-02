@@ -194,6 +194,11 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
     private static class ViewHolder {
         FrameLayout frameLayout;
         CardView imageCard;
@@ -202,10 +207,6 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         boolean isFavorite;
         boolean isRead;
         long entryID = -1;
-    }
-    @Override
-    public boolean isEmpty() {
-        return false;
     }
 
 }

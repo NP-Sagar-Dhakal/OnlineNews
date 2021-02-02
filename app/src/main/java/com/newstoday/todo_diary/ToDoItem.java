@@ -41,8 +41,8 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,16 +52,16 @@ import java.util.Date;
 import java.util.UUID;
 
 class ToDoItem implements Serializable {
-    private String mToDoText;
-    private boolean mHasReminder;
-    private int mTodoColor;
-    private Date mToDoDate;
-    private final UUID mTodoIdentifier;
     private static final String TODOTEXT = "todotext";
     private static final String TODOREMINDER = "todoreminder";
     private static final String TODOCOLOR = "todocolor";
     private static final String TODODATE = "tododate";
     private static final String TODOIDENTIFIER = "todoidentifier";
+    private final UUID mTodoIdentifier;
+    private String mToDoText;
+    private boolean mHasReminder;
+    private int mTodoColor;
+    private Date mToDoDate;
 
 
     ToDoItem() {
@@ -114,16 +114,16 @@ class ToDoItem implements Serializable {
         return mToDoDate;
     }
 
+    void setToDoDate(Date mToDoDate) {
+        this.mToDoDate = mToDoDate;
+    }
+
     int getTodoColor() {
         return mTodoColor;
     }
 
     void setTodoColor(int mTodoColor) {
         this.mTodoColor = mTodoColor;
-    }
-
-    void setToDoDate(Date mToDoDate) {
-        this.mToDoDate = mToDoDate;
     }
 
     UUID getIdentifier() {

@@ -62,16 +62,15 @@ import com.newstoday.Constants;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 
 public class RefreshService extends Service {
-    private static final String TAG = "RefreshService";
-
     public static final String SIXTY_MINUTES = "7200000";
+    private static final String TAG = "RefreshService";
+    private AlarmManager mAlarmManager;
+    private PendingIntent mTimerIntent;
     private final OnSharedPreferenceChangeListener mListener = (sharedPreferences, key) -> {
         if (PrefUtils.REFRESH_INTERVAL.equals(key)) {
             restartTimer(false);
         }
     };
-    private AlarmManager mAlarmManager;
-    private PendingIntent mTimerIntent;
 
     @Override
     public IBinder onBind(Intent intent) {

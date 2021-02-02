@@ -53,19 +53,17 @@ final class SwipeProgressBar {
 
     private final Paint mPaint = new Paint();
     private final RectF mClipRect = new RectF();
+    private final View mParent;
+    private final Rect mBounds = new Rect();
     private float mTriggerPercentage;
     private long mStartTime;
     private long mFinishTime;
     private boolean mRunning;
-
     // Colors used when rendering the animation,
     private int mColor1;
     private int mColor2;
     private int mColor3;
     private int mColor4;
-    private final View mParent;
-
-    private final Rect mBounds = new Rect();
 
     public SwipeProgressBar(View parent) {
         mParent = parent;

@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.ads.MobileAds;
 import com.newstoday.Constants;
 import com.newstoday.R;
 import com.newstoday.news_package.news_category.eleven.fragment.EntryFragment;
@@ -54,9 +53,6 @@ public class EntryActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.pull_in_right, R.anim.holder);
 
         setContentView(R.layout.cat_eleven_activity_entry);
-
-        MobileAds.initialize(this, initializationStatus -> {
-        });
 
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)

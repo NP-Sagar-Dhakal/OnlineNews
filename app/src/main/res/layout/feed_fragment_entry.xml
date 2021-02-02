@@ -22,7 +22,6 @@
             app:fadingDotCount="2"
             app:selectedDotColor="@color/h_dark_red"
             app:selectedDotRadius="3.5dp" />
-
     </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -58,8 +57,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="25dp"
-            android:layout_marginBottom="90dp"
+        android:layout_marginBottom="90dp"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/content_show" />
-
 </RelativeLayout>

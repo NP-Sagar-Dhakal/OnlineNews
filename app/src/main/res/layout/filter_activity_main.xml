@@ -46,7 +46,6 @@
                 android:tint="@android:color/darker_gray"
                 android:visibility="gone"
                 app:srcCompat="@drawable/filter_info_black_24dp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +84,6 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 app:eiv_padding="8dp" />
-
         </LinearLayout>
 
         <TextView
@@ -122,7 +120,6 @@
                 android:text="@string/scheduler_status_on_show_enable_time"
                 android:textColor="@color/text_black"
                 android:textSize="12sp" />
-
         </LinearLayout>
 
         <View
@@ -150,7 +147,5 @@
             layout="@layout/filter_include_advanced_mode_row"
             android:visibility="gone"
             tools:visibility="visible" />
-
     </LinearLayout>
-
 </FrameLayout>

@@ -23,8 +23,8 @@ import java.util.List;
 
 
 public class Favorite_Radio_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final Context context;
     public static List<Favorites_Radio_Items> radioItems;
+    private final Context context;
 
     public Favorite_Radio_Adapter(Context context, List<Favorites_Radio_Items> radioItems) {
         this.context = context;
@@ -77,12 +77,12 @@ public class Favorite_Radio_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (All_Radio_Fragment.favoriteDatabase.favoriteDao().isFavorite(radioItems.get(position).stationName) != 1) {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_filled);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().addData(favoriteList);
-                Toast.makeText(context, "Added to Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, this.context.getResources().getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
 
             } else {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_empty);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().delete(favoriteList);
-                Toast.makeText(context, "Removed from Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, this.context.getResources().getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
 
             }
         });

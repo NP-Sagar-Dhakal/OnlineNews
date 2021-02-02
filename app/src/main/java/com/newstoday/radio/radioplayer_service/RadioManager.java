@@ -41,7 +41,7 @@ public class RadioManager {
         return service;
     }
 
-    public void resume(){
+    public void resume() {
         service.resume();
     }
 

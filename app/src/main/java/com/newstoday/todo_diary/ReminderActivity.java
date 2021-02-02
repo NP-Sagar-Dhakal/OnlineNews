@@ -65,10 +65,10 @@ import java.util.UUID;
 import static com.newstoday.todo_diary.AlarmReceiver.TODOUUID;
 
 public class ReminderActivity extends AppCompatActivity {
+    public static final String EXIT = "com.newstoday.todo_diary";
     private StoreRetrieveData storeRetrieveData;
     private ArrayList<ToDoItem> mToDoItems;
     private ToDoItem mItem;
-    public static final String EXIT = "com.newstoday.todo_diary";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

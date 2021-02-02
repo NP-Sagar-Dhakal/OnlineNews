@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Project News</string>
-
     <string name="app_id" translatable="false">ca-app-pub-7330887983553029~4271620333</string>
     <string name="banner_ad" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="interstitial_ad" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="native_ad" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-
     <string name="stream_offline">Radio station is offline. Please try again later.</string>
     <string name="no_to_dos">Add new note \n&amp;\n Swipe Right to delete the item</string>
     <string name="title">What\'s on your mind?</string>
@@ -14,86 +12,51 @@
     <string name="remind_date_and_time">Reminder set for %1$s, %2$s %3$s</string>
     <string name="remind_me">Remind Me</string>
     <string name="remove">Remove</string>
-
     <string name="start">Start</string>
     <string name="stop">Stop</string>
-
     <plurals name="number_of_new_entries_for_noti">
         <item quantity="one">One New News is available to read</item>
         <item quantity="other">%d New News are available to read</item>
     </plurals>
-
     <plurals name="number_of_new_entries_for_notification">
         <item quantity="one">One New Feed is available to read</item>
         <item quantity="other">%d New Feeds are available to read</item>
-    </plurals>
-
-    <!--    Deleted to-do-->
+    </plurals><!--    Deleted to-do-->
     <string name="deleted_todo">Sorry, the data is already deleted</string>
     <!--    Screen Filter-->
-    <string name="screen_filter">Screen Filter</string>
-
-    <!-- Button tip -->
-    <string name="button_tip_text">Tip: Click the top left button to turn on Night Screen.</string>
-
-    <!-- Yellow filter row -->
+    <string name="screen_filter">Screen Filter</string><!-- Button tip -->
+    <string name="button_tip_text">Tip: Click the top left button to turn on Night Screen.</string><!-- Yellow filter row -->
     <string name="yellow_filter">Yellow filter</string>
-    <string name="yellow_filter_explanation">Slide to the right to make the overlay yellow instead of grey</string>
-
-    <!-- Scheduler Row -->
+    <string name="yellow_filter_explanation">Slide to the right to make the overlay yellow instead of grey</string><!-- Scheduler Row -->
     <string name="scheduler_status_on_show_enable_time">Automatically enable at %s.</string>
     <string name="scheduler_status_on_show_disable_time">It will be end at %s.</string>
-    <string name="scheduler_status_off">OFF</string>
-
-    <!-- Dark theme Row -->
-
-    <!-- Advanced Row -->
+    <string name="scheduler_status_off">OFF</string><!-- Dark theme Row --><!-- Advanced Row -->
     <string name="dialog_choose_mode">Choose mode</string>
-
     <string name="mode_text_no_permission">No permission mode</string>
     <string name="mode_text_normal">Normal mode</string>
     <string name="mode_text_overlay_all">System overlay mode</string>
-
     <string name="mode_desc_no_permission">No permission is needed. However, the lockscreen, status bar and navigation bar are not dimmed. Note that this doesn\'t work in Android 7.0.</string>
     <string name="mode_desc_normal">Recommended mode. It is stable, although it cannot dim the navigation bar and it prevents users from clicking \"Install\" or \"Allow\" in permission dialogs.</string>
     <string name="mode_desc_overlay_all">Both the status bar and the navigation bar are dimmed. However, the screen may flash in some apps.</string>
-
     <string name="mode_android_oreo_explanation_dialog_title">Why can\'t I change the mode?</string>
     <string name="mode_android_oreo_explanation_dialog_message">Since Android Oreo (8.0), Android strictly limits the permissions of floating windows. The methods used before are no longer available. Maybe we will support better methods to control brightness in the future.</string>
     <string name="mode_android_oreo_explanation_read_more">Read more</string>
-    <string name="mode_android_oreo_explanation_url" translatable="false">https://developer.android.com/about/versions/oreo/android-8.0-changes.html#all-aw</string>
-
-    <!-- Notification Channel -->
-    <string name="notification_channel_running_status">Running status</string>
-
-    <!-- Shortcut -->
-    <string name="shortcut_label_switch">Toggle</string>
-
-    <!-- About -->
-
+    <string name="mode_android_oreo_explanation_url" translatable="false">https://developer.android.com/about/versions/oreo/android-8.0-changes.html#all-aw</string><!-- Notification Channel -->
+    <string name="notification_channel_running_status">Running status</string><!-- Shortcut -->
+    <string name="shortcut_label_switch">Toggle</string><!-- About -->
     <string name="mask_fail_to_start">Failed to start mask. Please check whether the system has denied the permissions.</string>
-
     <string name="dialog_first_run_title">First run</string>
-    <string name="dialog_first_run_message">Can you see this message? If you can, Night Screen is working well.\nIt will automatically stop after 5 seconds if you don\'t press OK.</string>
-
-    <!-- Notification -->
+    <string name="dialog_first_run_message">Can you see this message? If you can, Night Screen is working well.\nIt will automatically stop after 5 seconds if you don\'t press OK.</string><!-- Notification -->
     <string name="notification_running_title">Night Screen is enabled</string>
     <string name="notification_running_msg">Click here to open settings</string>
-
     <string name="notification_paused_title">Night Screen is paused</string>
     <string name="notification_paused_msg">Click here to open settings or Swipe to stop Night Screen</string>
-
     <string name="notification_action_turn_off">Pause</string>
-    <string name="notification_action_turn_on">Resume</string>
-
-    <!-- Auto Mode -->
+    <string name="notification_action_turn_on">Resume</string><!-- Auto Mode -->
     <string name="scheduler_title">Auto mode</string>
-
     <string name="dialog_ignore_battery_opt_title">Note</string>
     <string name="dialog_ignore_battery_opt_msg">Due to restrictions on apps introduced in Android 6.0, we may not be able to automatically (de-)activate Night Screen on time. \n\nA possible solution is to tell Android to ignore battery optimizations for Night Screen. To do so, tap \"Go to settings\" and confirm the dialog that follows.</string>
-    <string name="dialog_button_go_to_set">Go to settings</string>
-
-    <!--    Readify-->
+    <string name="dialog_button_go_to_set">Go to settings</string><!--    Readify-->
     <string name="never">never</string>
     <string name="update">Update</string>
     <string name="colon" translatable="false">:\u00A0</string>
@@ -105,18 +68,14 @@
     <string name="no_result">No result</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
     <plurals name="number_of_new_news">
         <item quantity="one">One New News</item>
         <item quantity="other">%d New News</item>
     </plurals>
-
     <plurals name="number_of_new_entries">
         <item quantity="one">One New Entry</item>
         <item quantity="other">%d New Entries</item>
-    </plurals>
-
-    <!-- FEEDS -->
+    </plurals><!-- FEEDS -->
     <string name="feeds">Feeds</string>
     <string name="menu_add_feed">Add feed</string>
     <string name="no_feeds">No feeds</string>
@@ -175,9 +134,7 @@
     <string name="google_news_sports">Sports</string>
     <string name="google_news_science">Science</string>
     <string name="google_news_health">Health</string>
-    <string name="google_news_custom_topic">Enter custom topic</string>
-
-    <!-- ENTRIES -->
+    <string name="google_news_custom_topic">Enter custom topic</string><!-- ENTRIES -->
     <string name="all">Entries</string>
     <string name="no_entries">List is empty,
         Please click refresh button</string>
@@ -198,9 +155,7 @@
     <string name="file">File</string>
     <string name="download_and_save">Download and save</string>
     <string name="open_link">Open link</string>
-    <string name="tip_sentence">Tip: slide left to mark as read and slide right to mark as favorite</string>
-
-    <!-- SETTINGS -->
+    <string name="tip_sentence">Tip: slide left to mark as read and slide right to mark as favorite</string><!-- SETTINGS -->
     <string name="settings_category_refresh">Automated refresh</string>
     <string name="settings_refresh_enabled">Enable automatic refresh</string>
     <string name="settings_refresh_enabled_description">Enable the automatic refresh of feeds</string>
@@ -222,17 +177,14 @@
     <string name="settings_refresh_on_open_description">Refreshes all feeds after opening the application</string>
     <string name="settings_refresh_wifi_only">Refresh only over Wi-Fi</string>
     <string name="settings_refresh_wifi_only_description">Automatic refresh will only be done if Wi-Fi connection is available</string>
-
     <string-array name="langSelector" translatable="false">
         <item>English</item>
         <item>Nepali</item>
     </string-array>
-
     <string-array name="langSelector_values" translatable="false">
         <item>en</item>
         <item>ne</item>
     </string-array>
-
     <string-array name="settings_intervals" translatable="false">
         <item>10 minutes</item>
         <item>1 hour</item>
@@ -288,7 +240,6 @@
     <string name="marked_as_read">Marked as read</string>
     <string name="undo">Undo</string>
     <string name="website_or_feed" translatable="false">(e.g: Hacker News, The Verge…)</string>
-
     <string-array name="settings_interval_values" translatable="false">
         <item>600000</item>
         <item>3600000</item>
@@ -322,9 +273,7 @@
         <item>NEVER_DISPLAYED</item>
         <item>WIFI_ONLY_PRELOAD</item>
         <item>ALWAYS_PRELOAD</item>
-    </string-array>
-
-    <!--    Layout Values-->
+    </string-array><!--    Layout Values-->
     <string name="ad" translatable="false">Ad</string>
     <string name="developer_name" translatable="false">Sagar Dhakal</string>
     <string name="developer_career" translatable="false">Android Developer</string>
@@ -341,10 +290,8 @@
     <string name="regular">is a regular expression</string>
     <string name="radio_name">Radio name</string>
     <string name="recently_played">Recently Played</string>
-
     <string name="location">Locations</string>
     <string name="category">Categories</string>
-
     <string name="recent_news">Recent News</string>
     <string name="read_full_content">Read Full Content</string>
     <string name="reader">RSS Feed Reader</string>
@@ -353,9 +300,7 @@
     <string name="next">Next</string>
     <string name="get_started">Get Started</string>
     <string name="search">Search</string>
-    <string name="night_mode">Night Mode</string>
-
-    <!--    Menu Strings-->
+    <string name="night_mode">Night Mode</string><!--    Menu Strings-->
     <string name="home">Home</string>
     <string name="tools">Tools</string>
     <string name="social_media">Social Media</string>
@@ -378,9 +323,7 @@
     <string name="news_publisher">News Publishers</string>
     <string name="more_add_publisher">Add News Site or Radio</string>
     <string name="refresh_suggestion">You can click refresh button on top. When you want to read new news.</string>
-    <string name="theme">Theme</string>
-
-    <!--    Extra things-->
+    <string name="theme">Theme</string><!--    Extra things-->
     <string name="noConnection">No Internet Connection</string>
     <string name="allitems">All Items</string>
     <string name="success">Successfully Done</string>
@@ -389,7 +332,6 @@
     <string name="fullText">Full Text</string>
     <string name="somethingWrong">Sorry Something went wrong, Please try again later</string>
     <!--    Categories Name-->
-
     <string name="catOne">Politics</string>
     <string name="catOneE">National</string>
     <string name="catTwo">Entertainment</string>
@@ -400,10 +342,7 @@
     <string name="catSeven">Sports</string>
     <string name="catEight">Tech &amp; Auto</string>
     <string name="catNine">World</string>
-
-    <string name="extra_description" translatable="false">Hello Everyone, \n My name is Sagar Dhakal and I\'m the man behind this app.\n\n To add new websites or RSS Feed please email me, Go below.\n\nThanks to all for installing this app, If you have any suggestions &amp; feedback feel free to message me. I will reply to everyone. :) Do drop me a Hi, It really means a lot to me.\n\nLooking forward to hear from you.</string>
-
-    <!--    Disclaimer-->
+    <string name="extra_description" translatable="false">Hello Everyone, \n My name is Sagar Dhakal and I\'m the man behind this app.\n\n To add new websites or RSS Feed please email me, Go below.\n\nThanks to all for installing this app, If you have any suggestions &amp; feedback feel free to message me. I will reply to everyone. :) Do drop me a Hi, It really means a lot to me.\n\nLooking forward to hear from you.</string><!--    Disclaimer-->
     <string name="app_disclaimer" translatable="false">This app is made for those who like to read news and other article and listen online radios,
         \n
         To make a good application we should give extra effort to make all services accurate and valid, application may contain inaccuracies. By using this app,
@@ -418,10 +357,34 @@
         To add new sites or rss feed please contact me, Go to developer page on this app. Thank you.
     </string>
 
+    <!--    Extras-->
     <string name="drawerOne">News, Radio &amp; Other Tools</string>
-
     <string name="newsSettings">News Settings</string>
     <string name="chooseLanguage">Language</string>
+    <string name="favourites">Favourites</string>
+    <string name="recent">Recent</string>
+    <string name="news_publishers">News Publishers</string>
+    <string name="source">Source</string>
 
+    <!--    Toasts-->
+    <string name="fav_added">Added to Favorite List</string>
+    <string name="fav_removed">Removed from Favorite List</string>
+    <string name="click_refresh">Click refresh button until you get your real location</string>
+    <string name="turn_location_on">Please Turn on Location Service</string>
+    <string name="connect_internet">Please connect to the Internet</string>
+    <string name="please_wait">Please wait Some Time</string>
+    <string name="server_busy">Server is busy. Please close the app and try again later.</string>
+    <string name="turn_on_internet">Please turn on internet connection and re-open</string>
+    <string name="all_news">All News</string>
+    <string name="unread_only">Unread News Only</string>
+    <string name="fav_news">Favourite News</string>
+    <string name="only_mail">Please send message only from Gmail.</string>
+    <string name="swipe_right">Swipe right to read next news.</string>
+    <string name="added_to_fav">Added to Favorite List</string>
+    <string name="removed_from_fav">Removed from Favorite List</string>
+    <string name="radio_will_stopped">\"Radio will be Stopped after \"</string>
+    <string name="timer_stopped">Timer Stopped</string>
+    <string name="server_error">Server Error</string>
+    <string name="coming_soon">Coming Soon!</string>
 
 </resources>

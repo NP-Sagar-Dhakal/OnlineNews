@@ -64,13 +64,13 @@ import com.newstoday.news_package.recent_news.utils.PrefUtils;
 
 public class RefreshService extends Service {
     public static final String SIXTY_MINUTES = "7200000";
+    private AlarmManager mAlarmManager;
+    private PendingIntent mTimerIntent;
     private final OnSharedPreferenceChangeListener mListener = (sharedPreferences, key) -> {
         if (PrefUtils.REFRESH_INTERVAL.equals(key)) {
             restartTimer(false);
         }
     };
-    private AlarmManager mAlarmManager;
-    private PendingIntent mTimerIntent;
 
     @Override
     public IBinder onBind(Intent intent) {

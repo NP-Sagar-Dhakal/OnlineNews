@@ -2,21 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
-
     <item
         android:id="@+id/menu_unread"
         android:icon="@drawable/nav_unread"
         android:title="@string/context_menu_show_read"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
-
     <item
         android:id="@+id/edit_feeds"
         android:title="@string/edit_feed_title" />
@@ -24,7 +21,6 @@
         android:id="@+id/settings"
         android:orderInCategory="100"
         android:title="@string/menu_settings" />
-
     <item
         android:id="@+id/menu_all_read"
         android:title="@string/menu_all_read" />

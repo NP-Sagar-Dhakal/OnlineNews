@@ -16,11 +16,11 @@ class Radio_Pager_Adapter extends FragmentPagerAdapter {
 
     @NonNull
     public Fragment getItem(int arg0) {
-        Radio_Detail_Fragement radioDetailFragement = new Radio_Detail_Fragement();
+        Radio_Detail_Fragment radioDetailFragment = new Radio_Detail_Fragment();
         Bundle data = new Bundle();
         data.putInt("current_page", arg0 + 1);
-        radioDetailFragement.setArguments(data);
-        return radioDetailFragement;
+        radioDetailFragment.setArguments(data);
+        return radioDetailFragment;
     }
 
 

@@ -1,6 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- Base application theme. -->
+<resources xmlns:tools="http://schemas.android.com/tools"><!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -11,7 +9,6 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:itemBackground">@color/colorPrimary</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
         <item name="colorReadState">@color/read_state</item>
         <item name="android:colorBackground">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
@@ -61,5 +58,4 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
 </resources>

@@ -41,8 +41,8 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -71,9 +71,8 @@ public class DrawerAdapter extends BaseAdapter {
             return size() > CACHE_MAX_ENTRIES;
         }
     };
-
-    private int mSelectedItem;
     private final Context mContext;
+    private int mSelectedItem;
     private Cursor mFeedsCursor;
     private int mAllUnreadNumber, mFavoritesNumber;
 

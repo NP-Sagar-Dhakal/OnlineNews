@@ -34,11 +34,11 @@ import com.newstoday.screenfilter.receiver.ActionReceiver;
 @TargetApi(Build.VERSION_CODES.N)
 public class MaskTileService extends TileService {
 
-    private boolean isRunning = false;
     private static final String TAG = MaskTileService.class.getSimpleName();
+    private boolean isRunning = false;
 
     @Override
-    public void onClick(){
+    public void onClick() {
         Log.d(TAG, "Tile service onClick method called");
         super.onClick();
         Tile tile = getQsTile();

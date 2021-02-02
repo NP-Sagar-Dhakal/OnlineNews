@@ -8,5 +8,4 @@
     tools:showIn="@layout/feed_activity_home">
 
     <include layout="@layout/feed_view_drawer_content" />
-
 </FrameLayout>

@@ -41,7 +41,6 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
-
 package com.newstoday.todo_diary;
 
 import android.animation.Animator;
@@ -62,15 +61,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.newstoday.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -85,60 +84,48 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
     private EditText mToDoTextBodyEditText;
     private LinearLayout mUserDateSpinnerContainingLinearLayout;
     private TextView mReminderTextView;
-
     private EditText mDateEditText;
     private EditText mTimeEditText;
-
     private ToDoItem mUserToDoItem;
     private String mUserEnteredText;
     private boolean mUserHasReminder;
     private Date mUserReminderDate;
     private int mUserColor;
 
-    private InterstitialAd mInterstitialAd;
+    public static String formatDate(String formatString, Date dateToFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatString);
+        return simpleDateFormat.format(dateToFormat);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.todo_add_new);
-
         MobileAds.initialize(this, initializationStatus -> {
         });
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-
-
         final Drawable cross = getResources().getDrawable(R.drawable.ic_clear);
-
         Toolbar mToolbar = findViewById(R.id.base_toolbar);
         setSupportActionBar(mToolbar);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(cross);
-
         }
-
         TextView notAvailable = findViewById(R.id.notAvailable);
         mUserToDoItem = (ToDoItem) getIntent().getSerializableExtra(MainActivity.TODOITEM);
         mUserEnteredText = Objects.requireNonNull(mUserToDoItem).getToDoText();
         mUserHasReminder = mUserToDoItem.hasReminder();
         mUserReminderDate = mUserToDoItem.getToDoDate();
         mUserColor = mUserToDoItem.getTodoColor();
-
         LinearLayout mContainerLayout = findViewById(R.id.todoReminderAndDateContainerLayout);
         mUserDateSpinnerContainingLinearLayout = findViewById(R.id.toDoEnterDateLinearLayout);
         mToDoTextBodyEditText = findViewById(R.id.userToDoEditText);
         SwitchCompat mToDoDateSwitch = findViewById(R.id.toDoHasDateSwitchCompat);
         FloatingActionButton mToDoSendFloatingActionButton = findViewById(R.id.makeToDoFloatingActionButton);
         mReminderTextView = findViewById(R.id.newToDoDateTimeReminderTextView);
-
         mContainerLayout.setOnClickListener(v -> hideKeyboard(mToDoTextBodyEditText));
-
         if (mUserHasReminder && (mUserReminderDate != null)) {
             setReminderTextView();
             setEnterDateLayoutVisibleWithAnimations(true);
@@ -146,36 +133,27 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
         if (mUserReminderDate == null) {
             mToDoDateSwitch.setChecked(false);
             mReminderTextView.setVisibility(View.INVISIBLE);
-
         }
-
         mToDoTextBodyEditText.requestFocus();
         mToDoTextBodyEditText.setText(mUserEnteredText);
         InputMethodManager imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
         Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         mToDoTextBodyEditText.setSelection(mToDoTextBodyEditText.length());
-
-
         mToDoTextBodyEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mUserEnteredText = s.toString();
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
-
         setEnterDateLayoutVisible(mToDoDateSwitch.isChecked());
-
         mToDoDateSwitch.setChecked(mUserHasReminder && (mUserReminderDate != null));
         mToDoDateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) {
@@ -186,43 +164,23 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             setEnterDateLayoutVisibleWithAnimations(isChecked);
             hideKeyboard(mToDoTextBodyEditText);
         });
-
-
         mToDoSendFloatingActionButton.setOnClickListener(v -> {
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-                mInterstitialAd.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdClosed() {
-                        super.onAdClosed();
-                        makeResult(RESULT_OK);
-                        hideKeyboard(mToDoTextBodyEditText);
-                        finish();
-
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(LoadAdError loadAdError) {
-                        super.onAdFailedToLoad(loadAdError);
-                        makeResult(RESULT_OK);
-                        hideKeyboard(mToDoTextBodyEditText);
-                        finish();
-
-                    }
-                });
-            } else {
-                makeResult(RESULT_OK);
-                hideKeyboard(mToDoTextBodyEditText);
-                finish();
-            }
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(AddToDoActivity.this, getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(AddToDoActivity.this);
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
+            makeResult();
+            hideKeyboard(mToDoTextBodyEditText);
+            finish();
         });
-
-
         mDateEditText = findViewById(R.id.newTodoDateEditText);
         mTimeEditText = findViewById(R.id.newTodoTimeEditText);
-
-        mDateEditText.setOnClickListener(v -> {
-
+        mDateEditText.setOnClickListener(v ->
+        {
             Date date;
             hideKeyboard(mToDoTextBodyEditText);
             if (mUserToDoItem.getToDoDate() != null) {
@@ -235,15 +193,11 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
-
             DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(AddToDoActivity.this, year, month, day);
             datePickerDialog.show(getFragmentManager(), "DateFragment");
-
         });
-
-
-        mTimeEditText.setOnClickListener(v -> {
-
+        mTimeEditText.setOnClickListener(v ->
+        {
             Date date;
             hideKeyboard(mToDoTextBodyEditText);
             if (mUserToDoItem.getToDoDate() != null) {
@@ -255,7 +209,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             calendar.setTime(date);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int minute = calendar.get(Calendar.MINUTE);
-
             TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(AddToDoActivity.this, hour, minute, DateFormat.is24HourFormat(AddToDoActivity.this));
             timePickerDialog.show(getFragmentManager(), "TimeFragment");
         });
@@ -263,7 +216,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void setDateAndTimeEditText() {
-
         if (mUserToDoItem.hasReminder() && mUserReminderDate != null) {
             String userDate = formatDate("d MMM, yyyy", mUserReminderDate);
             String formatToUse;
@@ -271,12 +223,10 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
                 formatToUse = "k:mm";
             } else {
                 formatToUse = "h:mm a";
-
             }
             String userTime = formatDate(formatToUse, mUserReminderDate);
             mTimeEditText.setText(userTime);
             mDateEditText.setText(userDate);
-
         } else {
             mDateEditText.setText(getString(R.string.date_reminder_default));
             boolean time24 = DateFormat.is24HourFormat(this);
@@ -300,35 +250,28 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void hideKeyboard(EditText et) {
-
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         Objects.requireNonNull(imm).hideSoftInputFromWindow(et.getWindowToken(), 0);
     }
-
 
     private void setDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         int hour, minute;
         Calendar reminderCalendar = Calendar.getInstance();
         reminderCalendar.set(year, month, day);
-
         if (reminderCalendar.before(calendar)) {
             Toast.makeText(this, "My time-machine is a bit rusty", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (mUserReminderDate != null) {
             calendar.setTime(mUserReminderDate);
         }
-
         if (DateFormat.is24HourFormat(this)) {
             hour = calendar.get(Calendar.HOUR_OF_DAY);
         } else {
-
             hour = calendar.get(Calendar.HOUR);
         }
         minute = calendar.get(Calendar.MINUTE);
-
         calendar.set(year, month, day, hour, minute);
         mUserReminderDate = calendar.getTime();
         setReminderTextView();
@@ -340,14 +283,12 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
         if (mUserReminderDate != null) {
             calendar.setTime(mUserReminderDate);
         }
-
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         Log.d("OskarSchindler", "Time set: " + hour);
         calendar.set(year, month, day, hour, minute, 0);
         mUserReminderDate = calendar.getTime();
-
         setReminderTextView();
         setTimeEditText();
     }
@@ -363,7 +304,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             dateFormat = "k:mm";
         } else {
             dateFormat = "h:mm a";
-
         }
         mTimeEditText.setText(formatDate(dateFormat, mUserReminderDate));
     }
@@ -381,7 +321,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             String dateString = formatDate("d MMM, yyyy", date);
             String timeString;
             String amPmString = "";
-
             if (DateFormat.is24HourFormat(this)) {
                 timeString = formatDate("k:mm", date);
             } else {
@@ -393,14 +332,12 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             mReminderTextView.setText(finalString);
         } else {
             mReminderTextView.setVisibility(View.INVISIBLE);
-
         }
     }
 
-    private void makeResult(int result) {
+    private void makeResult() {
         Intent i = new Intent();
         if (mUserEnteredText.length() > 0) {
-
             String capitalizedString = Character.toUpperCase(mUserEnteredText.charAt(0)) + mUserEnteredText.substring(1);
             mUserToDoItem.setToDoText(capitalizedString);
         } else {
@@ -416,7 +353,7 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
         mUserToDoItem.setToDoDate(mUserReminderDate);
         mUserToDoItem.setTodoColor(mUserColor);
         i.putExtra(MainActivity.TODOITEM, mUserToDoItem);
-        setResult(result, i);
+        setResult(android.app.Activity.RESULT_OK, i);
     }
 
     @Override
@@ -424,7 +361,7 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
         if (mUserReminderDate.before(new Date())) {
             mUserToDoItem.setToDoDate(null);
         }
-        makeResult(RESULT_OK);
+        makeResult();
         super.onBackPressed();
     }
 
@@ -436,11 +373,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static String formatDate(String formatString, Date dateToFormat) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatString);
-        return simpleDateFormat.format(dateToFormat);
     }
 
     @Override
@@ -484,7 +416,6 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
                     new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-
                         }
 
                         @Override
@@ -494,17 +425,14 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
 
                         @Override
                         public void onAnimationCancel(Animator animation) {
-
                         }
 
                         @Override
                         public void onAnimationRepeat(Animator animation) {
-
                         }
                     }
             );
         }
-
     }
 
     @Override
@@ -512,4 +440,3 @@ public class AddToDoActivity extends AppCompatActivity implements DatePickerDial
         setTime(hourOfDay, minute);
     }
 }
-

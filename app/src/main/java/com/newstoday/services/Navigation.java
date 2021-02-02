@@ -186,7 +186,7 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                 break;
             case R.id.radio:
                 if (MainHomeActivity.radioItems.isEmpty()) {
-                    Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent radio = new Intent(Navigation.this, Radio_Activity.class);
                     startActivity(radio);

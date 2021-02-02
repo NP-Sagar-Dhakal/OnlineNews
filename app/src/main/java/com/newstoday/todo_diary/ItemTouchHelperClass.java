@@ -41,21 +41,17 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
  */
- 
- package com.newstoday.todo_diary;
+
+package com.newstoday.todo_diary;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-class ItemTouchHelperClass extends ItemTouchHelper.Callback{
+class ItemTouchHelperClass extends ItemTouchHelper.Callback {
     private final ItemTouchHelperAdapter adapter;
-    public interface ItemTouchHelperAdapter{
-        void onItemMoved(int fromPosition, int toPosition);
-        void onItemRemoved(int position);
-    }
 
-    ItemTouchHelperClass(ItemTouchHelperAdapter ad){
+    ItemTouchHelperClass(ItemTouchHelperAdapter ad) {
         adapter = ad;
     }
 
@@ -87,5 +83,11 @@ class ItemTouchHelperClass extends ItemTouchHelper.Callback{
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         adapter.onItemRemoved(viewHolder.getAdapterPosition());
 
+    }
+
+    public interface ItemTouchHelperAdapter {
+        void onItemMoved(int fromPosition, int toPosition);
+
+        void onItemRemoved(int position);
     }
 }

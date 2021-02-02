@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:orientation="horizontal"
     android:paddingStart="16dp"
     android:paddingTop="16dp"
@@ -50,7 +49,5 @@
             android:layout_marginTop="16dp"
             android:max="100"
             android:progress="0" />
-
     </LinearLayout>
-
 </LinearLayout>

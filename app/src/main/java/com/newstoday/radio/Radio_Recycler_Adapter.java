@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final Context context;
     public static List<NewsItem.News.OnlineRadios> radioItems;
+    private final Context context;
 
     Radio_Recycler_Adapter(Context context, List<NewsItem.News.OnlineRadios> radioItems) {
         this.context = context;
@@ -77,11 +77,11 @@ public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (All_Radio_Fragment.favoriteDatabase.favoriteDao().isFavorite(radioItems.get(position).stationName) != 1) {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_filled);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().addData(favoriteList);
-                Toast.makeText(context, "Added to Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.fav_added), Toast.LENGTH_SHORT).show();
             } else {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_empty);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().delete(favoriteList);
-                Toast.makeText(context, "Removed from Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.fav_removed), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -94,6 +94,12 @@ public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             e.printStackTrace();
             return 0;
         }
+    }
+
+    void updateList(List<NewsItem.News.OnlineRadios> searchList) {
+        radioItems = new ArrayList<>();
+        radioItems.addAll(searchList);
+        notifyDataSetChanged();
     }
 
     static class RadioViewHolder extends RecyclerView.ViewHolder {
@@ -111,11 +117,5 @@ public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             radio_Image = itemView.findViewById(R.id.radio_image);
             radioConstraint = itemView.findViewById(R.id.radio_constraint);
         }
-    }
-
-    void updateList(List<NewsItem.News.OnlineRadios> searchList) {
-        radioItems = new ArrayList<>();
-        radioItems.addAll(searchList);
-        notifyDataSetChanged();
     }
 }

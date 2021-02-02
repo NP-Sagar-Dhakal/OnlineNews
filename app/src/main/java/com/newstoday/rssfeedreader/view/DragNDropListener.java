@@ -37,13 +37,11 @@ public interface DragNDropListener {
 
     /**
      * Called when a drag is to be performed.
-     *
      */
     void onDrag();
 
     /**
      * Called when a drag stops. Any changes in onStartDrag need to be undone here so that the view can be used in the list again.
-     *
      */
     void onStopDrag();
 

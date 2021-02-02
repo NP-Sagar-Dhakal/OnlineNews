@@ -75,6 +75,9 @@ import static com.newstoday.news_package.news_location.seventeen.provider.FeedDa
 
 public class FeedDataContentProvider extends ContentProvider {
 
+    public static final int URI_ENTRIES_FOR_FEED = 9;
+    public static final int URI_SEARCH = 21;
+    public static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
     private static final int URI_GROUPED_FEEDS = 1;
     private static final int URI_GROUPS = 2;
     private static final int URI_GROUP = 3;
@@ -83,7 +86,6 @@ public class FeedDataContentProvider extends ContentProvider {
     private static final int URI_FEED = 6;
     private static final int URI_FILTERS = 7;
     private static final int URI_FILTERS_FOR_FEED = 8;
-    public static final int URI_ENTRIES_FOR_FEED = 9;
     private static final int URI_ENTRY_FOR_FEED = 10;
     private static final int URI_ENTRIES_FOR_GROUP = 11;
     private static final int URI_ENTRY_FOR_GROUP = 12;
@@ -95,10 +97,7 @@ public class FeedDataContentProvider extends ContentProvider {
     private static final int URI_FAVORITES_ENTRY = 18;
     private static final int URI_TASKS = 19;
     private static final int URI_TASK = 20;
-    public static final int URI_SEARCH = 21;
     private static final int URI_SEARCH_ENTRY = 22;
-
-    public static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         URI_MATCHER.addURI(FeedData.AUTHORITY, "grouped_feeds", URI_GROUPED_FEEDS);

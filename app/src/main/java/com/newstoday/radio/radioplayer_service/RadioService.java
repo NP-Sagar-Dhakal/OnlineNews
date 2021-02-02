@@ -47,21 +47,22 @@ import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.newstoday.R;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Objects;
 
 public class RadioService extends Service implements Player.EventListener, AudioManager.OnAudioFocusChangeListener, MetadataOutput {
-    private String radioName;
-    private String radioDetail;
-    private String radioImage;
-    private Bitmap bitmap;
     public static final String ACTION_PLAY = "ACTION_PLAY";
     public static final String ACTION_PAUSE = "ACTION_PAUSE";
     public static final String ACTION_STOP = "ACTION_STOP";
     public static String current_Url;
     private final IBinder iBinder = new LocalBinder();
+    private String radioName;
+    private String radioDetail;
+    private String radioImage;
+    private Bitmap bitmap;
     private SimpleExoPlayer exoPlayer;
     private MediaSessionCompat mediaSession;
     private MediaControllerCompat.TransportControls transportControls;
@@ -69,8 +70,50 @@ public class RadioService extends Service implements Player.EventListener, Audio
     private TelephonyManager telephonyManager;
     private WifiManager.WifiLock wifiLock;
     private AudioManager audioManager;
+    private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            pause();
+        }
+    };
     private MediaNotificationManager notificationManager;
+    private final MediaSessionCompat.Callback mediasSessionCallback = new MediaSessionCompat.Callback() {
+        @Override
+        public void onPause() {
+            super.onPause();
+            pause();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            stop();
+            notificationManager.cancelNotify();
+        }
+
+        @Override
+        public void onPlay() {
+            super.onPlay();
+            resume();
+        }
+    };
     private String status;
+    private final PhoneStateListener phoneStateListener = new PhoneStateListener() {
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            if (state == TelephonyManager.CALL_STATE_OFFHOOK
+                    || state == TelephonyManager.CALL_STATE_RINGING) {
+                if (!isPlaying()) return;
+                onGoingCall = true;
+                stop();
+
+            } else if (state == TelephonyManager.CALL_STATE_IDLE) {
+                if (!onGoingCall) return;
+                onGoingCall = false;
+                resume();
+            }
+        }
+    };
     private boolean isRunning = false;
 
     public void sleepTimer(Context context, long minutes) {
@@ -89,7 +132,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         if (!isRunning) {
             thread.start();
-            Toast.makeText(context, "Radio will be Stopped after " + minutes + " Minutes", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, getString(R.string.radio_will_stopped) + minutes + " Minutes", Toast.LENGTH_LONG).show();
         } else {
             isRunning = false;
             try {
@@ -97,7 +140,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Toast.makeText(context, "Timer Stopped", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, getString(R.string.timer_stopped), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -123,64 +166,12 @@ public class RadioService extends Service implements Player.EventListener, Audio
         }
     }
 
-
     private void sendMessageToActivity(String metadata) {
         Intent intent = new Intent("radioDetail");
         intent.putExtra("radioDetail", metadata);
         intent.putExtra("currentLink", current_Url);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
-
-    public class LocalBinder extends Binder {
-        public RadioService getService() {
-            return RadioService.this;
-        }
-    }
-
-    private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            pause();
-        }
-    };
-
-    private final PhoneStateListener phoneStateListener = new PhoneStateListener() {
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            if (state == TelephonyManager.CALL_STATE_OFFHOOK
-                    || state == TelephonyManager.CALL_STATE_RINGING) {
-                if (!isPlaying()) return;
-                onGoingCall = true;
-                stop();
-
-            } else if (state == TelephonyManager.CALL_STATE_IDLE) {
-                if (!onGoingCall) return;
-                onGoingCall = false;
-                resume();
-            }
-        }
-    };
-
-    private final MediaSessionCompat.Callback mediasSessionCallback = new MediaSessionCompat.Callback() {
-        @Override
-        public void onPause() {
-            super.onPause();
-            pause();
-        }
-
-        @Override
-        public void onStop() {
-            super.onStop();
-            stop();
-            notificationManager.cancelNotify();
-        }
-
-        @Override
-        public void onPlay() {
-            super.onPlay();
-            resume();
-        }
-    };
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -408,7 +399,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
                 pause();
             }
         } else {
-            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -432,5 +423,11 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     private String getUserAgent() {
         return Util.getUserAgent(this, getClass().getSimpleName());
+    }
+
+    public class LocalBinder extends Binder {
+        public RadioService getService() {
+            return RadioService.this;
+        }
     }
 }

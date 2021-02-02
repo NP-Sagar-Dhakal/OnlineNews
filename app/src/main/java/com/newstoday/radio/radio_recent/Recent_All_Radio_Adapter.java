@@ -77,12 +77,12 @@ public class Recent_All_Radio_Adapter extends RecyclerView.Adapter<Recent_All_Ra
             if (All_Radio_Fragment.favoriteDatabase.favoriteDao().isFavorite(radioItems.get(position).stationName) != 1) {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_filled);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().addData(favoriteList);
-                Toast.makeText(context, "Added to Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, this.context.getResources().getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
 
             } else {
                 holder.addto_fav.setImageResource(R.drawable.ic_heart_empty);
                 All_Radio_Fragment.favoriteDatabase.favoriteDao().delete(favoriteList);
-                Toast.makeText(context, "Removed from Favorite List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, this.context.getResources().getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
             }
         });
 

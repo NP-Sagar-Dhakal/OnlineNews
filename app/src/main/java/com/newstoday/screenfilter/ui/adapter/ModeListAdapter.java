@@ -36,87 +36,73 @@ import java.util.List;
 
 public class ModeListAdapter extends BaseAdapter implements ListAdapter {
 
-	private int current;
+    private static final List<ModeItem> MODES;
 
-	private static final List<ModeItem> MODES;
-
-	static {
-	    MODES = new ArrayList<>();
-	    MODES.add(ModeItem.MODE_NORMAL);
-	    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-	        MODES.add(ModeItem.MODE_NO_PERMISSION);
+    static {
+        MODES = new ArrayList<>();
+        MODES.add(ModeItem.MODE_NORMAL);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            MODES.add(ModeItem.MODE_NO_PERMISSION);
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             MODES.add(ModeItem.MODE_OVERLAY_ALL);
         }
     }
 
-	public ModeListAdapter(int current) {
-		this.current = current;
-	}
+    private int current;
 
-	public void setCurrent(int current) {
-		this.current = current;
-		notifyDataSetChanged();
-	}
+    public ModeListAdapter(int current) {
+        this.current = current;
+    }
 
-	@Override
-	public int getCount() {
-		return MODES.size();
-	}
+    public void setCurrent(int current) {
+        this.current = current;
+        notifyDataSetChanged();
+    }
 
-	@Override
-	public ModeItem getItem(int position) {
-		return MODES.get(position);
-	}
+    @Override
+    public int getCount() {
+        return MODES.size();
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return getItem(position).modeId;
-	}
+    @Override
+    public ModeItem getItem(int position) {
+        return MODES.get(position);
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(parent.getContext())
+    @Override
+    public long getItemId(int position) {
+        return getItem(position).modeId;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.filter_item_list_mode, parent, false);
-			holder = new ViewHolder();
-			holder.title = convertView.findViewById(R.id.title);
-			holder.description = convertView.findViewById(R.id.description);
-			holder.radioButton = convertView.findViewById(R.id.radio_button);
-			convertView.setTag(holder);
-		} else  {
-			holder = (ViewHolder) convertView.getTag();
-		}
-		holder.title.setText(getItem(position).titleResId);
-		holder.description.setText(getItem(position).descResId);
-		holder.radioButton.setChecked(position == current);
-		return convertView;
-	}
-
-	private static class ViewHolder {
-
-		TextView title, description;
-		RadioButton radioButton;
-
-	}
-
-	public static class ModeItem {
-
-	    private final int modeId;
-	    private final int titleResId;
-        private final int descResId;
-
-	    ModeItem(int modeId, int titleResId, int descResId) {
-	        this.modeId = modeId;
-	        this.titleResId = titleResId;
-	        this.descResId = descResId;
+            holder = new ViewHolder();
+            holder.title = convertView.findViewById(R.id.title);
+            holder.description = convertView.findViewById(R.id.description);
+            holder.radioButton = convertView.findViewById(R.id.radio_button);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
+        holder.title.setText(getItem(position).titleResId);
+        holder.description.setText(getItem(position).descResId);
+        holder.radioButton.setChecked(position == current);
+        return convertView;
+    }
 
-        public int getModeId() {
-	        return this.modeId;
-        }
+    private static class ViewHolder {
+
+        TextView title, description;
+        RadioButton radioButton;
+
+    }
+
+    public static class ModeItem {
 
         private static final ModeItem MODE_NORMAL = new ModeItem(
                 Constants.AdvancedMode.NONE,
@@ -130,6 +116,19 @@ public class ModeListAdapter extends BaseAdapter implements ListAdapter {
                 Constants.AdvancedMode.OVERLAY_ALL,
                 R.string.mode_text_overlay_all,
                 R.string.mode_desc_overlay_all);
+        private final int modeId;
+        private final int titleResId;
+        private final int descResId;
+
+        ModeItem(int modeId, int titleResId, int descResId) {
+            this.modeId = modeId;
+            this.titleResId = titleResId;
+            this.descResId = descResId;
+        }
+
+        public int getModeId() {
+            return this.modeId;
+        }
 
     }
 

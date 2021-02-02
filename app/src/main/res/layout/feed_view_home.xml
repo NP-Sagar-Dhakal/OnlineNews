@@ -39,9 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_label="@string/add_custom_feed" />
-
         </com.github.clans.fab.FloatingActionMenu>
-
     </FrameLayout>
-
 </LinearLayout>

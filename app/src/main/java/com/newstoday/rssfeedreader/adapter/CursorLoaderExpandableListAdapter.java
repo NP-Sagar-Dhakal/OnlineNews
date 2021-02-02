@@ -43,6 +43,16 @@ import com.newstoday.rssfeedreader.Constants;
 abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapter {
     private static final String URI_ARG = "uri";
     private final Activity mActivity;
+    private final LoaderManager mLoaderMgr;
+    private final Uri mGroupUri;
+    private final int mCollapsedGroupLayout;
+    private final int mExpandedGroupLayout;
+    private final int mChildLayout;
+    private final LayoutInflater mInflater;
+    /**
+     * The map of a group position to the group's children cursor
+     */
+    private final SparseArray<Pair<Cursor, Boolean>> mChildrenCursors = new SparseArray<>();
     private final LoaderManager.LoaderCallbacks<Cursor> mChildrenLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -72,16 +82,6 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
             notifyDataSetInvalidated();
         }
     };
-    private final LoaderManager mLoaderMgr;
-    private final Uri mGroupUri;
-    private final int mCollapsedGroupLayout;
-    private final int mExpandedGroupLayout;
-    private final int mChildLayout;
-    private final LayoutInflater mInflater;
-    /**
-     * The map of a group position to the group's children cursor
-     */
-    private final SparseArray<Pair<Cursor, Boolean>> mChildrenCursors = new SparseArray<>();
     private Cursor mGroupCursor;
 
     /**
@@ -139,7 +139,6 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
 
     /**
      * Constructor.
-     *
      */
     CursorLoaderExpandableListAdapter(Activity activity, Uri groupUri) {
         this(activity, groupUri, com.newstoday.R.layout.feed_item_feed_list, com.newstoday.R.layout.feed_item_feed_list, com.newstoday.R.layout.feed_item_feed_list);
@@ -289,9 +288,10 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
 
     /**
      * Bind an existing view to the group data pointed to by cursor.
-     *  @param view       Existing view, returned earlier by newGroupView.
-     * @param context    Interface to application's global information
-     * @param cursor     The cursor from which to get the data. The cursor is already moved to the correct position.
+     *
+     * @param view    Existing view, returned earlier by newGroupView.
+     * @param context Interface to application's global information
+     * @param cursor  The cursor from which to get the data. The cursor is already moved to the correct position.
      */
     protected abstract void bindGroupView(View view, Context context, Cursor cursor);
 
@@ -307,7 +307,7 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
     /**
      * Called on the background thread just after loaded the cursor
      *
-     * @param cursor  The cursor from which to get the data.
+     * @param cursor The cursor from which to get the data.
      */
     protected abstract void onCursorLoaded(Cursor cursor);
 

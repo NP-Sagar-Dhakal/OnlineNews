@@ -20,20 +20,20 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="70dp"
                 android:animateLayoutChanges="true"
+                android:drawableEnd="@drawable/ic_arrow_upward"
                 android:drawableRight="@drawable/ic_arrow_upward"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:visibility="gone"
-                android:drawableEnd="@drawable/ic_arrow_upward" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@android:id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
-                android:text="@string/no_entries"
-                android:focusable="true" />
+                android:text="@string/no_entries" />
 
             <ListView
                 android:id="@android:id/list"
@@ -41,7 +41,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="fill"
                 android:footerDividersEnabled="false" />
-
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

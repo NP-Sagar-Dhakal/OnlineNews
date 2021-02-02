@@ -35,6 +35,24 @@ import com.newstoday.screenfilter.service.MaskService;
 
 public class ToggleActivity extends Activity {
 
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            IMaskServiceInterface msi = IMaskServiceInterface.Stub.asInterface(service);
+            try {
+                ActionReceiver.sendActionStartOrStop(ToggleActivity.this, !msi.isShowing());
+                unbindService(this);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,23 +78,5 @@ public class ToggleActivity extends Activity {
         }
 
     }
-
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            IMaskServiceInterface msi = IMaskServiceInterface.Stub.asInterface(service);
-            try {
-                ActionReceiver.sendActionStartOrStop(ToggleActivity.this, !msi.isShowing());
-                unbindService(this);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
-    };
 
 }

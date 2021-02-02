@@ -49,19 +49,6 @@ public class SocialMedia_Recycler_Adapter extends RecyclerView.Adapter<SocialMed
         this.context = context;
     }
 
-    static class SocialMedia_Viewholder extends RecyclerView.ViewHolder {
-        final LinearLayout socialLinear;
-        final ImageView socialImage;
-        final TextView socialTitle;
-
-        SocialMedia_Viewholder(View view) {
-            super(view);
-            socialLinear = view.findViewById(R.id.socialLinear);
-            socialImage = view.findViewById(R.id.socialImage);
-            socialTitle = view.findViewById(R.id.socialTitle);
-        }
-    }
-
     @NonNull
     @Override
     public SocialMedia_Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,6 +79,19 @@ public class SocialMedia_Recycler_Adapter extends RecyclerView.Adapter<SocialMed
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    static class SocialMedia_Viewholder extends RecyclerView.ViewHolder {
+        final LinearLayout socialLinear;
+        final ImageView socialImage;
+        final TextView socialTitle;
+
+        SocialMedia_Viewholder(View view) {
+            super(view);
+            socialLinear = view.findViewById(R.id.socialLinear);
+            socialImage = view.findViewById(R.id.socialImage);
+            socialTitle = view.findViewById(R.id.socialTitle);
         }
     }
 }

@@ -56,8 +56,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
@@ -72,8 +73,6 @@ import com.newstoday.services.Theme_Service;
 
 import java.util.Objects;
 
-;
-
 public class EntryFragment extends SwipeRefreshFragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = "EntryFragment";
@@ -82,7 +81,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
     private static final String STATE_CURRENT_PAGER_POS = "STATE_CURRENT_PAGER_POS";
     private static final String STATE_ENTRIES_IDS = "STATE_ENTRIES_IDS";
     private static final String STATE_INITIAL_ENTRY_ID = "STATE_INITIAL_ENTRY_ID";
-
+    int slideAD;
     private int mTitlePos = -1;
     private int mDatePos;
     private int mMobilizedHtmlPos;
@@ -92,18 +91,28 @@ public class EntryFragment extends SwipeRefreshFragment implements
     private int mIsReadPos;
     private int mEnclosurePos;
     private int mAuthorPos;
-
     private int mCurrentPagerPos = -1;
     private Uri mBaseUri;
     private long mInitialEntryId = -1;
     private long[] mEntriesIds;
-
     private boolean mFavorite, mPreferFullText = true;
     private ViewPager mEntryPager;
     private EntryPagerAdapter mEntryPagerAdapter;
-
+    private final SharedPreferences.OnSharedPreferenceChangeListener mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (PrefUtils.IS_REFRESHING.equals(key)) {
+                Log.d(TAG, "onSharedPreferenceChanged() called with: " + "sharedPreferences = [" + sharedPreferences + "], key = [" + key + "]");
+                refreshSwipeProgress();
+                if (PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
+                    return;
+                }
+                //if refreshing is done, reload
+                mEntryPagerAdapter.displayEntry(mCurrentPagerPos, null, true);
+            }
+        }
+    };
     private InterstitialAd mInterstitialAd;
-    int slideAD;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,15 +121,11 @@ public class EntryFragment extends SwipeRefreshFragment implements
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public void inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.news_fragment_entry, container, true);
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
-        mInterstitialAd = new InterstitialAd(Objects.requireNonNull(getActivity()));
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
 
         mEntryPager = rootView.findViewById(R.id.pager);
         //mEntryPager.setPageTransformer(true, new DepthPageTransformer());
@@ -146,19 +151,26 @@ public class EntryFragment extends SwipeRefreshFragment implements
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 int slideAD = sharedPreferences.getInt("SLIDE_AD", 0) + 1;
                 SlideAd_Service.putSLIDE_AD(getActivity(), slideAD);
-                if (slideAD >= 15) {
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
-                        mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-                        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                    } else {
-                        SlideAd_Service.putSLIDE_AD(getActivity(), slideAD);
-                        mInterstitialAd = new InterstitialAd(getActivity());
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-                        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                    }
+                if (slideAD == 15) {
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    InterstitialAd.load(getActivity(), getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            interstitialAd.show(getActivity());
+                            SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                            super.onAdLoaded(interstitialAd);
+                        }
+                    });
+                } else if (slideAD >= 20) {
+                    SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    InterstitialAd.load(getActivity(), getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            interstitialAd.show(getActivity());
+                            super.onAdLoaded(interstitialAd);
+                        }
+                    });
                 }
                 mCurrentPagerPos = i;
                 refreshUI(mEntryPagerAdapter.getCursor(i));
@@ -274,7 +286,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                         if (link != null) {
                             String title = cursor.getString(mTitlePos);
                             startActivity(Intent.createChooser(
-                                    new Intent(Intent.ACTION_SEND).putExtra(Intent.EXTRA_SUBJECT, title+ "\n#servicesbycherry\n").putExtra(Intent.EXTRA_TEXT, link)
+                                    new Intent(Intent.ACTION_SEND).putExtra(Intent.EXTRA_SUBJECT, title + "\n#servicesbycherry\n").putExtra(Intent.EXTRA_TEXT, link)
                                             .setType(Constants.MIMETYPE_TEXT_PLAIN), getString(R.string.menu_share)
                             ));
                         }
@@ -291,7 +303,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     Toast.makeText(activity, R.string.copied_clipboard, Toast.LENGTH_SHORT).show();
                     break;
                 }
-               case R.id.menu_mark_as_unread: {
+                case R.id.menu_mark_as_unread: {
                     final Uri uri = ContentUris.withAppendedId(mBaseUri, mEntriesIds[mCurrentPagerPos]);
                     new Thread() {
                         @Override
@@ -322,7 +334,6 @@ public class EntryFragment extends SwipeRefreshFragment implements
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public void setData(Uri uri) {
         mCurrentPagerPos = -1;
@@ -399,7 +410,6 @@ public class EntryFragment extends SwipeRefreshFragment implements
         }
     }
 
-
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cursorLoader = new CursorLoader(getActivity(), EntryColumns.CONTENT_URI(mEntriesIds[id]), null, null, null, null);
@@ -439,10 +449,17 @@ public class EntryFragment extends SwipeRefreshFragment implements
         mEntryPagerAdapter.setUpdatedCursor(loader.getId(), null);
     }
 
-
     @Override
     public void onRefresh() {
         // Nothing to do
+    }
+
+    private void refreshSwipeProgress() {
+        if (PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
+            showSwipeProgress();
+        } else {
+            hideSwipeProgress();
+        }
     }
 
     private class EntryPagerAdapter extends PagerAdapter {
@@ -533,29 +550,6 @@ public class EntryFragment extends SwipeRefreshFragment implements
                 view.setTag(newCursor);
                 view.setTag(R.id.updated_cursor, newCursor);
             }
-        }
-    }
-
-    private final SharedPreferences.OnSharedPreferenceChangeListener mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (PrefUtils.IS_REFRESHING.equals(key)) {
-                Log.d(TAG, "onSharedPreferenceChanged() called with: " + "sharedPreferences = [" + sharedPreferences + "], key = [" + key + "]");
-                refreshSwipeProgress();
-                if (PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
-                    return;
-                }
-                //if refreshing is done, reload
-                mEntryPagerAdapter.displayEntry(mCurrentPagerPos, null, true);
-            }
-        }
-    };
-
-    private void refreshSwipeProgress() {
-        if (PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false)) {
-            showSwipeProgress();
-        } else {
-            hideSwipeProgress();
         }
     }
 }

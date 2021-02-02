@@ -49,6 +49,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
@@ -63,8 +64,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
@@ -86,7 +88,6 @@ import com.newstoday.services.SlideAd_Service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.category10Name;
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.category10NewsSites;
@@ -189,10 +190,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     private static final int ENTRIES_LOADER_ID = 1;
     private static final int NEW_ENTRIES_NUMBER_LOADER_ID = 2;
-
-    private View header;
-
-
     private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -203,6 +200,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             }
         }
     };
+    private View header;
     private Cursor mJustMarkedAsReadEntries;
     private Button mRefreshListBtn;
     private Uri mUri, mOriginalUri;
@@ -672,7 +670,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             t_view.setText(getResources().getString(R.string.catThreeE));
         } else if (name.equals("Business & Economy")) {
             t_view.setText(getResources().getString(R.string.catFour));
-        } else if (name.equals("Health & Lifestyle")) {
+        } else if (name.equals("Health & LifeStyle")) {
             t_view.setText(getResources().getString(R.string.catSix));
         } else if (name.equals("Sports")) {
             t_view.setText(getResources().getString(R.string.catSeven));
@@ -688,29 +686,20 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     private void loadAD(String name, Intent intent) {
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
-        InterstitialAd mInterstitialAd = new InterstitialAd(Objects.requireNonNull(getActivity()));
-        mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
-        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
         int slideAD = sharedPreferences.getInt("BUTTON_CLICK", 0) + 1;
         SlideAd_Service.putBUTTON_CLICK(getActivity(), slideAD);
         if (slideAD >= 5) {
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-                SlideAd_Service.putBUTTON_CLICK(getActivity(), 0);
-                mInterstitialAd = new InterstitialAd(getActivity());
-                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
-                mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-            } else {
-                SlideAd_Service.putBUTTON_CLICK(getActivity(), slideAD);
-                mInterstitialAd = new InterstitialAd(getActivity());
-                mInterstitialAd.setAdUnitId(getActivity().getResources().getString(R.string.interstitial_ad));
-                mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-            }
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(getActivity());
+                    SlideAd_Service.putBUTTON_CLICK(getActivity(), 0);
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
         }
-        intent.putExtra("name", name);
-        getActivity().startActivity(intent);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -846,7 +835,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                     startActivity(intent);
                 });
                 alertDialogBuilder.setNegativeButton("Send Problems", (dialog, which) -> {
-                    Toast.makeText(myContext, "Please send message only from Gmail.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(myContext, this.getResources().getString(R.string.only_mail), Toast.LENGTH_SHORT).show();
                     Intent email = new Intent(Intent.ACTION_SEND);
                     email.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
                     email.putExtra(Intent.EXTRA_SUBJECT, "Problems & Feedback from-- " + getActivity().getPackageName());
@@ -868,7 +857,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                 break;
 
             case R.id.more_add_publisher:
-                Toast.makeText(myContext, "Please send message only from Gmail.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(myContext, this.getResources().getString(R.string.only_mail), Toast.LENGTH_SHORT).show();
                 Intent emaill = new Intent(Intent.ACTION_SEND);
                 emaill.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
                 emaill.putExtra(Intent.EXTRA_SUBJECT, "Add New Suggestion from " + getActivity().getPackageName());
@@ -877,7 +866,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                 startActivity(Intent.createChooser(emaill, "Send Mail"));
                 break;
             case R.id.more_send:
-                Toast.makeText(myContext, "Please send message only from Gmail.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(myContext, this.getResources().getString(R.string.only_mail), Toast.LENGTH_SHORT).show();
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
                 email.putExtra(Intent.EXTRA_SUBJECT, "Problems & Feedback from " + getActivity().getPackageName());

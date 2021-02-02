@@ -85,16 +85,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     private static final int NEW_ENTRIES_NUMBER_LOADER_ID = 2;
 
     private SwipeRefreshLayout mySwipeRefreshLayout;
-    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (PrefUtils.SHOW_READ.equals(key)) {
-                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
-            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
-                refreshSwipeProgress();
-            }
-        }
-    };
     private Cursor mJustMarkedAsReadEntries;
     private Button mRefreshListBtn;
     private Uri mUri, mOriginalUri;
@@ -123,6 +113,16 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             mEntriesCursorAdapter.swapCursor(Constants.EMPTY_CURSOR);
+        }
+    };
+    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (PrefUtils.SHOW_READ.equals(key)) {
+                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
+            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
+                refreshSwipeProgress();
+            }
         }
     };
     private Menu menu;

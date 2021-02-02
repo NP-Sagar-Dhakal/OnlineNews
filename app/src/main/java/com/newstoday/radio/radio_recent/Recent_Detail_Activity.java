@@ -7,19 +7,19 @@ import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.R;
 import com.newstoday.radio.Next_Prev_Callback;
 import com.newstoday.radio.Radio_Activity;
 import com.newstoday.services.SlideAd_Service;
 
 public class Recent_Detail_Activity extends AppCompatActivity implements Next_Prev_Callback {
-
     private ViewPager pager;
 
     @Override
@@ -29,7 +29,6 @@ public class Recent_Detail_Activity extends AppCompatActivity implements Next_Pr
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_radio_detail);
-
         int position = getIntent().getIntExtra("position", 0);
         pager = findViewById(R.id.radioViewPager);
         Recent_Pager_Adapter pagerAdapter = new Recent_Pager_Adapter(getSupportFragmentManager());
@@ -38,7 +37,6 @@ public class Recent_Detail_Activity extends AppCompatActivity implements Next_Pr
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -46,30 +44,31 @@ public class Recent_Detail_Activity extends AppCompatActivity implements Next_Pr
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Recent_Detail_Activity.this);
                 int slideAD = sharedPreferences.getInt("SLIDE_AD", 0) + 1;
                 SlideAd_Service.putSLIDE_AD(Recent_Detail_Activity.this, slideAD);
-                if (slideAD >= 15) {
-                    MobileAds.initialize(Recent_Detail_Activity.this, initializationStatus -> {
+                if (slideAD == 15) {
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    InterstitialAd.load(Recent_Detail_Activity.this, getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            interstitialAd.show(Recent_Detail_Activity.this);
+                            SlideAd_Service.putSLIDE_AD(Recent_Detail_Activity.this, 0);
+                            super.onAdLoaded(interstitialAd);
+                        }
                     });
-                    InterstitialAd mInterstitialAd = new InterstitialAd(Recent_Detail_Activity.this);
-                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-                    mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                        SlideAd_Service.putSLIDE_AD(Recent_Detail_Activity.this, 0);
-                        mInterstitialAd = new InterstitialAd(Recent_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-                        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                    } else {
-                        SlideAd_Service.putSLIDE_AD(Recent_Detail_Activity.this, slideAD);
-                        mInterstitialAd = new InterstitialAd(Recent_Detail_Activity.this);
-                        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad));
-                        mInterstitialAd.loadAd(new AdRequest.Builder().addKeyword("Insurance").build());
-                    }
+                } else if (slideAD >= 20) {
+                    SlideAd_Service.putSLIDE_AD(Recent_Detail_Activity.this, 0);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    InterstitialAd.load(Recent_Detail_Activity.this, getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            interstitialAd.show(Recent_Detail_Activity.this);
+                            super.onAdLoaded(interstitialAd);
+                        }
+                    });
                 }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         pagerAdapter.notifyDataSetChanged();
@@ -86,5 +85,4 @@ public class Recent_Detail_Activity extends AppCompatActivity implements Next_Pr
         Intent intent = new Intent(Recent_Detail_Activity.this, Radio_Activity.class);
         startActivity(intent);
     }
-
 }

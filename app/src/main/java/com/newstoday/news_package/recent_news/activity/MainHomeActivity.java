@@ -91,29 +91,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainHomeActivity extends Navigation implements LoaderManager.LoaderCallbacks<Cursor>, NavigationView.OnNavigationItemSelectedListener {
+    public static final int MULTIPLE_PERMISSIONS = 10; // cod
     private static final String STATE_CURRENT_DRAWER_POS = "STATE_CURRENT_DRAWER_POS";
     private static final String FEED_UNREAD_NUMBER = "(SELECT " + Constants.DB_COUNT + " FROM " + EntryColumns.TABLE_NAME + " WHERE " +
             EntryColumns.IS_READ + " IS NULL AND " + EntryColumns.FEED_ID + '=' + FeedColumns.TABLE_NAME + '.' + FeedColumns._ID + ')';
-
     private static final int LOADER_ID = 0;
-    private final SharedPreferences.OnSharedPreferenceChangeListener mShowReadListener = (sharedPreferences, key) -> {
-        if (PrefUtils.SHOW_READ.equals(key)) {
-            getLoaderManager().restartLoader(LOADER_ID, null, MainHomeActivity.this);
-
-        }
-    };
-    private EntriesListFragment mEntriesFragment;
-    private int mCurrentDrawerPos;
-    private int i;
-    private final String demo = "News Today";
-
     public static List<NewsItem.News.RecentRssLinks> recentRssLinks;
     public static List<NewsItem.News.TopNewsSites> topNewsSites;
     public static List<NewsItem.News.OnlineRadios> radioItems;
-
     public static String category1Name, category2Name, category3Name, category4Name, category5Name, category6Name, category7Name, category8Name, category9Name, category10Name, category11Name, category12Name, category13Name, category14Name, category15Name;
     public static String location1Name, location2Name, location3Name, location4Name, location5Name, location6Name, location7Name, location8Name, location9Name, location10Name, location11Name, location12Name, location13Name, location14Name, location15Name, location16Name, location17Name, location18Name, location19Name, location20Name, location21Name, location22Name, location23Name, location24Name, location25Name, location26Name, location27Name, location28Name, location29Name, location30Name;
-
     public static List<NewsItem.News.Categories.Category1.Category1NewsSites> category1NewsSites;
     public static List<NewsItem.News.Categories.Category1.Category1RssLinks> category1RssLinks;
     public static List<NewsItem.News.Categories.Category2.Category2NewsSites> category2NewsSites;
@@ -144,7 +131,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
     public static List<NewsItem.News.Categories.Category14.Category14RssLinks> category14RssLinks;
     public static List<NewsItem.News.Categories.Category15.Category15NewsSites> category15NewsSites;
     public static List<NewsItem.News.Categories.Category15.Category15RssLinks> category15RssLinks;
-
     public static List<NewsItem.News.Location.Location1.Location1NewsSites> location1NewsSites;
     public static List<NewsItem.News.Location.Location1.Location1RssLinks> Location1RssLinks;
     public static List<NewsItem.News.Location.Location2.Location2NewsSites> location2NewsSites;
@@ -205,14 +191,16 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
     public static List<NewsItem.News.Location.Location29.Location29RssLinks> Location29RssLinks;
     public static List<NewsItem.News.Location.Location30.Location30NewsSites> location30NewsSites;
     public static List<NewsItem.News.Location.Location30.Location30RssLinks> Location30RssLinks;
-
-
     public static List<NewsItem.News.SocialMedia> socialMedia;
+    private final SharedPreferences.OnSharedPreferenceChangeListener mShowReadListener = (sharedPreferences, key) -> {
+        if (PrefUtils.SHOW_READ.equals(key)) {
+            getLoaderManager().restartLoader(LOADER_ID, null, MainHomeActivity.this);
+
+        }
+    };
+    private final String demo = "News Today";
     InternetIsConnected isConnected;
-
     SharedPreferences sharedPreferences;
-
-    public static final int MULTIPLE_PERMISSIONS = 10; // cod
     @SuppressLint("InlinedApi")
     String[] permissions = {
             Manifest.permission.FOREGROUND_SERVICE,
@@ -228,6 +216,35 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             Manifest.permission.CLEAR_APP_CACHE,
             Manifest.permission.RECEIVE_BOOT_COMPLETED
     };
+    private EntriesListFragment mEntriesFragment;
+    private int mCurrentDrawerPos;
+    private int i;
+
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,7 +270,7 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         String databaseLink = sharedPreferences.getString("DatabaseLink", "");
 
         if (Objects.requireNonNull(responses).equals("")) {
-            Toast.makeText(this, "Please wait Some Time", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getResources().getString(R.string.please_wait), Toast.LENGTH_LONG).show();
             try {
                 FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             } catch (RuntimeException e) {
@@ -312,6 +329,17 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         }
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.home_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+//    }
+
     private void getRealtimeUrl(Bundle savedInstanceState, String databaseUrl, boolean fetchdata) {
         String responses = sharedPreferences.getString("NewsSites", "");
         if (Objects.requireNonNull(responses).equals("")) {
@@ -322,14 +350,14 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
                         getNewsItem(savedInstanceState, response);
                     }, error -> {
                         //Todo
-                        Toast.makeText(MainHomeActivity.this, "Server is busy. Please close the app and try again later.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainHomeActivity.this, this.getResources().getString(R.string.server_busy), Toast.LENGTH_LONG).show();
                     });
                     RequestQueue queue = Volley.newRequestQueue(MainHomeActivity.this);
                     queue.add(stringRequest);
                 });
 
             } else {
-                Toast.makeText(MainHomeActivity.this, "Please turn on internet connection and re-open", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainHomeActivity.this, this.getResources().getString(R.string.turn_on_internet), Toast.LENGTH_LONG).show();
             }
         } else {
             getNewsItem(savedInstanceState, responses);
@@ -507,17 +535,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.home_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-//    }
-
     private void sharedResponse(String key, String response) {
         SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = m.edit();
@@ -658,22 +675,22 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             if (!PrefUtils.getBoolean(PrefUtils.SHOW_READ, true)) {
                 PrefUtils.putBoolean(PrefUtils.SHOW_READ, true);
                 read_unread.setImageResource(R.drawable.nav_unread);
-                Toast.makeText(this, "All News", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.all_news), Toast.LENGTH_LONG).show();
             } else {
                 PrefUtils.putBoolean(PrefUtils.SHOW_READ, false);
                 read_unread.setImageResource(R.drawable.nav_read);
-                Toast.makeText(this, "Unread News Only", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.unread_only), Toast.LENGTH_LONG).show();
             }
         });
 
         fab.setOnClickListener(v -> {
             if (mCurrentDrawerPos == 1) {
                 fab.setImageResource(R.drawable.ic_heart_empty);
-                Toast.makeText(this, "All News", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.all_news), Toast.LENGTH_LONG).show();
                 selectDrawerItem(0);
             } else {
                 fab.setImageResource(R.drawable.ic_heart_filled);
-                Toast.makeText(this, "Favourite News", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.fav_news), Toast.LENGTH_LONG).show();
                 selectDrawerItem(1);
             }
         });
@@ -750,7 +767,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         }
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(STATE_CURRENT_DRAWER_POS, mCurrentDrawerPos);
@@ -791,7 +807,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -849,32 +864,6 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             channel.setSound(null, null);
 
             notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    public static void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            deleteDir(dir);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if (dir != null && dir.isFile()) {
-            return dir.delete();
-        } else {
-            return false;
         }
     }
 }

@@ -188,20 +188,6 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
-    static class News_Sites_ViewHolder extends RecyclerView.ViewHolder {
-        final ConstraintLayout newsParent;
-        final ImageView siteImage;
-        final TextView siteName;
-
-        News_Sites_ViewHolder(View itemView) {
-            super(itemView);
-            newsParent = itemView.findViewById(R.id.newsParent);
-            siteName = itemView.findViewById(R.id.siteName);
-            siteImage = itemView.findViewById(R.id.siteImage);
-
-        }
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -775,7 +761,6 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         opener.openLink(c, link);
     }
 
-
     @Override
     public int getItemCount() {
         try {
@@ -878,5 +863,19 @@ public class News_Sites_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             e.printStackTrace();
         }
         return 0;
+    }
+
+    static class News_Sites_ViewHolder extends RecyclerView.ViewHolder {
+        final ConstraintLayout newsParent;
+        final ImageView siteImage;
+        final TextView siteName;
+
+        News_Sites_ViewHolder(View itemView) {
+            super(itemView);
+            newsParent = itemView.findViewById(R.id.newsParent);
+            siteName = itemView.findViewById(R.id.siteName);
+            siteImage = itemView.findViewById(R.id.siteImage);
+
+        }
     }
 }

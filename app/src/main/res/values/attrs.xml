@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="card_color" format="reference" />
-    <attr name="colorReadState" format="color|reference" />
-
-    <!--    Screen Filter-->
-
+    <attr name="colorReadState" format="color|reference" /><!--    Screen Filter-->
     <declare-styleable name="DiagonalLayout">
         <attr name="diagonal_angle" format="integer" />
         <attr name="diagonal_handleMargins" format="boolean" />
@@ -19,7 +16,6 @@
             <enum name="right" value="2" />
         </attr>
     </declare-styleable>
-
     <declare-styleable name="ExpandIconView">
         <attr name="eiv_roundedCorners" format="boolean" />
         <attr name="eiv_switchColor" format="boolean" />
@@ -30,12 +26,10 @@
         <attr name="eiv_animationDuration" format="integer" />
         <attr name="eiv_padding" format="dimension" />
     </declare-styleable>
-
     <declare-styleable name="Blackbulb">
         <attr name="card_background_color" format="color" />
         <attr name="progress_bar_color" format="color" />
         <attr name="icon_tint" format="color" />
         <attr name="overflow_tint" format="color" />
     </declare-styleable>
-
 </resources>

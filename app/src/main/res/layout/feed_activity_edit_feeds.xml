@@ -11,5 +11,4 @@
         class="com.newstoday.rssfeedreader.fragment.EditFeedsListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>

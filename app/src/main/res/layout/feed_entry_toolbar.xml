@@ -2,7 +2,6 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/feed_entry_toolbar"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
     android:layout_height="38dp">
 
     <TextView
@@ -14,5 +13,4 @@
         android:maxLines="1"
         android:textColor="@color/text_black"
         android:visibility="gone" />
-
 </androidx.appcompat.widget.Toolbar>

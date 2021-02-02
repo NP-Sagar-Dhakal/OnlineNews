@@ -63,6 +63,28 @@ import java.util.Objects;
 public class Activity_Weather extends AppCompatActivity {
 
     private final int PERMISSION_ID = 44;
+    private final LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            Location mLastLocation = locationResult.getLastLocation();
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(Activity_Weather.this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+                String city = addresses.get(0).getLocality();
+                String state = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
+                String userLocation = String.format("%s, %s, %s", city, state, country);
+                sharedResponse(userLocation);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
     private FusedLocationProviderClient mFusedLocationClient;
     private TextView latTextView;
     private WebView webView;
@@ -75,7 +97,7 @@ public class Activity_Weather extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_weather);
-        Toast.makeText(this, "Click refresh button until you get your real location", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, this.getResources().getString(R.string.click_refresh), Toast.LENGTH_LONG).show();
         Toolbar toolbar = findViewById(R.id.weatherToolbar);
         setSupportActionBar(toolbar);
         latTextView = findViewById(R.id.latTextView);
@@ -125,7 +147,7 @@ public class Activity_Weather extends AppCompatActivity {
                         }
                 );
             } else {
-                Toast.makeText(this, "Please Turn on Location Service", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.turn_location_on), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
@@ -133,7 +155,6 @@ public class Activity_Weather extends AppCompatActivity {
             requestPermissions();
         }
     }
-
 
     @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
@@ -149,29 +170,6 @@ public class Activity_Weather extends AppCompatActivity {
         );
 
     }
-
-    private final LocationCallback mLocationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            Location mLastLocation = locationResult.getLastLocation();
-            Geocoder geocoder;
-            List<Address> addresses;
-            geocoder = new Geocoder(Activity_Weather.this, Locale.getDefault());
-
-            try {
-                addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-                String city = addresses.get(0).getLocality();
-                String state = addresses.get(0).getAdminArea();
-                String country = addresses.get(0).getCountryName();
-                String userLocation = String.format("%s, %s, %s", city, state, country);
-                sharedResponse(userLocation);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
 
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&

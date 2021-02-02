@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <item android:title="@string/home">
         <menu>
             <item
@@ -15,7 +14,6 @@
                 android:title="@string/dark_theme" />
         </menu>
     </item>
-
     <item android:title="@string/tools">
         <menu>
             <item
@@ -48,5 +46,4 @@
                 android:title="@string/exit" />
         </menu>
     </item>
-
 </menu>

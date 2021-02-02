@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -49,7 +48,6 @@
                 android:text="@string/no_to_dos"
                 android:textColor="@color/ultra_grey"
                 android:textSize="16sp" />
-
         </LinearLayout>
 
         <com.newstoday.todo_diary.RecyclerViewEmptySupport
@@ -58,17 +56,14 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addToDoItemFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:backgroundTint="@color/floating_button"
             android:layout_margin="16dp"
+            app:backgroundTint="@color/floating_button"
             app:layout_behavior="com.newstoday.todo_diary.ScrollingFABBehaviour"
             app:srcCompat="@drawable/ic_add" />
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

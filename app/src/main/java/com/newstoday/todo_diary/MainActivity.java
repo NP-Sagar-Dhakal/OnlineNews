@@ -91,23 +91,22 @@ import static com.newstoday.todo_diary.AlarmReceiver.TODOTEXT;
 import static com.newstoday.todo_diary.AlarmReceiver.TODOUUID;
 
 public class MainActivity extends AppCompatActivity {
+    static final String TODOITEM = "com.newstoday.todo_diary.MainActivity";
+    static final String FILENAME = "tododiary.json";
+    static final String SHARED_PREF_DATA_SET_CHANGED = "com.newstoday.todo_diary.datasetchanged";
+    static final String CHANGE_OCCURED = "com.newstoday.todo_diary.changeoccured";
+    private static final int REQUEST_ID_TODO_ITEM = 100;
+    private static final String DATE_TIME_FORMAT_12_HOUR = "MMM d, yyyy  h:mm a";
+    private static final String DATE_TIME_FORMAT_24_HOUR = "MMM d, yyyy  k:mm";
     private RecyclerViewEmptySupport mRecyclerView;
     private FloatingActionButton mAddToDoItemFAB;
     private ArrayList<ToDoItem> mToDoItemsArrayList;
     private CoordinatorLayout mCoordLayout;
-    static final String TODOITEM = "com.newstoday.todo_diary.MainActivity";
     private BasicListAdapter adapter;
-    private static final int REQUEST_ID_TODO_ITEM = 100;
     private ToDoItem mJustDeletedToDoItem;
     private int mIndexOfDeletedToDoItem;
-    private static final String DATE_TIME_FORMAT_12_HOUR = "MMM d, yyyy  h:mm a";
-    private static final String DATE_TIME_FORMAT_24_HOUR = "MMM d, yyyy  k:mm";
-    static final String FILENAME = "tododiary.json";
     private StoreRetrieveData storeRetrieveData;
     private CustomRecyclerScrollViewListener customRecyclerScrollViewListener;
-    static final String SHARED_PREF_DATA_SET_CHANGED = "com.newstoday.todo_diary.datasetchanged";
-    static final String CHANGE_OCCURED = "com.newstoday.todo_diary.changeoccured";
-
 
     static ArrayList<ToDoItem> getLocallyStoredData(StoreRetrieveData storeRetrieveData) {
         ArrayList<ToDoItem> items = null;
@@ -300,8 +299,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        try {
+            storeRetrieveData.saveToFile(mToDoItemsArrayList);
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRecyclerView.removeOnScrollListener(customRecyclerScrollViewListener);
+    }
+
     public class BasicListAdapter extends RecyclerView.Adapter<BasicListAdapter.ViewHolder> implements ItemTouchHelperClass.ItemTouchHelperAdapter {
         private final ArrayList<ToDoItem> items;
+
+        BasicListAdapter(ArrayList<ToDoItem> items) {
+
+            this.items = items;
+        }
 
         @Override
         public void onItemMoved(int fromPosition, int toPosition) {
@@ -385,12 +414,6 @@ public class MainActivity extends AppCompatActivity {
             return items.size();
         }
 
-        BasicListAdapter(ArrayList<ToDoItem> items) {
-
-            this.items = items;
-        }
-
-
         class ViewHolder extends RecyclerView.ViewHolder {
 
             final View mView;
@@ -414,31 +437,6 @@ public class MainActivity extends AppCompatActivity {
                 linearLayout = v.findViewById(R.id.listItemLinearLayout);
             }
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        try {
-            storeRetrieveData.saveToFile(mToDoItemsArrayList);
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mRecyclerView.removeOnScrollListener(customRecyclerScrollViewListener);
     }
 
 }

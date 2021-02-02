@@ -202,7 +202,7 @@ public class NetworkUtils {
                 }
             }
         } catch (FileNotFoundException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {

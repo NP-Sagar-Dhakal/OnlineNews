@@ -43,13 +43,10 @@ import java.util.Objects;
 
 public class FilterService extends Service {
 
-    private LinearLayout mView;
-
-    public static int STATE;
-    private static final int NOTI_STATE;
-
-    private static final int INACTIVE = 0;
     public static final int ACTIVE = 0;
+    private static final int NOTI_STATE;
+    private static final int INACTIVE = 0;
+    public static int STATE;
     static int red, green, blue, brightness;
 
     static {
@@ -57,12 +54,14 @@ public class FilterService extends Service {
         NOTI_STATE = INACTIVE;
     }
 
+    private LinearLayout mView;
+
+    public FilterService() {
+    }
+
     private static int getColor() {
         String hexColour = String.format("%02x%02x%02x%02x", brightness, red, green, blue);
         return (int) Long.parseLong(hexColour, 16);
-    }
-
-    public FilterService() {
     }
 
     @Override
