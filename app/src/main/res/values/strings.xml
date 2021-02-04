@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">Project News</string>
-    <string name="app_id" translatable="false">ca-app-pub-7330887983553029~4271620333</string>
-    <string name="banner_ad" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_ad" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="native_ad" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="app_name">Hindi News</string>
+
+    <string name="app_id" translatable="false">ca-app-pub-7330887983553029~3031760397</string>
+    <string name="banner_ad" translatable="false">ca-app-pub-7330887983553029/8930954330</string>
+    <string name="interstitial_ad" translatable="false">ca-app-pub-7330887983553029/6257184371</string>
+    <string name="native_ad" translatable="false">ca-app-pub-7330887983553029/3678627659</string>
+
+
     <string name="stream_offline">Radio station is offline. Please try again later.</string>
     <string name="no_to_dos">Add new note \n&amp;\n Swipe Right to delete the item</string>
     <string name="title">What\'s on your mind?</string>
@@ -179,7 +182,7 @@
     <string name="settings_refresh_wifi_only_description">Automatic refresh will only be done if Wi-Fi connection is available</string>
     <string-array name="langSelector" translatable="false">
         <item>English</item>
-        <item>Nepali</item>
+        <item>हिंदी</item>
     </string-array>
     <string-array name="langSelector_values" translatable="false">
         <item>en</item>

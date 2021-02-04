@@ -29,6 +29,7 @@
     <application
         android:name="com.newstoday.MainApplication"
         android:allowBackup="true"
+        android:configChanges="uiMode"
         android:fullBackupContent="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"

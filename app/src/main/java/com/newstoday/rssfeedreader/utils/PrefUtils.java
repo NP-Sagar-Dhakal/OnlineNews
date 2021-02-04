@@ -27,7 +27,6 @@ import android.preference.PreferenceManager;
 import com.newstoday.MainApplication;
 
 public class PrefUtils {
-    public static final String SLIDE_AD = "SLIDE_AD";
     public static final String DISPLAY_TIP = "DISPLAY_TIP_READER";
     public static final String IS_REFRESHING = "IS_REFRESHING_READER";
     public static final String REFRESH_INTERVAL = "refresh.interval.reader";

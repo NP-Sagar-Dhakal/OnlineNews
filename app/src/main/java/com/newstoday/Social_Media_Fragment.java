@@ -28,7 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.newstoday.recyclerview.SocialMedia_Recycler_Adapter;
+import com.newstoday.Recyclerview.SocialMedia_Recycler_Adapter;
 
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.socialMedia;
 

@@ -81,9 +81,9 @@ public class Radio_Activity extends AppCompatActivity implements SearchView.OnQu
         Main_Radio_ViewPager_Adapter pager_adapter = new Main_Radio_ViewPager_Adapter(getSupportFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        pager_adapter.addFragment(new All_Radio_Fragment(), "All");
-        pager_adapter.addFragment(new Favourite_Radio_Fragment(), "Favourites");
-        pager_adapter.addFragment(new Recent_Radio_Fragment(), "Recent");
+        pager_adapter.addFragment(new All_Radio_Fragment(), this.getResources().getString(R.string.all));
+        pager_adapter.addFragment(new Favourite_Radio_Fragment(), this.getResources().getString(R.string.favourites));
+        pager_adapter.addFragment(new Recent_Radio_Fragment(), this.getResources().getString(R.string.recent));
         pager.setAdapter(pager_adapter);
     }
 

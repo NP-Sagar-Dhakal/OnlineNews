@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.newstoday.recyclerview;
+package com.newstoday.Recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

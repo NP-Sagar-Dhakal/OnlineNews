@@ -6,13 +6,9 @@ import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.R;
 import com.newstoday.services.SlideAd_Service;
 
@@ -39,29 +35,7 @@ public class Radio_Detail_Activity extends AppCompatActivity implements Next_Pre
             @Override
             public void onPageSelected(int position) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Radio_Detail_Activity.this);
-                int slideAD = sharedPreferences.getInt("SLIDE_AD", 0) + 1;
-                SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, slideAD);
-                if (slideAD == 15) {
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    InterstitialAd.load(Radio_Detail_Activity.this, getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            interstitialAd.show(Radio_Detail_Activity.this);
-                            SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, 0);
-                            super.onAdLoaded(interstitialAd);
-                        }
-                    });
-                } else if (slideAD >= 20) {
-                    SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, 0);
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    InterstitialAd.load(Radio_Detail_Activity.this, getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            interstitialAd.show(Radio_Detail_Activity.this);
-                            super.onAdLoaded(interstitialAd);
-                        }
-                    });
-                }
+                SlideAd_Service.putSLIDE_AD(Radio_Detail_Activity.this, sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1);
             }
 
             @Override

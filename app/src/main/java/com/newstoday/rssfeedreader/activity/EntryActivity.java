@@ -28,9 +28,6 @@ import android.view.WindowManager;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.newstoday.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.fragment.EntryFragment;
@@ -53,12 +50,6 @@ public class EntryActivity extends BaseActivity {
         overridePendingTransition(R.anim.pull_in_right, R.anim.holder);
         setContentView(R.layout.feed_activity_entry);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-        AdRequest adRequest = new AdRequest.Builder().build();
-        AdView adView = findViewById(R.id.adView);
-        adView.loadAd(adRequest);
-
 
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)

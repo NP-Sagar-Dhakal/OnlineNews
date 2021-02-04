@@ -36,6 +36,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,14 +49,20 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.Constants;
 import com.newstoday.R;
+import com.newstoday.Recyclerview.News_Sites_Adapter;
 import com.newstoday.news_package.news_location.fifthteen.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.news_location.fifthteen.provider.FeedData;
 import com.newstoday.news_package.news_location.fifthteen.provider.FeedData.EntryColumns;
@@ -64,8 +71,8 @@ import com.newstoday.news_package.news_location.fifthteen.service.FetcherService
 import com.newstoday.news_package.news_location.fifthteen.utils.PrefUtils;
 import com.newstoday.news_package.recent_news.fragment.SwipeRefreshListFragment;
 import com.newstoday.news_package.recent_news.utils.UiUtils;
-import com.newstoday.recyclerview.News_Sites_Adapter;
 import com.newstoday.services.Pref_Util_Service;
+import com.newstoday.services.SlideAd_Service;
 import com.newstoday.services.Theme_Service;
 
 import java.util.Date;
@@ -307,6 +314,27 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
+        MobileAds.initialize(getActivity(), initializationStatus -> {
+        });
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
+        int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
+        SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick);
+        if (slideCount >= 25 || newsClick >= 10) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(getActivity());
+                    if (slideCount >= 25) {
+                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                    } else {
+                        SlideAd_Service.putNEWS_CLICK(getActivity(), 0);
+                    }
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
+        }
         if (id >= 0) { // should not happen, but I had a crash with this on PlayStore...
             startActivity(new Intent(Intent.ACTION_VIEW, ContentUris.withAppendedId(mUri, id)));
         }

@@ -29,7 +29,6 @@ import com.newstoday.MainApplication;
 
 
 public class PrefUtils {
-    public static final String SLIDE_AD = "SLIDE_AD";
     public static final String FIRST_OPEN = "FIRST_OPEN_L_TWENTYTWO";
     public static final String IS_REFRESHING = "IS_REFRESHING_L_TWENTYTWO";
     public static final String DISPLAY_OLDEST_FIRST = "display_oldest_first";

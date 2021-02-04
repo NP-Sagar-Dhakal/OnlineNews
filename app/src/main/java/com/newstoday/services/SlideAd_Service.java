@@ -23,14 +23,15 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class SlideAd_Service {
-    public static final String SLIDE_AD = "SLIDE_AD";
+    public static final String SLIDE_COUNT = "SLIDE_COUNT";
     public static final String BUTTON_CLICK = "BUTTON_CLICK";
     public static final String WEBSITE_CLICK = "WEBSITE_CLICK";
+    public static final String NEWS_CLICK = "NEWS_CLICK";
 
     public static void putSLIDE_AD(Context context, int value) {
         SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = m.edit();
-        editor.putInt(SLIDE_AD, value);
+        editor.putInt(SLIDE_COUNT, value);
         editor.apply();
     }
 
@@ -47,4 +48,17 @@ public class SlideAd_Service {
         editor.putInt(WEBSITE_CLICK, value);
         editor.apply();
     }
+
+    public static void putNEWS_CLICK(Context context, int value) {
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putInt(NEWS_CLICK, value);
+        editor.apply();
+    }
+
+    public static int getAdCount(Context context, String key, int defValue) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        return settings.getInt(key, defValue);
+    }
+
 }

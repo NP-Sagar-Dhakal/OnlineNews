@@ -1,7 +1,10 @@
 package com.newstoday.radio;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.R;
 import com.newstoday.items.NewsItem;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
+import com.newstoday.services.SlideAd_Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +64,24 @@ public class Radio_Recycler_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         holder.radioConstraint.setOnClickListener(v -> {
+            MobileAds.initialize(context, initializationStatus -> {
+            });
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
+            int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
+            SlideAd_Service.putNEWS_CLICK(context, newsClick);
+            if (slideCount >= 25 || newsClick >= 10) {
+                AdRequest adRequest = new AdRequest.Builder().build();
+                InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        interstitialAd.show((Activity) context);
+                        SlideAd_Service.putNEWS_CLICK(context, 0);
+                        super.onAdLoaded(interstitialAd);
+                    }
+                });
+            }
+
             Intent intent = new Intent(context, Radio_Detail_Activity.class);
             intent.putExtra("position", position);
             context.startActivity(intent);

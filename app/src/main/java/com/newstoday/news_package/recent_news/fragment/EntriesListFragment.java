@@ -71,6 +71,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
+import com.newstoday.Recyclerview.News_Sites_Adapter;
 import com.newstoday.activities.About_Developer;
 import com.newstoday.news_package.recent_news.activity.GeneralPrefsActivity;
 import com.newstoday.news_package.recent_news.adapter.EntriesCursorAdapter;
@@ -80,7 +81,6 @@ import com.newstoday.news_package.recent_news.provider.FeedDataContentProvider;
 import com.newstoday.news_package.recent_news.service.FetcherService;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
 import com.newstoday.news_package.recent_news.utils.UiUtils;
-import com.newstoday.recyclerview.News_Sites_Adapter;
 import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.Disclaimer_Dialog;
 import com.newstoday.services.Pref_Util_Service;
@@ -687,7 +687,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int slideAD = sharedPreferences.getInt("BUTTON_CLICK", 0) + 1;
+        int slideAD = sharedPreferences.getInt(SlideAd_Service.BUTTON_CLICK, 0) + 1;
         SlideAd_Service.putBUTTON_CLICK(getActivity(), slideAD);
         if (slideAD >= 5) {
             AdRequest adRequest = new AdRequest.Builder().build();
@@ -700,6 +700,8 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                 }
             });
         }
+        intent.putExtra("name", name);
+        getActivity().startActivity(intent);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -763,6 +765,27 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
+        MobileAds.initialize(getActivity(), initializationStatus -> {
+        });
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
+        int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
+        SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick);
+        if (slideCount >= 25 || newsClick >= 10) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(getActivity());
+                    if (slideCount >= 25) {
+                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                    } else {
+                        SlideAd_Service.putNEWS_CLICK(getActivity(), 0);
+                    }
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
+        }
         if (id >= 0) { // should not happen, but I had a crash with this on PlayStore...
             startActivity(new Intent(Intent.ACTION_VIEW, ContentUris.withAppendedId(mUri, id)));
         }

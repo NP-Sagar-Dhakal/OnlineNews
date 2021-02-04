@@ -27,7 +27,7 @@
             app:cardBackgroundColor="@color/mid_grey"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
-            app:contentPadding="1dp"></androidx.cardview.widget.CardView>
+            app:contentPadding="1dp" />
     </FrameLayout>
 
     <RelativeLayout

@@ -57,10 +57,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
@@ -212,29 +210,8 @@ public class EntryFragment extends SwipeRefreshFragment implements
             @Override
             public void onPageSelected(int i) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                int slideAD = sharedPreferences.getInt("SLIDE_AD", 0) + 1;
-                SlideAd_Service.putSLIDE_AD(getActivity(), slideAD);
-                if (slideAD == 15) {
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    InterstitialAd.load(getActivity(), getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            interstitialAd.show(getActivity());
-                            SlideAd_Service.putSLIDE_AD(getActivity(), 0);
-                            super.onAdLoaded(interstitialAd);
-                        }
-                    });
-                } else if (slideAD >= 20) {
-                    SlideAd_Service.putSLIDE_AD(getActivity(), 0);
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    InterstitialAd.load(getActivity(), getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            interstitialAd.show(getActivity());
-                            super.onAdLoaded(interstitialAd);
-                        }
-                    });
-                }
+                SlideAd_Service.putSLIDE_AD(getActivity(), sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1);
+
                 mCurrentPagerPos = i;
                 mEntryPagerAdapter.onPause(); // pause all webviews
                 mEntryPagerAdapter.onResume(); // resume the current webview

@@ -32,6 +32,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.view.GestureDetector;
@@ -51,12 +52,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.newstoday.MainApplication;
 import com.newstoday.R;
@@ -70,9 +76,11 @@ import com.newstoday.rssfeedreader.provider.FeedDataContentProvider;
 import com.newstoday.rssfeedreader.service.FetcherService;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.rssfeedreader.utils.UiUtils;
+import com.newstoday.services.SlideAd_Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class EntriesListFragment extends SwipeRefreshListFragment implements ViewTreeObserver.OnScrollChangedListener {
 
@@ -277,9 +285,29 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
+        MobileAds.initialize(getActivity(), initializationStatus -> {
+        });
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
+        int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
+        SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick);
+        if (slideCount >= 25 || newsClick >= 10) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                    interstitialAd.show(getActivity());
+                    if (slideCount >= 25) {
+                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                    } else {
+                        SlideAd_Service.putNEWS_CLICK(getActivity(), 0);
+                    }
+                    super.onAdLoaded(interstitialAd);
+                }
+            });
+        }
         if (id >= 0) { // should not happen, but I had a crash with this on PlayStore...
             startActivity(new Intent(Intent.ACTION_VIEW, ContentUris.withAppendedId(mUri, id)));
-
         }
     }
 
