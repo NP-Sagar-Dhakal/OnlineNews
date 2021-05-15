@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.provider.FeedData.FeedColumns;
 import com.newstoday.rssfeedreader.utils.UiUtils;
 

@@ -79,7 +79,7 @@ import android.widget.Toast;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.Toolbar;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.adapter.FiltersCursorAdapter;
 import com.newstoday.rssfeedreader.loader.BaseLoader;

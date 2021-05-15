@@ -65,7 +65,7 @@ import android.widget.Toast;
 
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.news_location.twentythree.parser.RssAtomParser;
 import com.newstoday.news_package.news_location.twentythree.provider.FeedData;
 import com.newstoday.news_package.news_location.twentythree.provider.FeedData.EntryColumns;

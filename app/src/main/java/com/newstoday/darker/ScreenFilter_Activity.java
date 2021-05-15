@@ -35,7 +35,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.Objects;
 

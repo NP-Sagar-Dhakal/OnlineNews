@@ -25,7 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.view.SwipeRefreshLayout;
 
 public abstract class SwipeRefreshFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {

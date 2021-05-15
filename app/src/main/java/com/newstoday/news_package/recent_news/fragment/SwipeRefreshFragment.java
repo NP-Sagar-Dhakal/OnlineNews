@@ -26,7 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.view.SwipeRefreshLayout;
 
 

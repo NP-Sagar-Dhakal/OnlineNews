@@ -62,7 +62,7 @@ import com.newstoday.Constants;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 
 public class RefreshService extends Service {
-    public static final String SIXTY_MINUTES = "7200000";
+    public static final String SIXTY_MINUTES = "21600000";
     private static final String TAG = "RefreshService";
     private AlarmManager mAlarmManager;
     private PendingIntent mTimerIntent;
@@ -99,7 +99,7 @@ public class RefreshService extends Service {
             mAlarmManager.cancel(mTimerIntent);
         }
 
-        int time = 7200000;
+        int time = 21600000;
         try {
             time = Math.max(60000, Integer.parseInt(PrefUtils.getString(PrefUtils.REFRESH_INTERVAL, SIXTY_MINUTES)));
         } catch (Exception e) {

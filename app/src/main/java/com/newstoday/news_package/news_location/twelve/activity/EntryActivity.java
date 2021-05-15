@@ -21,18 +21,31 @@
 
 package com.newstoday.news_package.news_location.twelve.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.google.android.gms.ads.nativead.NativeAdOptions;
+import com.google.android.gms.ads.nativead.NativeAdView;
 import com.newstoday.Constants;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.news_location.twelve.fragment.EntryFragment;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
@@ -44,6 +57,7 @@ import java.util.Objects;
 public class EntryActivity extends AppCompatActivity {
 
     private EntryFragment mEntryFragment;
+    public static AdLoader adLoader;
 
 
     @Override
@@ -53,6 +67,33 @@ public class EntryActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.pull_in_right, R.anim.holder);
 
         setContentView(R.layout.location_twelve_activity_entry);
+
+
+        adLoader = new AdLoader.Builder(EntryActivity.this, this.getString(R.string.native_ad))
+                .forNativeAd(unifiedNativeAd -> {
+                    FrameLayout frameLayout =
+                            findViewById(R.id.adFrame);
+                    try {
+                        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        NativeAdView adView = (NativeAdView) Objects.requireNonNull(inflater).inflate(R.layout.aa_radio_native, null);
+                        populateUnifiedNativeAdView(unifiedNativeAd, adView);
+                        frameLayout.removeAllViews();
+                        frameLayout.addView(adView);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                })
+                .withAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(LoadAdError loadAdError) {
+                        super.onAdFailedToLoad(loadAdError);
+                    }
+                })
+                .withNativeAdOptions(new NativeAdOptions.Builder()
+                        .build())
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
 
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.LEFT)
@@ -67,6 +108,7 @@ public class EntryActivity extends AppCompatActivity {
                 .build();
 
         Slidr.attach(this, config);
+
 
         mEntryFragment = (EntryFragment) getFragmentManager().findFragmentById(R.id.entry_fragment);
         if (savedInstanceState == null) { // Put the data only the first time (the fragment will save its state)
@@ -111,5 +153,32 @@ public class EntryActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         mEntryFragment.setData(Objects.requireNonNull(intent.getData()));
+    }
+
+
+    private void populateUnifiedNativeAdView(NativeAd nativeAd, NativeAdView adView) {
+        adView.setMediaView(adView.findViewById(R.id.native_ad_media_view));
+        adView.setHeadlineView(adView.findViewById(R.id.native_ad_headline));
+        adView.setCallToActionView(adView.findViewById(R.id.native_ad_call_to_action_button));
+        adView.setBodyView(adView.findViewById(R.id.native_ad_body));
+        if (nativeAd.getBody() == null) {
+            adView.getBodyView().setVisibility(View.INVISIBLE);
+        } else {
+            adView.getBodyView().setVisibility(View.VISIBLE);
+            ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
+        }
+        if (nativeAd.getCallToAction() == null) {
+            adView.getCallToActionView().setVisibility(View.INVISIBLE);
+        } else {
+            adView.getCallToActionView().setVisibility(View.VISIBLE);
+            ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
+        }
+        if (nativeAd.getHeadline() == null) {
+            adView.getHeadlineView().setVisibility(View.INVISIBLE);
+        } else {
+            ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
+            adView.getHeadlineView().setVisibility(View.VISIBLE);
+        }
+        adView.setNativeAd(nativeAd);
     }
 }

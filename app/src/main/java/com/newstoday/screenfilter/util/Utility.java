@@ -42,7 +42,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.Constants;
 
 import cyanogenmod.app.CMStatusBarManager;

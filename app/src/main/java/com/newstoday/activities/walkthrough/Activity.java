@@ -34,8 +34,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.newstoday.R;
 import com.newstoday.activities.Splash_Activity;
+import com.newstoday.nepali.news.R;
 import com.newstoday.services.InternetIsConnected;
 
 import java.util.ArrayList;

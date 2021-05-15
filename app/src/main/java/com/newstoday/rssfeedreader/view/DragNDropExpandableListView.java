@@ -31,7 +31,7 @@ import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.Objects;
 

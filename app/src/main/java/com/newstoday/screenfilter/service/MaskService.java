@@ -40,7 +40,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.annotation.RequiresApi;
 
 import com.newstoday.IMaskServiceInterface;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.Constants;
 import com.newstoday.screenfilter.receiver.ActionReceiver;
 import com.newstoday.screenfilter.ui.MainActivity;

@@ -34,7 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.services.ChromeOpener;
 
 import java.util.Objects;

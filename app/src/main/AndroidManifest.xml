@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.newstoday"><!--    Notification-->
-    <uses-permission android:name="android.permission.VIBRATE" /><!--    Filter-->
+    package="com.newstoday.nepali.news">
+
+    <!--    Notification-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--    Filter-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />

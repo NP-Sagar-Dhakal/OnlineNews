@@ -34,7 +34,7 @@ import androidx.annotation.NonNull;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 
 import java.io.InputStream;

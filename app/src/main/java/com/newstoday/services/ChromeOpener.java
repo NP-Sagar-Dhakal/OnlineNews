@@ -16,7 +16,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 public class ChromeOpener {
     public void openLink(Context context, @NonNull String url) {
@@ -38,7 +38,7 @@ public class ChromeOpener {
                 @Override
                 public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                     interstitialAd.show(activity);
-                    SlideAd_Service.putWEBSITE_CLICK(context, 0);
+                    SlideAd_Service.putWEBSITE_CLICK(context, slideAD - 10);
                     super.onAdLoaded(interstitialAd);
                 }
             });

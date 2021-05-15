@@ -29,7 +29,7 @@ import android.os.IBinder;
 import android.os.Parcelable;
 
 import com.newstoday.IMaskServiceInterface;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.receiver.ActionReceiver;
 import com.newstoday.screenfilter.service.MaskService;
 

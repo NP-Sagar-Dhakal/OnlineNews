@@ -31,8 +31,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.newstoday.R;
 import com.newstoday.items.NewsItem;
+import com.newstoday.nepali.news.R;
 import com.newstoday.services.ChromeOpener;
 
 import java.util.List;

@@ -28,7 +28,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="start"
                 android:textColor="@color/ultra_grey"
-                android:textSize="25sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
             <View
@@ -63,7 +63,7 @@
                 android:layout_gravity="center"
                 android:padding="4dp"
                 android:textColor="@color/ultra_grey"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/source"
@@ -72,7 +72,7 @@
                 android:layout_gravity="center"
                 android:padding="4dp"
                 android:textColor="@color/ultra_grey"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <View
                 android:layout_width="200dp"
@@ -82,14 +82,12 @@
                 android:background="@drawable/dash_lines"
                 android:layerType="software" />
 
-            <FrameLayout
-                android:id="@+id/adFrame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center" />
-
-            <include layout="@layout/aa_news_background" />
+            <!--            <FrameLayout-->
+            <!--                android:id="@+id/adFrame"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:gravity="center" />-->
 
             <TextView
                 android:id="@+id/description"
@@ -103,7 +101,7 @@
                 android:paddingTop="@dimen/horizontal_margin2"
                 android:paddingBottom="@dimen/horizontal_margin2"
                 android:textColor="@color/text_black"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
             <View
                 android:layout_width="100dp"
@@ -137,7 +135,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="@string/read_full_content"
                         android:textColor="@color/p_white"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>

@@ -62,7 +62,6 @@ import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,8 +70,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.newstoday.Constants;
-import com.newstoday.R;
 import com.newstoday.items.NewsItem;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.fragment.EntriesListFragment;
 import com.newstoday.news_package.recent_news.provider.FeedData;
 import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
@@ -85,7 +84,6 @@ import com.newstoday.services.Custom_JobSheduler;
 import com.newstoday.services.InternetIsConnected;
 import com.newstoday.services.Navigation;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -216,47 +214,14 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             Manifest.permission.CLEAR_APP_CACHE,
             Manifest.permission.RECEIVE_BOOT_COMPLETED
     };
+    int REQUEST_CODE = 11;
     private EntriesListFragment mEntriesFragment;
     private int mCurrentDrawerPos;
     private int i;
 
-    public static void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            deleteDir(dir);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if (dir != null && dir.isFile()) {
-            return dir.delete();
-        } else {
-            return false;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAnalytics mFirebaseAnalytics;
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle bundle = new Bundle();
-
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Main Activity Started");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         findViewById(R.id.drawer_layout).setVisibility(View.GONE);
 
@@ -276,9 +241,9 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
-            DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference().child("News Today").child("Project News");
+            DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference().child("News Today").child("Nepali News");
             scoresRef.keepSynced(false);
-            DatabaseReference jokeslinks = FirebaseDatabase.getInstance().getReference().child("News Today").child("Project News");
+            DatabaseReference jokeslinks = FirebaseDatabase.getInstance().getReference().child("News Today").child("Nepali News");
             jokeslinks.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -303,9 +268,9 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
                 } catch (RuntimeException e) {
                     e.printStackTrace();
                 }
-                DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference().child("News Today").child("Project News");
+                DatabaseReference scoresRef = FirebaseDatabase.getInstance().getReference().child("News Today").child("Nepali News");
                 scoresRef.keepSynced(false);
-                DatabaseReference jokeslinks = FirebaseDatabase.getInstance().getReference().child("News Today").child("Project News");
+                DatabaseReference jokeslinks = FirebaseDatabase.getInstance().getReference().child("News Today").child("Nepali News");
                 jokeslinks.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -530,6 +495,7 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
             socialMedia = newsItems.News.get(2).SocialMedia;
             savePrefsData();
             afterDataFetched(savedInstanceState);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -843,6 +809,7 @@ public class MainHomeActivity extends Navigation implements LoaderManager.Loader
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            moveTaskToBack(true);
         } else {
             PrefUtils.putBoolean(PrefUtils.IS_REFRESHING, false);
             moveTaskToBack(true);

@@ -70,9 +70,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
 import com.newstoday.Recyclerview.News_Sites_Adapter;
 import com.newstoday.activities.About_Developer;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.GeneralPrefsActivity;
 import com.newstoday.news_package.recent_news.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.recent_news.provider.FeedData;
@@ -190,16 +190,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     private static final int ENTRIES_LOADER_ID = 1;
     private static final int NEW_ENTRIES_NUMBER_LOADER_ID = 2;
-    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (PrefUtils.SHOW_READ.equals(key)) {
-                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
-            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
-                refreshSwipeProgress();
-            }
-        }
-    };
     private View header;
     private Cursor mJustMarkedAsReadEntries;
     private Button mRefreshListBtn;
@@ -231,6 +221,15 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
             mEntriesCursorAdapter.swapCursor(Constants.EMPTY_CURSOR);
         }
     };
+
+    private final OnSharedPreferenceChangeListener mPrefListener = (sharedPreferences, key) -> {
+        if (PrefUtils.SHOW_READ.equals(key)) {
+            getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
+        } else if (PrefUtils.IS_REFRESHING.equals(key)) {
+            refreshSwipeProgress();
+        }
+    };
+
     private FragmentActivity myContext;
     private int mNewEntriesNumber, mOldUnreadEntriesNumber = -1;
     private boolean mAutoRefreshDisplayDate = false;
@@ -656,30 +655,43 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
 
     private void hideButton(String name, CardView view, TextView t_view) {
-        if (name.equals("null")) {
-            view.setVisibility(View.GONE);
-        } else if (name.equals("Politics")) {
-            t_view.setText(getResources().getString(R.string.catOne));
-        } else if (name.equals("National")) {
-            t_view.setText(getResources().getString(R.string.catOneE));
-        } else if (name.equals("Entertainment")) {
-            t_view.setText(getResources().getString(R.string.catTwo));
-        } else if (name.equals("Astrology & Horoscope")) {
-            t_view.setText(getResources().getString(R.string.catThree));
-        } else if (name.equals("Culture")) {
-            t_view.setText(getResources().getString(R.string.catThreeE));
-        } else if (name.equals("Business & Economy")) {
-            t_view.setText(getResources().getString(R.string.catFour));
-        } else if (name.equals("Health & LifeStyle")) {
-            t_view.setText(getResources().getString(R.string.catSix));
-        } else if (name.equals("Sports")) {
-            t_view.setText(getResources().getString(R.string.catSeven));
-        } else if (name.equals("Tech & Auto")) {
-            t_view.setText(getResources().getString(R.string.catEight));
-        } else if (name.equals("World")) {
-            t_view.setText(getResources().getString(R.string.catNine));
-        } else {
-            t_view.setText(name);
+        switch (name) {
+            case "null":
+                view.setVisibility(View.GONE);
+                break;
+            case "Politics":
+                t_view.setText(getResources().getString(R.string.catOne));
+                break;
+            case "National":
+                t_view.setText(getResources().getString(R.string.catOneE));
+                break;
+            case "Entertainment":
+                t_view.setText(getResources().getString(R.string.catTwo));
+                break;
+            case "Astrology & Horoscope":
+                t_view.setText(getResources().getString(R.string.catThree));
+                break;
+            case "Culture":
+                t_view.setText(getResources().getString(R.string.catThreeE));
+                break;
+            case "Business & Economy":
+                t_view.setText(getResources().getString(R.string.catFour));
+                break;
+            case "Health & LifeStyle":
+                t_view.setText(getResources().getString(R.string.catSix));
+                break;
+            case "Sports":
+                t_view.setText(getResources().getString(R.string.catSeven));
+                break;
+            case "Tech & Auto":
+                t_view.setText(getResources().getString(R.string.catEight));
+                break;
+            case "World":
+                t_view.setText(getResources().getString(R.string.catNine));
+                break;
+            default:
+                t_view.setText(name);
+                break;
         }
     }
 
@@ -687,19 +699,55 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         MobileAds.initialize(getActivity(), initializationStatus -> {
         });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int slideAD = sharedPreferences.getInt(SlideAd_Service.BUTTON_CLICK, 0) + 1;
-        SlideAd_Service.putBUTTON_CLICK(getActivity(), slideAD);
-        if (slideAD >= 5) {
+        int buttonClick = sharedPreferences.getInt(SlideAd_Service.BUTTON_CLICK, 0) + 1;
+        SlideAd_Service.putBUTTON_CLICK(getActivity(), buttonClick);
+        if (buttonClick >= 5) {
             AdRequest adRequest = new AdRequest.Builder().build();
             InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
                 @Override
                 public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                     interstitialAd.show(getActivity());
-                    SlideAd_Service.putBUTTON_CLICK(getActivity(), 0);
+                    SlideAd_Service.putBUTTON_CLICK(getActivity(), buttonClick - 5);
                     super.onAdLoaded(interstitialAd);
                 }
             });
         }
+
+        switch (name) {
+            case "Politics":
+                name = getResources().getString(R.string.catOne);
+                break;
+            case "National":
+                name = getResources().getString(R.string.catOneE);
+                break;
+            case "Entertainment":
+                name = getResources().getString(R.string.catTwo);
+                break;
+            case "Astrology & Horoscope":
+                name = getResources().getString(R.string.catThree);
+                break;
+            case "Culture":
+                name = getResources().getString(R.string.catThreeE);
+                break;
+            case "Business & Economy":
+                name = getResources().getString(R.string.catFour);
+                break;
+            case "Health & LifeStyle":
+                name = getResources().getString(R.string.catSix);
+                break;
+            case "Sports":
+                name = getResources().getString(R.string.catSeven);
+                break;
+            case "Tech & Auto":
+                name = getResources().getString(R.string.catEight);
+                break;
+            case "World":
+                name = getResources().getString(R.string.catNine);
+                break;
+            default:
+                name = name;
+        }
+
         intent.putExtra("name", name);
         getActivity().startActivity(intent);
     }
@@ -708,7 +756,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
     @Override
     public void inflateView(LayoutInflater inflater, ViewGroup container) {
         View rootView = inflater.inflate(R.layout.news_fragment_entry_list, container, true);
-
         if (mEntriesCursorAdapter != null) {
             setListAdapter(mEntriesCursorAdapter);
         }
@@ -765,22 +812,19 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        MobileAds.initialize(getActivity(), initializationStatus -> {
-        });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
         int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
         SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick);
-        if (slideCount >= 25 || newsClick >= 10) {
+        if (newsClick >= 10) {
             AdRequest adRequest = new AdRequest.Builder().build();
             InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
                 @Override
                 public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                     interstitialAd.show(getActivity());
-                    if (slideCount >= 25) {
-                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
-                    } else {
+                    if (newsClick > 20) {
                         SlideAd_Service.putNEWS_CLICK(getActivity(), 0);
+                    } else {
+                        SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick - 10);
                     }
                     super.onAdLoaded(interstitialAd);
                 }
@@ -862,7 +906,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
                     Intent email = new Intent(Intent.ACTION_SEND);
                     email.putExtra(Intent.EXTRA_EMAIL, new String[]{"cherrydigital.care@gmail.com"});
                     email.putExtra(Intent.EXTRA_SUBJECT, "Problems & Feedback from-- " + getActivity().getPackageName());
-                    email.putExtra(Intent.EXTRA_TEXT, "Note : Dont't clear the subject please,\n\n");
+                    email.putExtra(Intent.EXTRA_TEXT, "Note : Don't clear the subject please,\n\n");
                     email.setType("message/rfc822");
                     startActivity(Intent.createChooser(email, "Send Mail"));
                 });

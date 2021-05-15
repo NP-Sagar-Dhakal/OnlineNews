@@ -57,12 +57,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.Constants;
-import com.newstoday.R;
 import com.newstoday.Recyclerview.News_Sites_Adapter;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.news_category.five.adapter.EntriesCursorAdapter;
 import com.newstoday.news_package.news_category.five.provider.FeedData;
 import com.newstoday.news_package.news_category.five.provider.FeedData.EntryColumns;
@@ -133,16 +132,6 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     private static final int ENTRIES_LOADER_ID = 1;
     private static final int NEW_ENTRIES_NUMBER_LOADER_ID = 2;
-    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (PrefUtils.SHOW_READ.equals(key)) {
-                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
-            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
-                refreshSwipeProgress();
-            }
-        }
-    };
     private Cursor mJustMarkedAsReadEntries;
     private Button mRefreshListBtn;
     private Uri mUri, mOriginalUri;
@@ -173,6 +162,16 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             mEntriesCursorAdapter.swapCursor(Constants.EMPTY_CURSOR);
+        }
+    };
+    private final OnSharedPreferenceChangeListener mPrefListener = new OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (PrefUtils.SHOW_READ.equals(key)) {
+                getLoaderManager().restartLoader(ENTRIES_LOADER_ID, null, mEntriesLoader);
+            } else if (PrefUtils.IS_REFRESHING.equals(key)) {
+                refreshSwipeProgress();
+            }
         }
     };
     private int mNewEntriesNumber, mOldUnreadEntriesNumber = -1;
@@ -314,22 +313,19 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        MobileAds.initialize(getActivity(), initializationStatus -> {
-        });
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1;
         int newsClick = sharedPreferences.getInt(SlideAd_Service.NEWS_CLICK, 0) + 1;
         SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick);
-        if (slideCount >= 25 || newsClick >= 10) {
+        if (newsClick >= 10) {
             AdRequest adRequest = new AdRequest.Builder().build();
             InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
                 @Override
                 public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                     interstitialAd.show(getActivity());
-                    if (slideCount >= 25) {
-                        SlideAd_Service.putSLIDE_AD(getActivity(), 0);
-                    } else {
+                    if (newsClick > 20) {
                         SlideAd_Service.putNEWS_CLICK(getActivity(), 0);
+                    } else {
+                        SlideAd_Service.putNEWS_CLICK(getActivity(), newsClick - 10);
                     }
                     super.onAdLoaded(interstitialAd);
                 }
@@ -473,7 +469,7 @@ public class EntriesListFragment extends SwipeRefreshListFragment implements Vie
         if (mNewEntriesNumber > 0) {
             if (mRefreshListBtn.getVisibility() == View.GONE)
                 YoYo.with(Techniques.BounceInUp).duration(500).playOn(mRefreshListBtn);
-            mRefreshListBtn.setText(getResources().getQuantityString(R.plurals.number_of_new_entries, mNewEntriesNumber, mNewEntriesNumber));
+            mRefreshListBtn.setText(getResources().getQuantityString(R.plurals.number_of_new_news, mNewEntriesNumber, mNewEntriesNumber));
             mRefreshListBtn.setVisibility(View.VISIBLE);
         } else {
             mRefreshListBtn.setVisibility(View.GONE);

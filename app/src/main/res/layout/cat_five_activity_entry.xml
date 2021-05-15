@@ -11,7 +11,18 @@
         class="com.newstoday.news_package.news_category.five.fragment.EntryFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/frag_left_right"
-        android:layout_marginTop="@dimen/frag_top"
-        android:layout_marginRight="@dimen/frag_left_right" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="65dp" />
+
+    <FrameLayout
+        android:id="@+id/adFrame"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center" />
+
 </RelativeLayout>

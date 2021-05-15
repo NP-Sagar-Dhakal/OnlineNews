@@ -27,7 +27,7 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.Constants;
 import com.newstoday.screenfilter.receiver.ActionReceiver;
 

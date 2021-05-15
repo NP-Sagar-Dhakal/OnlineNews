@@ -45,6 +45,7 @@
 
 package com.newstoday.rssfeedreader.adapter;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -57,19 +58,23 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.provider.FeedData;
 import com.newstoday.rssfeedreader.provider.FeedData.EntryColumns;
@@ -92,11 +97,13 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
     private int mFeedIdPos;
     private int mFeedNamePos;
 
+    private int num1;
+
     public EntriesCursorAdapter(Context context, Uri uri, Cursor cursor, boolean showFeedInfo) {
         super(context, R.layout.feed_item_entry_list, cursor, 0);
         mUri = uri;
         mShowFeedInfo = showFeedInfo;
-        reinit(cursor);
+        reInit(cursor);
     }
 
     @Override
@@ -115,6 +122,9 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
     @Override
     public void bindView(final View view, final Context context, Cursor cursor) {
+        MobileAds.initialize(context, initializationStatus -> {
+        });
+
         final ViewHolder holder = (ViewHolder) view.getTag(R.id.holder);
         if (view.getTag(R.id.holder) == null) {
             ViewHolder holder1 = new ViewHolder();
@@ -125,6 +135,13 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
             holder1.starImgView = view.findViewById(R.id.favorite_icon);
             holder1.readImgView = view.findViewById(R.id.read_icon);
             view.setTag(R.id.holder, holder1);
+        }
+
+        if (cursor.getPosition() == 50) {
+            if (num1 != 50) {
+                num1 = 50;
+                loadAD(context);
+            }
         }
 
         String titleText = cursor.getString(mTitlePos);
@@ -188,6 +205,34 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
     }
 
+    private void loadAD(Context context) {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                interstitialAd.show((Activity) context);
+                super.onAdLoaded(interstitialAd);
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                retryAd(context);
+                super.onAdFailedToLoad(loadAdError);
+            }
+        });
+    }
+
+    private void retryAd(Context context) {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                interstitialAd.show((Activity) context);
+                super.onAdLoaded(interstitialAd);
+            }
+        });
+    }
+
     private void UpdateStarImgView(ViewHolder holder) {
         int starred = R.drawable.ic_heart_filled;
         holder.starImgView.setImageResource(holder.isFavorite ? starred : R.drawable.ic_heart_empty);
@@ -240,29 +285,29 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
     @Override
     public void changeCursor(Cursor cursor) {
-        reinit(cursor);
+        reInit(cursor);
         super.changeCursor(cursor);
     }
 
     @Override
     public Cursor swapCursor(Cursor newCursor) {
-        reinit(newCursor);
+        reInit(newCursor);
         return super.swapCursor(newCursor);
     }
 
     @Override
     public void notifyDataSetChanged() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetChanged();
     }
 
     @Override
     public void notifyDataSetInvalidated() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetInvalidated();
     }
 
-    private void reinit(Cursor cursor) {
+    private void reInit(Cursor cursor) {
         if (cursor != null && cursor.getCount() > 0) {
             mIdPos = cursor.getColumnIndex(EntryColumns._ID);
             mTitlePos = cursor.getColumnIndex(EntryColumns.TITLE);
@@ -277,44 +322,6 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
     }
 
-    private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
-        adView.setMediaView(adView.findViewById(R.id.native_ad_media_view));
-        adView.setHeadlineView(adView.findViewById(R.id.native_ad_headline));
-        adView.setCallToActionView(adView.findViewById(R.id.native_ad_call_to_action_button));
-        adView.setBodyView(adView.findViewById(R.id.native_ad_body));
-
-        if (nativeAd.getMediaContent() == null) {
-            adView.getMediaView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getMediaView().setVisibility(View.VISIBLE);
-            adView.getMediaView().setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-            (adView.getMediaView()).setMediaContent(nativeAd.getMediaContent());
-        }
-
-        if (nativeAd.getBody() == null) {
-            adView.getBodyView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getBodyView().setVisibility(View.VISIBLE);
-            ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
-        }
-
-        if (nativeAd.getCallToAction() == null) {
-            adView.getCallToActionView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getCallToActionView().setVisibility(View.VISIBLE);
-            ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
-        }
-
-
-        if (nativeAd.getHeadline() == null) {
-            adView.getHeadlineView().setVisibility(View.INVISIBLE);
-        } else {
-            ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
-            adView.getHeadlineView().setVisibility(View.VISIBLE);
-        }
-        adView.setNativeAd(nativeAd);
-
-    }
 
     private static class ViewHolder {
         FrameLayout frameLayout;

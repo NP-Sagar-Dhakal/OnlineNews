@@ -76,7 +76,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 import com.newstoday.news_package.recent_news.parser.RssAtomParser;
 import com.newstoday.news_package.recent_news.provider.FeedData;

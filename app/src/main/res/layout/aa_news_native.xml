@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:text="@string/ad"
                 android:textColor="@color/h_dark_red"
-                android:textSize="8sp"
+                android:textSize="6sp"
                 android:textStyle="bold"
                 tools:ignore="SmallSp" />
 
@@ -69,7 +69,7 @@
                 android:layout_toRightOf="@+id/native_ad_label"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -97,7 +97,7 @@
                     android:background="@drawable/native_call_button"
                     android:gravity="center"
                     android:textColor="@color/p_white"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:textStyle="bold"
                     tools:ignore="SmallSp" />
             </androidx.cardview.widget.CardView>
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

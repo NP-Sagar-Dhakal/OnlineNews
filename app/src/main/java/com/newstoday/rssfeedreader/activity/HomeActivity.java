@@ -51,7 +51,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.github.clans.fab.FloatingActionButton;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.adapter.DrawerAdapter;
 import com.newstoday.rssfeedreader.fragment.EntriesListFragment;

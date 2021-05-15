@@ -40,8 +40,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.newstoday.R;
 import com.newstoday.items.NewsItem;
+import com.newstoday.nepali.news.R;
 import com.newstoday.radio.radioplayer_service.RadioService;
 import com.newstoday.screenfilter.Constants;
 import com.newstoday.services.Theme_Service;
@@ -64,7 +64,7 @@ public class Radio_Activity extends AppCompatActivity implements SearchView.OnQu
         TabLayout radio_TabLayout = findViewById(R.id.radio_Tab);
         ViewPager radio_Main_ViewPager = findViewById(R.id.radio_ViewPager);
         setSupportActionBar(radio_Toolbar);
-        setupViewPgar(radio_Main_ViewPager);
+        setupViewPager(radio_Main_ViewPager);
         radio_TabLayout.setupWithViewPager(radio_Main_ViewPager);
 
         try {
@@ -77,11 +77,11 @@ public class Radio_Activity extends AppCompatActivity implements SearchView.OnQu
     }
 
 
-    private void setupViewPgar(ViewPager pager) {
+    private void setupViewPager(ViewPager pager) {
         Main_Radio_ViewPager_Adapter pager_adapter = new Main_Radio_ViewPager_Adapter(getSupportFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        pager_adapter.addFragment(new All_Radio_Fragment(), this.getResources().getString(R.string.all));
+        pager_adapter.addFragment(new All_Radio_Fragment(), "All");
         pager_adapter.addFragment(new Favourite_Radio_Fragment(), this.getResources().getString(R.string.favourites));
         pager_adapter.addFragment(new Recent_Radio_Fragment(), this.getResources().getString(R.string.recent));
         pager.setAdapter(pager_adapter);

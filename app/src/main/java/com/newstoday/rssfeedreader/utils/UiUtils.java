@@ -34,7 +34,7 @@ import androidx.collection.LongSparseArray;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 public class UiUtils {
 

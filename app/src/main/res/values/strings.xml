@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">Hindi News</string>
+    <string name="app_name">Nepali News</string>
 
-    <string name="app_id" translatable="false">ca-app-pub-7330887983553029~3031760397</string>
-    <string name="banner_ad" translatable="false">ca-app-pub-7330887983553029/8930954330</string>
-    <string name="interstitial_ad" translatable="false">ca-app-pub-7330887983553029/6257184371</string>
-    <string name="native_ad" translatable="false">ca-app-pub-7330887983553029/3678627659</string>
-
+    <string name="app_id" translatable="false">ca-app-pub-7330887983553029~9378768208</string>
+    <string name="banner_ad" translatable="false">ca-app-pub-7330887983553029/6752604868</string>
+    <string name="interstitial_ad" translatable="false">ca-app-pub-7330887983553029/4126441523</string>
+    <string name="native_ad" translatable="false">ca-app-pub-7330887983553029/2813359859</string>
 
     <string name="stream_offline">Radio station is offline. Please try again later.</string>
     <string name="no_to_dos">Add new note \n&amp;\n Swipe Right to delete the item</string>
@@ -181,15 +180,14 @@
     <string name="settings_refresh_wifi_only">Refresh only over Wi-Fi</string>
     <string name="settings_refresh_wifi_only_description">Automatic refresh will only be done if Wi-Fi connection is available</string>
     <string-array name="langSelector" translatable="false">
-        <item>English</item>
-        <item>हिंदी</item>
+        <item>English (Recommended)</item>
+        <item>नेपाली</item>
     </string-array>
     <string-array name="langSelector_values" translatable="false">
         <item>en</item>
         <item>ne</item>
     </string-array>
     <string-array name="settings_intervals" translatable="false">
-        <item>10 minutes</item>
         <item>1 hour</item>
         <item>2 hours</item>
         <item>6 hours</item>
@@ -244,7 +242,6 @@
     <string name="undo">Undo</string>
     <string name="website_or_feed" translatable="false">(e.g: Hacker News, The Verge…)</string>
     <string-array name="settings_interval_values" translatable="false">
-        <item>600000</item>
         <item>3600000</item>
         <item>7200000</item>
         <item>21600000</item>
@@ -280,7 +277,7 @@
     <string name="ad" translatable="false">Ad</string>
     <string name="developer_name" translatable="false">Sagar Dhakal</string>
     <string name="developer_career" translatable="false">Android Developer</string>
-    <string name="freelancer" translatable="false">Tech Solutions</string>
+    <string name="freelancer" translatable="false">Web Developer</string>
     <string name="developer_address" translatable="false">Cherry Digital Services</string>
     <string name="licenses" translatable="false">Licenses</string>
     <string name="fork_on_github" translatable="false">Fork on Github</string>
@@ -345,20 +342,6 @@
     <string name="catSeven">Sports</string>
     <string name="catEight">Tech &amp; Auto</string>
     <string name="catNine">World</string>
-    <string name="extra_description" translatable="false">Hello Everyone, \n My name is Sagar Dhakal and I\'m the man behind this app.\n\n To add new websites or RSS Feed please email me, Go below.\n\nThanks to all for installing this app, If you have any suggestions &amp; feedback feel free to message me. I will reply to everyone. :) Do drop me a Hi, It really means a lot to me.\n\nLooking forward to hear from you.</string><!--    Disclaimer-->
-    <string name="app_disclaimer" translatable="false">This app is made for those who like to read news and other article and listen online radios,
-        \n
-        To make a good application we should give extra effort to make all services accurate and valid, application may contain inaccuracies. By using this app,
-        you agree that this app assumes no liability for any harm caused by use of this application.
-        \n\n
-        We doesn\'t own and assume responsibility of any news and sites added on this app. This app uses RSS Feed to gather and display news and sites. News content, Images and their icons are copyright of their respective owner.
-        if any website/content is yours and you don\'t want to show your content here, please contact us first.
-        \n\n
-        Radio is a streaming client and doesn\'t stream/host any content by itself. Images/Logo are copyright of their respective owners.
-        If you want to add/update/remove your radio station, Please inform us(cherrydigital.care@gmail.com).
-        \n\n
-        To add new sites or rss feed please contact me, Go to developer page on this app. Thank you.
-    </string>
 
     <!--    Extras-->
     <string name="drawerOne">News, Radio &amp; Other Tools</string>

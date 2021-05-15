@@ -54,7 +54,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.Objects;
 

@@ -55,8 +55,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
-import com.newstoday.R;
 import com.newstoday.activities.Splash_Activity;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.service.RefreshService;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
 import com.newstoday.services.Custom_JobSheduler;

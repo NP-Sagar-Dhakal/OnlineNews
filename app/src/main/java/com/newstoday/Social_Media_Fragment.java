@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.newstoday.Recyclerview.SocialMedia_Recycler_Adapter;
+import com.newstoday.nepali.news.R;
 
 import static com.newstoday.news_package.recent_news.activity.MainHomeActivity.socialMedia;
 

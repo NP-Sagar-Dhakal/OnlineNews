@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.provider.FeedData.FilterColumns;
 
 public class FiltersCursorAdapter extends ResourceCursorAdapter {
@@ -42,7 +42,7 @@ public class FiltersCursorAdapter extends ResourceCursorAdapter {
 
     public FiltersCursorAdapter(Context context, Cursor cursor) {
         super(context, R.layout.feed_item_rule_list, cursor, 0);
-        reinit(cursor);
+        reInit(cursor);
     }
 
     @Override
@@ -76,29 +76,29 @@ public class FiltersCursorAdapter extends ResourceCursorAdapter {
 
     @Override
     public void changeCursor(Cursor cursor) {
-        reinit(cursor);
+        reInit(cursor);
         super.changeCursor(cursor);
     }
 
     @Override
     public Cursor swapCursor(Cursor newCursor) {
-        reinit(newCursor);
+        reInit(newCursor);
         return super.swapCursor(newCursor);
     }
 
     @Override
     public void notifyDataSetChanged() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetChanged();
     }
 
     @Override
     public void notifyDataSetInvalidated() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetInvalidated();
     }
 
-    private void reinit(Cursor cursor) {
+    private void reInit(Cursor cursor) {
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 mFilterTextColumnPosition = cursor.getColumnIndex(FilterColumns.FILTER_TEXT);

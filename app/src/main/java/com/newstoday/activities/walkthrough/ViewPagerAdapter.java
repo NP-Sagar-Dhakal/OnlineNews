@@ -29,7 +29,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.List;
 import java.util.Objects;

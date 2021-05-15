@@ -63,7 +63,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.utils.FileUtils;
 import com.newstoday.rssfeedreader.utils.HtmlUtils;

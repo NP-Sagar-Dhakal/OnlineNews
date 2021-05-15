@@ -23,7 +23,7 @@
     <com.newstoday.news_package.recent_news.view.AutoSummaryListPreference
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:defaultValue="7200000"
+        android:defaultValue="21600000"
         android:dependency="refresh.enabled"
         android:entries="@array/settings_intervals"
         android:entryValues="@array/settings_interval_values"

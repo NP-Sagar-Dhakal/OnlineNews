@@ -48,7 +48,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
             mConnection = true;
 
             if (!com.newstoday.rssfeedreader.utils.PrefUtils.getBoolean(com.newstoday.rssfeedreader.utils.PrefUtils.IS_REFRESHING, false) && com.newstoday.rssfeedreader.utils.PrefUtils.getBoolean(com.newstoday.rssfeedreader.utils.PrefUtils.REFRESH_ENABLED, true)) {
-                int time = 7200000;
+                int time = 21600000;
                 try {
                     time = Math.max(60000, Integer.parseInt(com.newstoday.rssfeedreader.utils.PrefUtils.getString(com.newstoday.rssfeedreader.utils.PrefUtils.REFRESH_INTERVAL, com.newstoday.rssfeedreader.service.RefreshService.SIXTY_MINUTES)));
                 } catch (Exception e) {
@@ -77,7 +77,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 
 
             if (!PrefUtils.getBoolean(PrefUtils.IS_REFRESHING, false) && PrefUtils.getBoolean(PrefUtils.REFRESH_ENABLED, true)) {
-                int time = 7200000;
+                int time = 21600000;
                 try {
                     time = Math.max(60000, Integer.parseInt(PrefUtils.getString(PrefUtils.REFRESH_INTERVAL, RefreshService.SIXTY_MINUTES)));
                 } catch (Exception e) {

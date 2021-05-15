@@ -69,11 +69,12 @@
         android:gravity="start"
         android:text="@string/app_name"
         android:textColor="?attr/colorReadState"
-        android:textSize="@dimen/pubdate_size"
+        android:textSize="@dimen/pubDate_Size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <View
+        android:id="@+id/lineView"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:layout_marginLeft="20dp"

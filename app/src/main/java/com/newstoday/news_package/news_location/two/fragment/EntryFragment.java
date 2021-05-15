@@ -51,11 +51,14 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
+import com.newstoday.news_package.news_location.two.activity.EntryActivity;
 import com.newstoday.news_package.news_location.two.provider.FeedData;
 import com.newstoday.news_package.news_location.two.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_location.two.provider.FeedData.FeedColumns;
@@ -144,9 +147,29 @@ public class EntryFragment extends SwipeRefreshFragment implements
 
             @Override
             public void onPageSelected(int i) {
+                if (String.valueOf(i).endsWith("3") || String.valueOf(i).endsWith("6") || String.valueOf(i).endsWith("9")) {
+                    EntryActivity.adLoader.loadAd(new AdRequest.Builder().build());
+                }
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SlideAd_Service.putSLIDE_AD(getActivity(), sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0) + 1);
-
+                int slideCount = sharedPreferences.getInt(SlideAd_Service.SLIDE_COUNT, 0);
+                if (slideCount >= 25) {
+                    if (slideCount <= 25 || slideCount >= 32) {
+                        AdRequest adRequest = new AdRequest.Builder().build();
+                        InterstitialAd.load(getActivity(), getActivity().getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+                            @Override
+                            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                                interstitialAd.show(getActivity());
+                                if (slideCount > 50) {
+                                    SlideAd_Service.putSLIDE_AD(getActivity(), 0);
+                                } else {
+                                    SlideAd_Service.putSLIDE_AD(getActivity(), slideCount - 25);
+                                }
+                                super.onAdLoaded(interstitialAd);
+                            }
+                        });
+                    }
+                }
                 mCurrentPagerPos = i;
                 refreshUI(mEntryPagerAdapter.getCursor(i));
             }
@@ -479,7 +502,7 @@ public class EntryFragment extends SwipeRefreshFragment implements
                     String title = newCursor.getString(mTitlePos);
                     String enclosure = newCursor.getString(mEnclosurePos);
 
-                    view.setHtml(getActivity(), title, link, contentText, timestamp);
+                    view.setHtml(getActivity(), pagerPos, title, link, contentText, timestamp);
                     view.setTag(newCursor);
 
                     if (pagerPos == mCurrentPagerPos) {

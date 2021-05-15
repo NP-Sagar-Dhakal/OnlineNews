@@ -56,7 +56,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +70,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.utils.StringUtils;
 import com.newstoday.services.ChromeOpener;
 import com.newstoday.services.Pref_Util_Service;
@@ -84,6 +83,7 @@ import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class EntryView extends ConstraintLayout {
+
     public EntryView(Context context) {
         super(context);
         init();
@@ -102,21 +102,49 @@ public class EntryView extends ConstraintLayout {
     private static String getDomainName(String url) throws URISyntaxException {
         URI uri = new URI(url);
         String domain = uri.getHost();
-        return domain.startsWith(" ") ? domain.substring(4) : domain;
+        try {
+            return domain.startsWith(" ") ? domain.substring(4) : domain;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public void setHtml(Activity activity, String title, String link, String contentText, long timestamp) {
-        boolean isFirst = Pref_Util_Service.getPrefBoolean(activity, "sug_Swipe", true);
-        if (isFirst) {
-            Toast.makeText(activity, this.getResources().getString(R.string.swipe_right), Toast.LENGTH_LONG).show();
-            Pref_Util_Service.putPrefBoolean(activity, "sug_Swipe", false);
-        }
+    public void setHtml(Activity activity, int position, String title, String link, String contentText, long timestamp) {
         TextView title_text = findViewById(R.id.title);
         TextView pubDate = findViewById(R.id.pubdate);
         ImageView image = findViewById(R.id.image);
         TextView source = findViewById(R.id.source);
         TextView description = findViewById(R.id.description);
         CardView readFullContent = findViewById(R.id.readFullContent);
+
+
+        Document doc = Jsoup.parse(contentText);
+        String imageLink = doc.getElementsByTag("img").attr("src");
+
+        int[] num1 = {0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99};
+        int[] num2 = {101, 104, 107, 110, 113, 116, 119, 122, 125, 128, 131, 134, 137, 140, 143, 146, 149, 152, 155, 158};
+
+//        if (position < 100) {
+//            for (int n : num1) {
+//                if (n == position) {
+//                    loadAd();
+//                    break;
+//                }
+//            }
+//        } else {
+//            for (int n : num2) {
+//                if (n == position) {
+//                    loadAd();
+//                    break;
+//                }
+//            }
+//        }
+
+        if (!imageLink.equals("")) {
+            image.setVisibility(View.VISIBLE);
+            Glide.with(activity).load(imageLink).placeholder(R.drawable.placeholder).into(image);
+        }
+
         title_text.setText(title);
         long now = System.currentTimeMillis();
         CharSequence ago =
@@ -133,30 +161,28 @@ public class EntryView extends ConstraintLayout {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        Document doc = Jsoup.parse(contentText);
-        String imagelink = doc.getElementsByTag("img").attr("src");
-        if (!imagelink.equals("")) {
-            image.setVisibility(View.VISIBLE);
-            Glide.with(activity).load(imagelink).placeholder(R.drawable.placeholder).into(image);
+
+        boolean isFirst = Pref_Util_Service.getPrefBoolean(activity, "sug_Swipe", true);
+        if (isFirst) {
+            Toast.makeText(activity, this.getResources().getString(R.string.swipe_right), Toast.LENGTH_LONG).show();
+            Pref_Util_Service.putPrefBoolean(activity, "sug_Swipe", false);
         }
+
         readFullContent.setOnClickListener(v -> {
             ChromeOpener opener = new ChromeOpener();
             opener.openLink(activity, link);
         });
     }
 
-    @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
-    private void init() {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.news_detail_news_layout, this, true);
-        RelativeLayout adBackground = v.findViewById(R.id.ad_background);
+    private void loadAd() {
         AdLoader adLoader = new AdLoader.Builder(Objects.requireNonNull(getContext()), getContext().getString(R.string.native_ad))
                 .forNativeAd(unifiedNativeAd -> {
                     FrameLayout frameLayout =
-                            v.findViewById(R.id.adFrame);
+                            findViewById(R.id.adFrame);
                     try {
                         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         NativeAdView adView = (NativeAdView) Objects.requireNonNull(inflater).inflate(R.layout.aa_news_native, null);
-                        populateUnifiedNativeAdView(adBackground, unifiedNativeAd, adView);
+                        populateUnifiedNativeAdView(unifiedNativeAd, adView);
                         frameLayout.removeAllViews();
                         frameLayout.addView(adView);
                     } catch (Exception e) {
@@ -167,7 +193,6 @@ public class EntryView extends ConstraintLayout {
                     @Override
                     public void onAdFailedToLoad(LoadAdError loadAdError) {
                         super.onAdFailedToLoad(loadAdError);
-                        adBackground.setVisibility(GONE);
                     }
                 })
                 .withNativeAdOptions(new NativeAdOptions.Builder()
@@ -176,8 +201,13 @@ public class EntryView extends ConstraintLayout {
         adLoader.loadAd(new AdRequest.Builder().build());
     }
 
-    private void populateUnifiedNativeAdView(RelativeLayout adBackground, NativeAd nativeAd, NativeAdView adView) {
-        adBackground.setVisibility(GONE);
+    @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
+    private void init() {
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.news_detail_news_layout, this, true);
+
+    }
+
+    private void populateUnifiedNativeAdView(NativeAd nativeAd, NativeAdView adView) {
         adView.setMediaView(adView.findViewById(R.id.native_ad_media_view));
         adView.setHeadlineView(adView.findViewById(R.id.native_ad_headline));
         adView.setCallToActionView(adView.findViewById(R.id.native_ad_call_to_action_button));

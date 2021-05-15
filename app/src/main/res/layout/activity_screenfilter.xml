@@ -31,7 +31,7 @@
                 android:gravity="center"
                 android:text="@string/filter_service"
                 android:textColor="#515153"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:text="@string/brightness"
                 android:textColor="#444444"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <SeekBar
@@ -87,7 +87,7 @@
                 android:gravity="center"
                 android:text="@string/mix_rgb_color"
                 android:textColor="#515153"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -104,7 +104,7 @@
                     android:gravity="center"
                     android:text="@string/red"
                     android:textColor="#CC1C1C"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <SeekBar
@@ -129,7 +129,7 @@
                     android:gravity="center"
                     android:text="@string/green"
                     android:textColor="#1AC462"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <SeekBar
@@ -154,7 +154,7 @@
                     android:gravity="center"
                     android:text="@string/blue"
                     android:textColor="#253BC4"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <SeekBar

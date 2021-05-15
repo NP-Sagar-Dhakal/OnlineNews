@@ -71,7 +71,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.activity.AddGoogleNewsActivity;
 import com.newstoday.rssfeedreader.adapter.FeedsCursorAdapter;
 import com.newstoday.rssfeedreader.parser.OPML;

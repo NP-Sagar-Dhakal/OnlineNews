@@ -36,7 +36,7 @@ import android.widget.LinearLayout;
 
 import androidx.core.app.NotificationCompat;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 
 import java.util.Objects;

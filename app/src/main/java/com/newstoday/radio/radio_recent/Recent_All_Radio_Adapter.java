@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.radio.All_Radio_Fragment;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
 

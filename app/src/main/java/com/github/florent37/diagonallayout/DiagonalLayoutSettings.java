@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 public class DiagonalLayoutSettings {
     public final static int LEFT = 1;

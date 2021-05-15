@@ -33,7 +33,7 @@ import com.newstoday.news_package.recent_news.utils.PrefUtils;
 public class Custom_JobSheduler {
 //    Background Service
 
-    public static final String SIXTY_MINUTES = "7200000";
+    public static final String SIXTY_MINUTES = "21600000";
 
     public static void scheduleNewsJob(Context context) {
         JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);

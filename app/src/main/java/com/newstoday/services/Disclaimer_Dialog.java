@@ -26,7 +26,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 public class Disclaimer_Dialog extends AppCompatDialogFragment {
 
@@ -36,7 +36,18 @@ public class Disclaimer_Dialog extends AppCompatDialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle);
         builder.setTitle("Disclaimer")
-                .setMessage(getString(R.string.app_disclaimer))
+                .setMessage("This app is made for those who like to read news and other article and listen online radios,\n" +
+                        "        \n\n" +
+                        "        To make a good application we should give extra effort to make all services accurate and valid, application may contain inaccuracies. By using this app,\n" +
+                        "        you agree that this app assumes no liability for any harm caused by use of this application.\n" +
+                        "        \n\n\n" +
+                        "        We doesn't own and assume responsibility of any news and sites added on this app. This app uses RSS Feed to gather and display news and sites. News content, Images and their icons are copyright of their respective owner.\n" +
+                        "        if any website/content is yours and you don't want to show your content here, please contact us first.\n" +
+                        "        \n\n\n" +
+                        "        Radio is a streaming client and doesn't stream/host any content by itself. Images/Logo are copyright of their respective owners.\n" +
+                        "        If you want to add/update/remove your radio station, Please inform us(cherrydigital.care@gmail.com).\n" +
+                        "        \n\n\n" +
+                        "        To add new sites or rss feed please contact me, Go to developer page on this app. Thank you.")
                 .setPositiveButton("OK", (dialogInterface, i) -> {
 
                 });

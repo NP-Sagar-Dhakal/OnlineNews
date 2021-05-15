@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.Objects;
 import java.util.UUID;

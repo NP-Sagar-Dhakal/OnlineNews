@@ -54,7 +54,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.service.RefreshService;
 import com.newstoday.rssfeedreader.utils.PrefUtils;
 import com.newstoday.services.Custom_JobSheduler;

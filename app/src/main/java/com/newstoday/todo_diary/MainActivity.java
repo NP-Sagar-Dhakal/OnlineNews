@@ -77,7 +77,7 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import org.json.JSONException;
 

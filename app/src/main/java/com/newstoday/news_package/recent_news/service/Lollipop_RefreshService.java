@@ -31,7 +31,6 @@ import com.newstoday.news_package.recent_news.utils.PrefUtils;
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class Lollipop_RefreshService extends JobService {
 
-    //    Background Service
     @Override
     public boolean onStartJob(JobParameters params) {
         new Thread(() -> {

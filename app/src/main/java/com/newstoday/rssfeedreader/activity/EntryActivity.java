@@ -28,7 +28,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.Constants;
 import com.newstoday.rssfeedreader.fragment.EntryFragment;
 import com.newstoday.rssfeedreader.utils.PrefUtils;

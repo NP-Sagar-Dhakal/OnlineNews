@@ -28,7 +28,7 @@ import android.widget.ListAdapter;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.Constants;
 
 import java.util.ArrayList;

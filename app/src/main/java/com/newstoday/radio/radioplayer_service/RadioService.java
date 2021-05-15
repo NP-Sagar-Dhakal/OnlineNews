@@ -43,11 +43,10 @@ import com.google.android.exoplayer2.source.hls.HlsTrackMetadataEntry;
 import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -202,9 +201,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
         Objects.requireNonNull(telephonyManager).listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
         DefaultBandwidthMeter.Builder bandwidthMeter = new DefaultBandwidthMeter.Builder(this);
-        TrackSelection.Factory factory = new AdaptiveTrackSelection.Factory();
         bandwidthMeter.setInitialBitrateEstimate(30000);
-        DefaultTrackSelector trackSelector = new DefaultTrackSelector(this, factory);
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(this, new AdaptiveTrackSelection.Factory());
         LoadControl loadControl = new DefaultLoadControl();
 
         exoPlayer = new SimpleExoPlayer.Builder(this).setLoadControl(loadControl).setBandwidthMeter(bandwidthMeter.build()).setTrackSelector(trackSelector).build();

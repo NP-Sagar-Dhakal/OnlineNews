@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/social_media"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 

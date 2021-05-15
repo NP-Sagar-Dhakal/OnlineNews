@@ -35,6 +35,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +44,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.newstoday.Constants;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.news_category.eight.fragment.EntriesListFragment;
 import com.newstoday.news_package.news_category.eight.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_category.eight.provider.FeedData.FeedColumns;
@@ -86,11 +87,6 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        FloatingActionMenu menu = findViewById(R.id.fab);
-        menu.getMenuIconView().setImageResource(R.drawable.ic_add);
-        FloatingActionButton fab = findViewById(R.id.fab_google);
-        FloatingActionButton fab2 = findViewById(R.id.fab_feed);
 
         String url1 = MainHomeActivity.category8RssLinks.get(i).rssLink1;
         String url2 = MainHomeActivity.category8RssLinks.get(i).rssLink2;
@@ -142,16 +138,33 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
             update(url14, "14");
         }
 
+        FloatingActionMenu menu = findViewById(R.id.fab);
+        menu.getMenuIconView().setImageResource(R.drawable.ic_add);
+        FloatingActionButton fab = findViewById(R.id.fav_news);
+
+
         fab.setColorNormalResId(R.color.colorPrimary);
         fab.setColorPressedResId(R.color.h_dark_red);
 
-        fab2.setColorNormalResId(R.color.colorPrimary);
-        fab2.setColorPressedResId(R.color.h_dark_red);
-
         fab.setImageResource(R.drawable.ic_heart_filled);
-        fab2.setImageResource(R.drawable.ic_heart_empty);
-        fab.setOnClickListener(v -> selectDrawerItem(1));
-        fab2.setOnClickListener(v -> selectDrawerItem(0));
+        fab.setColorNormalResId(R.color.colorPrimary);
+        fab.setColorPressedResId(R.color.h_dark_red);
+
+
+        fab.setImageResource(R.drawable.ic_heart_empty);
+
+        fab.setOnClickListener(v -> {
+            if (mCurrentDrawerPos == 1) {
+                fab.setImageResource(R.drawable.ic_heart_empty);
+                Toast.makeText(this, this.getResources().getString(R.string.all_news), Toast.LENGTH_LONG).show();
+                selectDrawerItem(0);
+            } else {
+                fab.setImageResource(R.drawable.ic_heart_filled);
+                Toast.makeText(this, this.getResources().getString(R.string.fav_news), Toast.LENGTH_LONG).show();
+                selectDrawerItem(1);
+            }
+        });
+
 
         if (savedInstanceState != null) {
             mCurrentDrawerPos = savedInstanceState.getInt(STATE_CURRENT_DRAWER_POS);
@@ -220,7 +233,7 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onNewIntent(intent);
 
         // We reset the current drawer position
-        selectDrawerItem(0);
+        selectDrawerItem(1);
     }
 
     @Override

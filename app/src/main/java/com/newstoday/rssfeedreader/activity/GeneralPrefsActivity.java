@@ -51,7 +51,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import java.util.Objects;
 

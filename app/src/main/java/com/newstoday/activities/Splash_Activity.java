@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 import com.newstoday.news_package.recent_news.utils.PrefUtils;
 import com.newstoday.services.SetAppLanguage;

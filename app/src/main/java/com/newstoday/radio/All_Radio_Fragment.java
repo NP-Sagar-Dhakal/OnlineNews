@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.newstoday.R;
 import com.newstoday.items.NewsItem;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 import com.newstoday.radio.radio_favorites.FavoriteDatabase;
 import com.newstoday.radio.radio_recent.RecentDatabase;

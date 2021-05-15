@@ -53,7 +53,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 
 import org.json.JSONException;
 

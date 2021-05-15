@@ -23,8 +23,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.newstoday.R;
 import com.newstoday.items.NewsItem;
+import com.newstoday.nepali.news.R;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
 import com.newstoday.services.SlideAd_Service;
 

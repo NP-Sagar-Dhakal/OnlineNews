@@ -29,7 +29,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.rssfeedreader.provider.FeedDataContentProvider;
 
 import java.io.UnsupportedEncodingException;

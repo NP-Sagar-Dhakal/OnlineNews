@@ -58,7 +58,7 @@ import android.util.Log;
 
 import com.newstoday.Constants;
 import com.newstoday.MainApplication;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.news_location.nineteen.provider.FeedData;
 import com.newstoday.news_package.news_location.nineteen.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.news_location.nineteen.provider.FeedData.FeedColumns;

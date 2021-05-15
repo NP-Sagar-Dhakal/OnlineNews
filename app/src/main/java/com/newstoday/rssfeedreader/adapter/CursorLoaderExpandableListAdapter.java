@@ -141,7 +141,7 @@ abstract class CursorLoaderExpandableListAdapter extends BaseExpandableListAdapt
      * Constructor.
      */
     CursorLoaderExpandableListAdapter(Activity activity, Uri groupUri) {
-        this(activity, groupUri, com.newstoday.R.layout.feed_item_feed_list, com.newstoday.R.layout.feed_item_feed_list, com.newstoday.R.layout.feed_item_feed_list);
+        this(activity, groupUri, com.newstoday.nepali.news.R.layout.feed_item_feed_list, com.newstoday.nepali.news.R.layout.feed_item_feed_list, com.newstoday.nepali.news.R.layout.feed_item_feed_list);
     }
 
     private void setAllChildrenCursorsAsObsolete() {

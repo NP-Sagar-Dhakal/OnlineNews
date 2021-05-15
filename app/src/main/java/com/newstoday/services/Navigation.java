@@ -36,9 +36,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.newstoday.R;
 import com.newstoday.Social_Media_Fragment;
 import com.newstoday.darker.ScreenFilter_Activity;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.activity.MainHomeActivity;
 import com.newstoday.radio.Radio_Activity;
 import com.newstoday.rssfeedreader.activity.HomeActivity;

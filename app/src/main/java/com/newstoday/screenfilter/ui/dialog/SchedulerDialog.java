@@ -31,7 +31,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.github.florent37.diagonallayout.DiagonalLayout;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.screenfilter.util.AlarmUtil;
 import com.newstoday.screenfilter.util.Settings;
 import com.newstoday.screenfilter.util.Utility;

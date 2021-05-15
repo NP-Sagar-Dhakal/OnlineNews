@@ -46,6 +46,7 @@
 
 package com.newstoday.news_package.recent_news.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
@@ -58,14 +59,22 @@ import android.widget.ImageView;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
-import com.newstoday.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.newstoday.nepali.news.R;
 import com.newstoday.news_package.recent_news.provider.FeedData.EntryColumns;
 import com.newstoday.news_package.recent_news.provider.FeedData.FeedColumns;
 import com.newstoday.news_package.recent_news.utils.NetworkUtils;
 import com.newstoday.rssfeedreader.utils.StringUtils;
+
+import static android.view.View.GONE;
 
 public class EntriesCursorAdapter extends ResourceCursorAdapter {
 
@@ -76,16 +85,27 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
     private int mIsReadPos;
     private int mFavoritePos;
 
+    private int num1;
+
     public EntriesCursorAdapter(Context context, Cursor cursor) {
         super(context, R.layout.news_list_item_layout, cursor, 0);
 
-        reinit(cursor);
+        reInit(cursor);
     }
 
     @Override
     public void bindView(final View view, final Context context, Cursor cursor) {
+        MobileAds.initialize(context, initializationStatus -> {
+        });
         ViewHolder holder = (ViewHolder) view.getTag();
         if (holder.titleTextView != null) {
+            if (cursor.getPosition() == 30) {
+                if (num1 != 30) {
+                    num1 = 30;
+                    loadAD(context);
+                }
+            }
+
             String titleText = cursor.getString(mTitlePos);
             holder.titleTextView.setText(titleText);
             final long entryID = cursor.getLong(mIdPos);
@@ -97,7 +117,7 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
                 holder.imageCard.setVisibility(View.VISIBLE);
                 Glide.with(context).load(mainImgUrl).into(holder.mainImgView);
             } else {
-                holder.imageCard.setVisibility(View.GONE);
+                holder.imageCard.setVisibility(GONE);
             }
 
             holder.isFavorite = cursor.getInt(mFavoritePos) == 1;
@@ -124,6 +144,34 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         }
     }
 
+    private void loadAD(Context context) {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                interstitialAd.show((Activity) context);
+                super.onAdLoaded(interstitialAd);
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                retryAd(context);
+                super.onAdFailedToLoad(loadAdError);
+            }
+        });
+    }
+
+    private void retryAd(Context context) {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                interstitialAd.show((Activity) context);
+                super.onAdLoaded(interstitialAd);
+            }
+        });
+    }
+
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         ViewHolder holder = new ViewHolder();
@@ -147,41 +195,41 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         } else {
             view = LayoutInflater.from(context).inflate(R.layout.news_list_item_layout, parent, false);
         }
+
         holder.imageCard = view.findViewById(R.id.image_card);
         holder.titleTextView = view.findViewById(R.id.title);
         holder.dateTextView = view.findViewById(R.id.pubdate);
         holder.mainImgView = view.findViewById(R.id.image);
         holder.frameLayout = view.findViewById(R.id.adFrame);
-
         view.setTag(holder);
         return view;
     }
 
     @Override
     public void changeCursor(Cursor cursor) {
-        reinit(cursor);
+        reInit(cursor);
         super.changeCursor(cursor);
     }
 
     @Override
     public Cursor swapCursor(Cursor newCursor) {
-        reinit(newCursor);
+        reInit(newCursor);
         return super.swapCursor(newCursor);
     }
 
     @Override
     public void notifyDataSetChanged() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetChanged();
     }
 
     @Override
     public void notifyDataSetInvalidated() {
-        reinit(null);
+        reInit(null);
         super.notifyDataSetInvalidated();
     }
 
-    private void reinit(Cursor cursor) {
+    private void reInit(Cursor cursor) {
         if (cursor != null && cursor.getCount() > 0) {
             mIdPos = cursor.getColumnIndex(EntryColumns._ID);
             mTitlePos = cursor.getColumnIndex(EntryColumns.TITLE);
@@ -202,4 +250,5 @@ public class EntriesCursorAdapter extends ResourceCursorAdapter {
         boolean isRead;
         long entryID = -1;
     }
+
 }

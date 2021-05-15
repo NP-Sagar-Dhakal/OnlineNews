@@ -23,7 +23,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.radio.All_Radio_Fragment;
 import com.newstoday.radio.radio_favorites.Favorites_Radio_Items;
 import com.newstoday.services.SlideAd_Service;
@@ -76,7 +76,11 @@ public class Recent_Radio_Adapter extends RecyclerView.Adapter<RecyclerView.View
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                         interstitialAd.show((Activity) context);
-                        SlideAd_Service.putNEWS_CLICK(context, 0);
+                        if (slideCount >= 25) {
+                            SlideAd_Service.putSLIDE_AD(context, slideCount - 25);
+                        } else {
+                            SlideAd_Service.putNEWS_CLICK(context, newsClick - 10);
+                        }
                         super.onAdLoaded(interstitialAd);
                     }
                 });

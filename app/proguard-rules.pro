@@ -5,7 +5,8 @@
   @org.greenrobot.eventbus.Subscribe <methods>;
 }
 -keepattributes SourceFile,LineNumberTable
--keep public class * extends java.lang.Exception-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends java.lang.Exception-keep
+-keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
  <init>(...);
 }

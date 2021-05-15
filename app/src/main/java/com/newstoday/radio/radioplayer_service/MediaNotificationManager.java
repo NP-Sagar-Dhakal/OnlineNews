@@ -12,7 +12,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.newstoday.R;
+import com.newstoday.nepali.news.R;
 import com.newstoday.radio.Radio_Activity;
 
 import java.util.Objects;
